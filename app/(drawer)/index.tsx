@@ -10,6 +10,7 @@ import renderQuickAccessButtons from '../../hooks/home/useHomeQuickAccessButtons
 import TopTutorsComponent from '../../components/TopTutorsComponent';
 import { MaterialIcons } from "@expo/vector-icons";
 import useHomeScreen from '../../hooks/home/useHomeScreen';
+import useNotificaciones from '../../hooks/useNotifications';
 
 export default function HomeScreen() {
   const {
@@ -21,6 +22,13 @@ export default function HomeScreen() {
     userName,
     handleLogin,
   } = useHomeScreen();
+
+  const { expoPushToken, notifications } = useNotificaciones();
+
+  React.useEffect(() => {
+    console.log('expoPushToken', expoPushToken);
+    console.log('notifications', notifications);
+  }, [expoPushToken, notifications]);
 
   return (
     <SafeAreaView className={`flex-1 bg-[#023046]`}>

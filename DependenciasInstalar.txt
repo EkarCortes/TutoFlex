@@ -64,5 +64,17 @@ npx expo install react-native-element-dropdown
 
 npm install jwt-decode@3.1.2
 
+--NOTIFICACIONES--
+
+npx expo install expo-notifications
+
+--DATE--
 
 npx expo install react-native-modal-datetime-picker @react-native-community/datetimepicker
+
+--INPUT PICKER--
+
+npm install @react-native-picker/picker
+
+--DEVICE--
+npx expo install expo-device
