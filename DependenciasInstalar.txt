@@ -1,0 +1,68 @@
+COMANDOS A INSTALAR NUEVOS
+
+npm install
+
+--Instalacion de NATIVEWIND--
+
+npx expo install nativewind tailwindcss react-native-reanimated react-native-safe-area-context
+
+--DRAWER--
+
+npx expo install @react-navigation/drawer react-native-gesture-handler react-native-reanimated
+
+--CARRUCEL--
+
+npm install react-native-reanimated-carousel
+
+--SUBIR IMAGENES--
+
+npx expo install expo-image-picker
+
+--FUNCIONAMIENTO DE NATIVE--
+
+npx expo customize 
+
+babel 
+
+//PEGAR ESTO DENTRO DE BABEL
+
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};
+
+--STACKS--
+
+npx expo install @react-navigation/stack
+
+--CALENDARIO--
+
+npx expo install react-native-calendars
+
+--TOAST--
+
+npx expo install react-native-toast-message
+
+--SECURE STORE --
+
+npx expo install expo-secure-store
+
+--AXIOS--
+
+npm install axios
+
+--DROPDOWN--
+
+npx expo install react-native-element-dropdown
+
+--INFO DEL TOKEN--
+
+npm install jwt-decode@3.1.2
+
+
+npx expo install react-native-modal-datetime-picker @react-native-community/datetimepicker
