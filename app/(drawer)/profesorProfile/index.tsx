@@ -1,24 +1,15 @@
 import { View, Text, Image, ScrollView, TouchableOpacity, Modal, SafeAreaView } from 'react-native';
-
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
-import { router, useFocusEffect } from 'expo-router';
-import useGetProfesorProfile from "../../../hooks/useGetProfesorProfile";
+import { router } from 'expo-router';
+import useGetProfesorProfile from "../../../hooks/profesorProfile/useGetProfesorProfile";
+import { useRefreshOnFocus } from '@/hooks/useRefreshOnFocus';
 
 const _profesorProfile = () => {
-
     const { profile, fetchProfile, loading: profileLoading } = useGetProfesorProfile();
-
-    useFocusEffect(
-        useCallback(() => {
-            fetchProfile();
-        }, [])
-    );
-
     const [activeSection, setActiveSection] = useState<'Informacion Personal' | 'Informacion Academica' | 'Cursos Pendientes'>('Informacion Personal');
-
     const getProfileValue = (value: any) => (value ? value : "No hay datos.");
-
+    useRefreshOnFocus(fetchProfile);
     if (profileLoading && !profile) {
         return (
             <View className="flex-1 bg-[#023047] justify-center items-center">
@@ -27,9 +18,7 @@ const _profesorProfile = () => {
         );
     }
 
-
     return (
-
         <View className="flex-1 bg-[#023047]">
 
             <ScrollView className="flex-1">

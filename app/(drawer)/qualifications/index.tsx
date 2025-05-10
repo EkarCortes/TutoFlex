@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBarComponent from "../../../components/StatusBarComponent";
@@ -6,6 +6,7 @@ import HeaderScreens from "../../../components/HeaderScreens";
 import ToastComponent from "../../../components/Toast";
 import LoadingScreen from "../../../components/LoadingScreen";
 import useFinalizedTutorialsScreen from "../../../hooks/qualifications/useFinalizedTutorials";
+import { useRefreshOnFocus } from "@/hooks/useRefreshOnFocus";
 
 const FinalizedTutorialsScreen = () => {
   const {
@@ -20,6 +21,8 @@ const FinalizedTutorialsScreen = () => {
     formatTime,
     handleReview,
   } = useFinalizedTutorialsScreen();
+
+  useRefreshOnFocus(refreshTutorials);
 
   return (
     <SafeAreaView className="flex-1 bg-[#023046]" edges={["left", "right", "bottom"]}>

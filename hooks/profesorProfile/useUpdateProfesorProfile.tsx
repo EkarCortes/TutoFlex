@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { updateProfile } from "../services/updateProfesorProfileService";
+import { updateProfile } from "../../services/updateProfesorProfileService";
 
 const useUpdateProfesorProfile = () => {
   const [loading, setLoading] = useState(false);
