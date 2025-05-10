@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Profile, getProfile } from "../../services/GetUserProfileService";
 
-// Este hook se encarga de manejar la lógica de obtención de los puntos del perfil del usuario.
+// Este hook se encarga de manejar la lógica de obtención del perfil del usuario.
 
 const useGetUserProfile = () => {
     const [profile, setProfile] = useState<Profile | null>(null);

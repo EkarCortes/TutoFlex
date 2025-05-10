@@ -5,6 +5,8 @@ import { usePaymentDetails } from "./usePaymentsDetails";
 import { showToast } from "../../components/Toast";
 import useUpdatePaymentStatus from "./useUpdatePaymentStatus ";
 
+// Este hook se encarga de manejar la lógica de los detalles del pago recibido.
+
 const useCardDetailsPayments = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showConfirmModalRejection, setShowConfirmModalRejection] =

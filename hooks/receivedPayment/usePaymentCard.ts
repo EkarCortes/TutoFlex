@@ -1,6 +1,8 @@
 import { router } from "expo-router";
 import usePaymentReceived from "./usePaymentReceived";
 
+// Este hook se encarga de manejar la lógica de los pagos recibidos y la navegación a los detalles del pago.
+
 const usePaymentCard = () => {
   const { students, loading, refreshPayments } = usePaymentReceived();
 

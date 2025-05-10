@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPaymentsDetailsService, Payment } from "../../services/getPaymentsDetailsService";
 
+// Este hook se encarga de manejar la lógica de los detalles del pago.
 
 export const usePaymentDetails = (pagoId: number | null) => {
     const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);

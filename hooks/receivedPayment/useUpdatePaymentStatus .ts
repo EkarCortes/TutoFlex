@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { updatePaymentStatus } from '../../services/updatePaymentsStatus';
 
+// Este hook se encarga de manejar la lógica de actualización del estado del pago.
 
 const useUpdatePaymentStatus = () => {
   const [loading, setLoading] = useState(false);

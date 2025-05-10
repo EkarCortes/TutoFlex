@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPaymentsReceived, Payment } from '../../services/getPaymentsReceivedService';
 
+// Este hook se encarga de manejar la lógica de los pagos recibidos por el profesor.
 
 const usePaymentReceived = () => {
   const [students, setStudents] = useState<Payment[]>([]); 
