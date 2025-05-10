@@ -1,21 +1,17 @@
-
-
 import React, { useState } from 'react';
 import { View, Modal, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 import PaymentInfoTeacher from '../../../components/PaymentInfoTeacher';
 import TransferenciaInfo from '../../../components/TransferenciaInfo';
 import UploadComprobante from '../../../components/UploadComprobante';
-import '../../../global.css';
 import RoundedHeader from '../../../components/HeaderScreens';
 import ButtonBotton from '../../../components/ButtonBottom';
 import ToastComponent from '../../../components/Toast';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
 import useGetProfesorProfile from '../../../hooks/profesorProfile/useGetProfesorProfile';
-import useTotalFee from '../../../hooks/useTotalFee';
-import useDeductionsPaymentHandler from '../../../hooks/useDeductionsPaymentHandler';
-
-
+import useTotalFee from '../../../hooks/deductions/useTotalFee';
+import useDeductionsPaymentHandler from '../../../hooks/deductions/useDeductionsPaymentHandler';
+import '../../../global.css';
 
 const ConfirmarPagoScreen = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);

@@ -1,8 +1,11 @@
-
-
 import { useState } from "react";
-import { showToast } from "../components/Toast";
-import { DeductionPaidItem, payMultipleDeductions } from "../services/deductionsService";
+import { showToast } from "../../components/Toast";
+import { DeductionPaidItem, payMultipleDeductions } from "../../services/deductionsService";
+
+
+// Este hook se utiliza para gestionar el pago de deducciones
+// y permite realizar el pago de múltiples deducciones.
+
 
 const usePayDeductions = () => {
   const [loading, setLoading] = useState(false);
