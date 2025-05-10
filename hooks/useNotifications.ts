@@ -3,7 +3,9 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { useState, useEffect, useRef } from 'react';
 import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axiosInstance from '../api/axiosConfig';
+
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -55,23 +57,28 @@ const useNotificaciones = () => {
   const notificationListener = useRef<Notifications.EventSubscription>();
   const responseListener = useRef<Notifications.EventSubscription>();
 
+
+  /* ----- Enviar el token si y solo si ha cambiado ----- */
   useEffect(() => {
     registerForPushNotificationsAsync()
       .then(async (token) => {
         if (!token) return;
         setExpoPushToken(token);
-
-        // ————— ACÁ SE REGISTRA EL TOKEN EN EL BACKEND —————
-        try {
-          await axiosInstance.post(
-            '/notifications/register-token',
-            {
-              token,
-              plataforma: Platform.OS,
-            }
-          );
-        } catch (err) {
-          console.warn('Error registrando el push token en el backend:', err);
+  
+        const lastToken = await AsyncStorage.getItem('expoPushToken');
+        if (lastToken !== token) {
+          try {
+            await axiosInstance.post(
+              '/notifications/register-token',
+              {
+                token,
+                plataforma: Platform.OS,
+              }
+            );
+            await AsyncStorage.setItem('expoPushToken', token);
+          } catch (err) {
+            console.warn('Error registrando el push token en el backend:', err);
+          }
         }
       })
       .catch((error) => {
