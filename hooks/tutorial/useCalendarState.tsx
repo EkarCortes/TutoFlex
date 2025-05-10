@@ -2,13 +2,15 @@ import { useState, useCallback, useMemo } from 'react';
 import { DAY_MAPPING_TO_NAME, normalizeDayName } from './utils';
 import { getPendingTutorialsByProfessor } from '../../services/getTutorialService';
 
+// Este hook se utiliza para gestionar la lógica del calendario en la pantalla de detalles de un tutorial.
+
 export const useCalendarState = (tutorData: any) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedDates, setSelectedDates] = useState<{ [date: string]: boolean }>({});
   const [pendingTutorials, setPendingTutorials] = useState<any[]>([]);
   const [occupiedHorarios, setOccupiedHorarios] = useState<number[]>([]);
   
-  // Calcular días disponibles solo una vez cuando cambia tutorData
+
   const availableDays = useMemo(() => {
     if (!tutorData?.horarios_array?.length) return [];
     
