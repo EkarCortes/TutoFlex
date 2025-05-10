@@ -2,12 +2,13 @@ import React from "react";
 import { View, Text, ActivityIndicator, Modal, Alert, TouchableOpacity, FlatList, RefreshControl, TextInput } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import useManageCoursesScreen from "../../hooks/manageCourse/useManageCoursesScreen";
 import ModalAddCourse from "../../components/ModalAddCourse";
 import HeaderScreens from '../../components/HeaderScreens';
 import CustomDropdown from "../../components/CustomDropdown";
 import InputField from "../../components/InputField";
 import ToastComponent from "../../components/Toast";
+import useManageCoursesScreen from "../../hooks/manageCourse/useManageCoursesScreen";
+
 
 const ManageCourseScreen = () => {
   const {
@@ -74,7 +75,6 @@ const ManageCourseScreen = () => {
     <SafeAreaView className="flex-1 bg-[#023046]" edges={['left', 'right', 'bottom']}>
       <HeaderScreens title={"Gestionar Cursos"} />
       <View className="flex-1 w-full px-5 py-3 md:px-8 md:py-5">
-        {/* Card de búsqueda y filtro */}
         <View className="w-full bg-[#0d6a97] rounded-2xl p-5 shadow-lg mb-4">
           <View className="flex-row items-center mb-4">
             <Ionicons name="search" size={24} color="#FB8500" />
@@ -113,7 +113,6 @@ const ManageCourseScreen = () => {
           </View>
         </View>
 
-        {/* Lista de cursos filtrados */}
         <View className="flex-1 bg-[#0d6a97] rounded-2xl px-5 pt-4 pb-3 shadow-lg">
           <View className="flex-row justify-between items-center mb-4">
             <View className="flex-row items-center">
@@ -169,7 +168,6 @@ const ManageCourseScreen = () => {
         </View>
       </View>
 
-      {/* Add Course Button */}
       <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">
         <TouchableOpacity
           className="bg-[#FB8500] h-14 rounded-xl items-center justify-center flex-row shadow-lg"
@@ -179,7 +177,6 @@ const ManageCourseScreen = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Add Course Modal */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -202,7 +199,6 @@ const ManageCourseScreen = () => {
         />
       </Modal>
 
-      {/* Edit Course Modal */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -262,7 +258,6 @@ const ManageCourseScreen = () => {
         </View>
       </Modal>
 
-      {/* Delete Course Modal */}
       <Modal
         animationType="fade"
         transparent={true}

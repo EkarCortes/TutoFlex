@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { getCourses, createCourse, getClassifications, deleteCourse, updateCourse, Course, CreateCourseData, UpdateCourseData, Classification } from "../../services/manageCourseService";
 
+// Este hook se utiliza para gestionar los cursos en la aplicación
+// y permite obtener, crear, eliminar y actualizar cursos.
+
 const useCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

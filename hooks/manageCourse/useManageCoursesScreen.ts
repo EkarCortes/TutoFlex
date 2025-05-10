@@ -3,6 +3,8 @@ import { Alert } from "react-native";
 import useCourses from "../../hooks/manageCourse/usemanageCourse";
 import { showToast } from "../../components/Toast";
 
+// Este hook se utiliza en la pantalla de gestión de cursos
+// y permite gestionar la creación, edición y eliminación de cursos.
 const useManageCoursesScreen = () => {
   const {
     courses,
