@@ -11,6 +11,9 @@ import {
   getCareersForDropdown,
 } from "../../services/catalogsService";
 
+// Este hook se utiliza en la pantalla de edición de perfil del profesor
+// y permite gestionar la información del perfil, incluyendo la foto, descripción,
+
 type Asset = {
   uri: string;
   fileName?: string;

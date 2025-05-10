@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { updateProfile } from "../../services/updateProfesorProfileService";
 
+// Este hook se utiliza para actualizar el perfil del profesor
+// en la pantalla de edición de perfil. Permite gestionar la carga de la foto,
+// la descripción y otros datos del perfil.
+
 const useUpdateProfesorProfile = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState<string | null>(null);
