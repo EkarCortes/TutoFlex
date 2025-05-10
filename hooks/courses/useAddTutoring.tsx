@@ -1,7 +1,7 @@
 //Este hook contiene la lógica para agregar una tutoría en la pantalla setClassDetails
 import { useRouter } from "expo-router";
-import { showToast } from "../components/Toast";
-import { addCourseDetails } from "../services/courseProfesorService";
+import { showToast } from "../../components/Toast";
+import { addCourseDetails } from "../../services/courseProfesorService";
 
 export const useAddTutoring = (onSuccess?: () => void) => {
   const router = useRouter();

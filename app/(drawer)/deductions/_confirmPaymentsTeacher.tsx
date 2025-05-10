@@ -11,7 +11,7 @@ import ButtonBotton from '../../../components/ButtonBottom';
 import ToastComponent from '../../../components/Toast';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import useGetProfesorProfile from '../../../hooks/useGetProfesorProfile';
+import useGetProfesorProfile from '../../../hooks/profesorProfile/useGetProfesorProfile';
 import useTotalFee from '../../../hooks/useTotalFee';
 import useDeductionsPaymentHandler from '../../../hooks/useDeductionsPaymentHandler';
 

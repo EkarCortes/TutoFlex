@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { View, Text, TouchableOpacity, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import useGetProfesorProfile from "../hooks/useGetProfesorProfile";
+import useGetProfesorProfile from "../hooks/profesorProfile/useGetProfesorProfile";
 import { useFocusEffect } from "expo-router";
 
 interface ImageUploadProps {

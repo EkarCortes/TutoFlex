@@ -1,5 +1,8 @@
 import { useState, useCallback } from 'react';
 
+// Este hook se utiliza para gestionar el estado de la selección de horarios
+// en la pantalla de Detalles de tutoriales. Permite seleccionar horarios
+
 export const useScheduleState = () => {
   const [selectedHorarios, setSelectedHorarios] = useState<number[]>([]);
   const [availableHours, setAvailableHours] = useState<string[]>([]);
