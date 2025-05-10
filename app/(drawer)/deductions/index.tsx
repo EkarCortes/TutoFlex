@@ -3,10 +3,11 @@ import { View, Text, ScrollView, RefreshControl } from 'react-native';
 import { router } from 'expo-router';
 import ButtonBotton from '../../../components/ButtonBottom';
 import InvoicesCard from '../../../components/InvoicesCard';
-import useTotalFee from '../../../hooks/useTotalFee';
 import RoundedHeader from '../../../components/HeaderScreens';
-import useAllDeductionsPaid from '../../../hooks/useAllDeductionsPaid';
 import DeductionsPaidList from '../../../components/DeductionsPaidList';
+import useTotalFee from '../../../hooks/deductions/useTotalFee';
+import useAllDeductionsPaid from '../../../hooks/deductions/useAllDeductionsPaid';
+
 
 const Index = () => {
   const [showAll, setShowAll] = useState(false);

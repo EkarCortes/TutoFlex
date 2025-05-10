@@ -1,6 +1,10 @@
 import { Platform } from "react-native";
-import { showToast } from "../components/Toast";
+import { showToast } from "../../components/Toast";
 import usePayDeductions from "./usePayDeductions";
+
+// Este hook se utiliza para gestionar el pago de deducciones
+// en la pantalla de Deducciones. Permite validar el número de transferencia,
+
 
 interface UsePayDeductionsHandlerProps {
   transferNumber: string;
