@@ -10,7 +10,13 @@ export default function renderQuickAccessButtons() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const userRole = user?.rol_id || 2; 
+  if (!user) {
+    // Puedes mostrar un loader o nada mientras se carga el usuario
+    return null;
+  }
+
+  const userRole = user.rol_id;
+
   if (userRole === 1) {
     return (
       <>
@@ -28,7 +34,6 @@ export default function renderQuickAccessButtons() {
         />
       </>
     );
-    
   } else if (userRole === 3) {
     return (
       <>

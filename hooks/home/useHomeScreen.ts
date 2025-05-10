@@ -14,8 +14,12 @@ export default function useHomeScreen() {
   const router = useRouter();
   useFontsLoader();
 
-  const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido}` : "Usuario";
+  // NUEVA
+  const userName = user ? user.nombre.split(' ')[0] + ' ' + user.apellido : "Usuario";
 
+  //VIEJA
+  //const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido}` : "Usuario";
+  
   // Verifica si el token ha expirado y configura el temporizador adecuadamente
   useEffect(() => {
     let tokenExpirationTimer: NodeJS.Timeout;
