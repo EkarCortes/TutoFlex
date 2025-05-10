@@ -1,6 +1,7 @@
-// hooks/useGetProfesorProfile.ts
 import { useState, useEffect, useCallback } from "react";
-import { getProfile, Profile } from "../services/getProfesorProfileService";
+import { getProfile, Profile } from "../../services/getProfesorProfileService";
+
+// Este hook se utiliza para obtener el perfil del profesor
 
 const useGetProfesorProfile = () => {
   const [profile, setProfile]   = useState<Profile | null>(null);

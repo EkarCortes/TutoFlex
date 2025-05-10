@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { CourseDetails } from "./useCourseDetails";
-import { showToast } from "../components/Toast";
+import { showToast } from "../../components/Toast";
+
+// Este hook se utiliza para inicializar los detalles del curso
+// en la pantalla de _setClassDetails. 
 
 interface UseInitializeCourseDetailsProps {
   courseDetails: CourseDetails | null;

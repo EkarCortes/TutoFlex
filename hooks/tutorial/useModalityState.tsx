@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 
+// Este hook se utiliza para gestionar el estado de la modalidad
+// en la pantalla de Detalles de tutoriales. Permite seleccionar la modalidad
+// y establecer un valor por defecto basado en los datos del tutor.
+
 export const useModalityState = (tutorData: any) => {
   const [selectedModalidad, setSelectedModalidad] = useState<string | null>(null);
   

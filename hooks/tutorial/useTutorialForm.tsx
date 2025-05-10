@@ -5,6 +5,7 @@ import { useModalityState } from './useModalityState';
 import { useFormSubmission } from './useFormSubmission';
 
 // Hook principal que orquesta los demás hooks
+// y gestiona el estado de la pantalla de detalles de la tutoría
 export const useTutorialForm = (tutorData: any) => {
   // Estados compartidos
   const [topics, setTopics] = useState<string>("");

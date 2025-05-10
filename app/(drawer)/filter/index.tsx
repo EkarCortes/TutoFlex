@@ -1,16 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, TouchableOpacity, Modal, ScrollView, ActivityIndicator } from 'react-native';
 import { MaterialIcons, Fontisto, FontAwesome, Feather, Ionicons } from '@expo/vector-icons';
-import CardProfesor from '../../../components/CardProfesor';
-import { FontAwesome5 } from '@expo/vector-icons';
-import useInicioLogic from '../../../hooks/useFilter';
 import { useLocalSearchParams } from 'expo-router';
+import useInicioLogic from '../../../hooks/filter/useFilter';
+import CardProfesor from '../../../components/CardProfesor';
 
 export default function Inicio() {
   const { searchQuery } = useLocalSearchParams();
   const [mostrarModalFiltro, setMostrarModalFiltro] = useState(false);
-  const [loading, setLoading] = useState(true); // Inicializar como true
+  const [loading, setLoading] = useState(true); 
   const {
     mostrarPaises, setMostrarPaises, mostrarUniversidad, setMostrarUniversidad, mostrarcarrera, setMostrarcarrera,
     mostrarclasificacion, setMostrarClasificacion, mostrarFecha, setMostrarFecha, mostrarModalidad, setMostrarModalidad,
@@ -24,7 +22,7 @@ export default function Inicio() {
     if (searchQuery) {
       setBusqueda(searchQuery);
     }
-    setTimeout(() => setLoading(false), 2000); // Simula la carga de datos
+    setTimeout(() => setLoading(false), 2000); 
   }, [searchQuery]);
 
   if (loading) {
@@ -38,7 +36,6 @@ export default function Inicio() {
 
   return (
     <View className="flex-1 bg-[#082F49] p-4">
-      {/* Campo de búsqueda con icono de filtro */}
       <View className="mb-4 flex-col rounded-xl bg-[#8ECAE7] px-4 py-2">
         <View className='flex-row items-center'>
           <TextInput
@@ -48,14 +45,12 @@ export default function Inicio() {
             value={busqueda}
             onChangeText={setBusqueda}
           />
-          {/* Botón de filtro */}
           <TouchableOpacity onPress={() => setMostrarModalFiltro(true)}>
             <MaterialIcons name="filter-alt" size={24} color="#082F49" />
           </TouchableOpacity>
         </View>
       </View>
       <View className='justify-center items-center text-center'>
-        {/*  Filtros aplicados  */}
         {(paisSeleccionado || universidadSeleccionado || carreraSeleccionado || clasificacionSeleccionada || fechaSeleccionada || modalidadSeleccionada) && (
           <View className="flex-row items-center justify-between mt-2 mb-10 bg-gray-200 rounded-full px-4 py-2 max-w-80 text-center">
             <Text className="text-gray-700 text-sm text-center ">
@@ -75,7 +70,7 @@ export default function Inicio() {
         )}
       </View>
 
-      {/* Lista de tarjetas filtradas */}
+
       <FlatList
         data={datosFiltrados}
         keyExtractor={(item) => item.id}
@@ -94,8 +89,7 @@ export default function Inicio() {
         )}
       />
 
-      {/* Modal de Filtros */}
-      {/* Modal de Filtros */}
+
       <Modal visible={mostrarModalFiltro} animationType="fade" transparent>
         <View className="flex-1 items-center justify-center bg-black/80">
           <View className="max-h-[90vh] w-96 rounded-lg bg-[#0B4C6D] p-6">
@@ -107,7 +101,6 @@ export default function Inicio() {
               <MaterialIcons name="close" size={24} color="white" />
             </TouchableOpacity>
             <ScrollView className="max-h-[80vh] mt-8">
-              {/* Botón para mostrar los filtros de país */}
               <TouchableOpacity
                 className="flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarPaises(!mostrarPaises)}>
@@ -122,7 +115,7 @@ export default function Inicio() {
                 />
               </TouchableOpacity>
 
-              {/* Lista de países dinámica desde el catálogo */}
+  
               {mostrarPaises && (
                 <View className="mt-2 rounded-lg bg-[#c2e4f4] p-2">
                   {loading ? (
@@ -145,7 +138,7 @@ export default function Inicio() {
                 </View>
               )}
               
-              {/* Universidad */}
+  
               <TouchableOpacity
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarUniversidad(!mostrarUniversidad)}>
@@ -184,7 +177,6 @@ export default function Inicio() {
                 </View>
               )}
 
-              {/* Carrera */}
               <TouchableOpacity
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarcarrera(!mostrarcarrera)}>
@@ -223,7 +215,6 @@ export default function Inicio() {
                 </View>
               )}
 
-              {/* Clasificación */}
               <TouchableOpacity
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarClasificacion(!mostrarclasificacion)}>
@@ -265,7 +256,6 @@ export default function Inicio() {
                 </View>
               )}
 
-              {/* Fecha */}
               <TouchableOpacity
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarFecha(!mostrarFecha)}>
@@ -298,7 +288,6 @@ export default function Inicio() {
                 </View>
               )}
 
-              {/* Modalidad */}
               <TouchableOpacity
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarModalidad(!mostrarModalidad)}>
@@ -330,7 +319,6 @@ export default function Inicio() {
               )}
             </ScrollView>
 
-            {/* Botón para aplicar los filtros y cerrar el modal */}
             <TouchableOpacity
               className="mt-4 rounded bg-[#FB8500] p-2"
               onPress={() => setMostrarModalFiltro(false)}>

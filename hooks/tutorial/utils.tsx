@@ -1,4 +1,4 @@
-// Constantes compartidas
+// Constantes compartidas entre los tutoriales
 export const DAY_MAPPING_TO_NUMBER: { [key: string]: number } = {
   'Domingo': 0, 'Lunes': 1, 'Martes': 2, 'Miércoles': 3, 
   'Jueves': 4, 'Viernes': 5, 'Sábado': 6

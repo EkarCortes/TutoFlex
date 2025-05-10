@@ -6,10 +6,10 @@ import HeaderScreens from "../../../components/HeaderScreens";
 import ScheduleModal from "../../../components/ScheduleModal";
 import DeleteConfirmationModal from "../../../components/DeleteConfirmationModal";
 import ToastComponent, { showToast } from "../../../components/Toast";
-import useSetClassDetails from "../../../hooks/courses/useSetClassDetails";
 import ScheduleList from "../../../components/ScheduleList";
 import ModeSelector from "../../../components/ModeSelector";
 import InputField from "../../../components/InputField";
+import useSetClassDetails from "../../../hooks/courses/useSetClassDetails";
 
 const SetClassDetails = () => {
   const {

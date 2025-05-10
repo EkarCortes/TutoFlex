@@ -19,7 +19,7 @@ type AuthContextType = {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  getToken: () => Promise<string | null>; // Añadido getToken
+  getToken: () => Promise<string | null>; 
   loading: boolean;
 };
 

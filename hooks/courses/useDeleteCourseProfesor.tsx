@@ -1,6 +1,9 @@
-import { deleteCourseProfessor } from "../services/courseProfesorService";
+import { deleteCourseProfessor } from "../../services/courseProfesorService";
 import { useState } from "react";
-import { showToast } from "../components/Toast";
+import { showToast } from "../../components/Toast";
+
+// Este hook se utiliza para eliminar un curso de un profesor en 
+// la pantalla de _setClassDetails.tsx. Permite gestionar la eliminación de un curso
 
 const useDeleteCourseProfesor = (onSuccess?: () => void) => {
   const [loading, setLoading] = useState(false);

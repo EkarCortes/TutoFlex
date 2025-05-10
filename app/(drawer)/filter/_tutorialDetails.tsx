@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,17 +10,17 @@ import {
   ActivityIndicator
 } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
+import { Ionicons } from '@expo/vector-icons';
 import DateCalendar from "../../../components/DateCalendar";
 import ScheduleSelector from "../../../components/ScheduleSelector";
 import ModeSelector from "../../../components/ModeSelector";
 import TopicsInput from "../../../components/TopicsInput";
-import "../../../global.css";
 import StatusBarComponent from "../../../components/StatusBarComponent";
 import HeaderScreens from "../../../components/HeaderScreens";
-import { useTutorialForm } from "../../../hooks/tutorial/useTutorialForm";
 import InfoTeacher from "../../../components/InfoTeacher";
 import ToastComponent, { showToast } from "../../../components/Toast";
-import { Ionicons } from '@expo/vector-icons';
+import useTutorialDetails from "../../../hooks/tutorial/useTutorialDetails";
+import "../../../global.css";
 
 // ConfirmationModal component definition
 interface ConfirmationModalProps {
@@ -33,7 +33,7 @@ interface ConfirmationModalProps {
   horarios: string[];
   formatSelectedDate: (date: string) => string;
   isSubmitting: boolean;
-  selectedModalidad: string | null; // Add this line
+  selectedModalidad: string | null; 
 }
 
 // Calendar modal component
@@ -70,15 +70,12 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
     >
       <View className="flex-1 justify-end bg-black/70">
         <View className="bg-[#023046] rounded-t-3xl p-6 shadow-2xl">
-          {/* Header */}
           <View className="flex-row justify-between items-center mb-4">
             <Text className="text-white text-xl font-bold">Selecciona una fecha</Text>
             <TouchableOpacity onPress={onClose} className="p-2">
               <Ionicons name="close-circle" size={28} color="#FB8500" />
             </TouchableOpacity>
           </View>
-
-          {/* Calendario */}
         
             <DateCalendar
               selectedDates={selectedDates}
@@ -86,8 +83,6 @@ const CalendarModal: React.FC<CalendarModalProps> = ({
               disabledDaysOfWeek={disabledDaysOfWeek}
             />
         
-
-          {/* Estado de selección y acción */}
           <View className="items-center">
             <Ionicons
               name="calendar-outline"
@@ -127,7 +122,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   horarios,
   formatSelectedDate,
   isSubmitting,
-  selectedModalidad, // Add this line
+  selectedModalidad, 
 }) => {
   if (!visible) return null;
 
@@ -225,6 +220,7 @@ const TutoriaScreen = () => {
   const tutorData = params.tutorData ? JSON.parse(params.tutorData as string) : null;
   const [showCalendarModal, setShowCalendarModal] = useState(false);
 
+
   const {
     selectedDate,
     selectedHorarios,
@@ -236,7 +232,7 @@ const TutoriaScreen = () => {
     selectedDates,
     handleDayPress,
     pendingTutorials,
-    occupiedHorarios, // Añadir esta propiedad
+    occupiedHorarios,
     toggleHorario,
     setSelectedModalidad,
     formatSelectedDate,
@@ -245,37 +241,15 @@ const TutoriaScreen = () => {
     setShowConfirmModal,
     availableHours,
     getDisabledDaysOfWeek,
-  } = useTutorialForm(tutorData);
-
- 
-  // Update this section to handle empty hours better
-  const horariosToDisplay = availableHours && availableHours.length > 0
-    ? availableHours
-    : ["No hay horarios disponibles"];
-
-  // Update the modalidadesToDisplay logic to handle hybrid cases
-  const modalidadesToDisplay = useMemo(() => {
-    if (!tutorData?.modalidad) {
-      return ["Presencial", "Virtual"]; // Default if no modality is specified
-    }
-
-    const modalidad = tutorData.modalidad.toLowerCase();
-
-    // Check if the modality is "hibrida" or "híbrida" (with accent)
-    if (modalidad === "hibrida" || modalidad === "híbrida") {
-      return ["Presencial", "Virtual"]; // Show both options for hybrid
-    } else {
-      // Capitalize first letter for non-hybrid modalities
-      return [tutorData.modalidad.charAt(0).toUpperCase() + tutorData.modalidad.slice(1)];
-    }
-  }, [tutorData?.modalidad]);
+    horariosToDisplay,
+    modalidadesToDisplay,
+  } = useTutorialDetails(tutorData);
 
   return (
     <View className="flex-1 bg-[#023046]">
       <StatusBarComponent />
       <HeaderScreens title={"Detalles Tutoría"} />
 
-      {/* SOLO el contenido scrollable dentro del KeyboardAvoidingView */}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
@@ -290,7 +264,6 @@ const TutoriaScreen = () => {
           <View className="p-4 mt-1">
             <InfoTeacher tutorData={tutorData} />
             <View className="bg-[#096491] rounded-2xl p-5 shadow-lg mb-4">
-              {/* Fecha */}
               <Text className="text-white text-lg font-bold mb-2">Fecha</Text>
               <TouchableOpacity
                 onPress={() => setShowCalendarModal(true)}
@@ -307,13 +280,13 @@ const TutoriaScreen = () => {
                 horarios={horariosToDisplay}
                 selectedHorarios={selectedHorarios}
                 toggleHorario={toggleHorario}
-                dateSelected={!!selectedDate} // Pass whether a date is selected
-                occupiedHorarios={occupiedHorarios} // Pasar los horarios ocupados
+                dateSelected={!!selectedDate}
+                occupiedHorarios={occupiedHorarios}
               />
               <ModeSelector
                 modalidades={modalidadesToDisplay}
                 selectedModalidad={selectedModalidad}
-                setSelectedModalidad={setSelectedModalidad} 
+                setSelectedModalidad={setSelectedModalidad}
               />
               <TopicsInput
                 topics={topics}
@@ -324,7 +297,6 @@ const TutoriaScreen = () => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      {/* Barra de acciones fija */}
       <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">
         <View className="flex-row justify-between">
           <TouchableOpacity

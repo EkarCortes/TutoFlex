@@ -3,6 +3,10 @@ import { router } from 'expo-router';
 import { scheduleTutorial } from '../../services/getTutorialService';
 import { showToast } from '../../components/Toast';
 
+
+// Este hook se utiliza para gestionar la lógica de la pantalla de detalles de la tutoría
+// y la confirmación de la tutoría. Permite enviar los datos de la tutoría seleccionada
+
 interface FormSubmissionProps {
   tutorData: any;
   selectedDate: string | null;
