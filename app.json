@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "tutoflex",
-    "slug": "tutoflex",
+    "slug": "tuto-flex",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -12,12 +12,13 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#023047"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.ekarcorts.tutoflex"
+      "package": "com.utn.tutoflex"
     },
     "web": {
       "bundler": "metro",
@@ -35,7 +36,14 @@
           "backgroundColor": "#023047"
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/logo.png",
+          "color": "#023047"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
@@ -43,9 +51,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "8faa7e6c-5ce8-4df5-aaf5-950f932fee99"
+        "projectId": "688f7b77-ff63-47ce-99f8-023cb757cdc0"
       }
     },
-    "owner": "ekarcorts"
+    "owner": "tutoflex"
   }
 }
