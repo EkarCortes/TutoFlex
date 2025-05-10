@@ -78,3 +78,6 @@ npm install @react-native-picker/picker
 
 --DEVICE--
 npx expo install expo-device
+
+--- ASYNC STORAGE ---
+ npx expo install @react-native-async-storage/async-storage
