@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
+import { getCourses, createCourse, Course, CreateCourseData, searchCourses, SearchCoursesParams } from "../../services/courseService";
+import { getCoursesProfesor } from "../../services/courseProfesorService";
+
 //Este use se utiliza en la pantalla index de la 
 // carpeta course para pintar los cursos y añadir cursos
-import { useState, useEffect } from "react";
-import { getCourses, createCourse, Course, CreateCourseData, searchCourses, SearchCoursesParams } from "../services/courseService";
-import { getCoursesProfesor } from "../services/courseProfesorService";
 
 const useCourses = () => {
   const [courses, setCourses] = useState<Course[]>([]);

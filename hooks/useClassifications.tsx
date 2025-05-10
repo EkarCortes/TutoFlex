@@ -1,3 +1,5 @@
+// Este hooks se utiliza para obtener las clasificaciones de los cursos
+// Se usa en el index de la carpeta course y en el filtro del bucador principal
 import { useState, useEffect } from "react";
 import { getClassifications, Classification } from "../services/classificationService";
 
