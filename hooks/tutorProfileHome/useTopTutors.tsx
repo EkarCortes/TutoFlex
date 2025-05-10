@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getTopTutors, TutorProfile } from '../../services/tutorService';
 
+// Este hook se utiliza para obtener los mejores tutores
+// en la pantalla de inicio del perfil del tutor. Permite cargar los tutores
+
 const useTopTutors = (limit: number = 5) => {
   const [tutors, setTutors] = useState<TutorProfile[]>([]);
   const [loading, setLoading] = useState(true);

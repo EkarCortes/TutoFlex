@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getTutorById, TutorProfile } from '../../services/tutorService';
 
+// Este hook se utiliza para obtener el perfil de un tutor
+// en la pantalla de inicio del perfil del tutor. Permite cargar el perfil
+
 const useTutorProfile = (tutorId: number | null) => {
   const [tutor, setTutor] = useState<TutorProfile | null>(null);
   const [loading, setLoading] = useState(true);

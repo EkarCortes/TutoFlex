@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import useTopTutors from '../hooks/tutorProfileHome/useTopTutors';
 
 const TopTutorsComponent = () => {
-  const { tutors, loading, error } = useTopTutors(5);
+  const { tutors, loading, error } = useTopTutors(6);
 
   if (loading) {
     return (
