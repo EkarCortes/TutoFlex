@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { DeductionPaidItem, getAllDeductionsPaid } from "../services/deductionsService";
+import { DeductionPaidItem, getAllDeductionsPaid } from "../../services/deductionsService";
+
+// Este hook personalizado se encarga de obtener todas las deducciones pagadas y su estado de carga y error.
 
 const useAllDeductionsPaid = () => {
   const [deductionsPaid, setDeductionsPaid] = useState<DeductionPaidItem[]>([]);

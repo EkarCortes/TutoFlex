@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-import useTotalFee from '../hooks/useTotalFee';
+import useTotalFee from '../hooks/deductions/useTotalFee';
 
 const DeductionsCard = () => {
   const { deductions, loading, error } = useTotalFee();

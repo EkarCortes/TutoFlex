@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { getDeductionProfessor } from "../services/deductionsService";
+import { getDeductionProfessor } from "../../services/deductionsService";
+
+// Este hook personalizado se encarga de obtener el total de deducciones y su estado de carga y error.
 
 const useTotalFee = () => {
   const [feeTotal, setFeeTotal] = useState<number>(0);
