@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import useGetTutorials from './useGetTutorial';
-import useClassifications from './useClassifications';
-import { useUniversityCatalogs } from '../hooks/useCatalogsService';
+import useClassifications from '../useClassifications';
+import { useUniversityCatalogs } from '../useCatalogsService';
 import { 
   getCountriesFromUniversities,
   getUniversitiesForDropdown,
   getCareersForDropdown 
-} from '../services/catalogsService';
+} from '../../services/catalogsService';
 
 interface DropdownOption {
   label: string;

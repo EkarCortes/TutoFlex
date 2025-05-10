@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { sendPayment, PaymentRequest } from "../services/paymentService";
-import { showToast } from "../components/Toast";
+import { sendPayment, PaymentRequest } from "../../services/paymentService";
+import { showToast } from "../../components/Toast";
 
 const usePayment = () => {
   const [loading, setLoading] = useState(false);

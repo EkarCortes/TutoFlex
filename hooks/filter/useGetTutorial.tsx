@@ -1,6 +1,6 @@
 //HOOK PARA MANEJAR LAS CARD DE LOS PROFESORES DE LAS TUTORIAS
 import { useState, useEffect } from "react";
-import { getTutorial, Tutorial } from "../services/getTutorialService";
+import { getTutorial, Tutorial } from "../../services/getTutorialService";
 
 const useGetTutorials = () => {
   // Cambié el tipo de tutorials a Tutorial[] para que coincida con la respuesta de la API

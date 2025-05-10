@@ -1,7 +1,7 @@
 import { View, TextInput, FlatList, ActivityIndicator, Text } from 'react-native';
 import React, { useEffect } from 'react';
 import CardProfesor from '../components/CardProfesor';
-import useProfesor from '../hooks/useProfesor';
+import useProfesor from '../hooks/filter/useProfesor';
 import { Picker } from '@react-native-picker/picker';
 
 export default function ListadoTutores() {

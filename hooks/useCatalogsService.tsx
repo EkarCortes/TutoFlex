@@ -15,6 +15,9 @@ import {
   Career,
 } from "../services/catalogsService";
 
+// Este hook se utiliza para gestionar los catálogos de universidades, sedes, recintos y carreras
+// y permite cargar los datos de manera asíncrona y manejarlos en el componente.
+
 export const useUniversityCatalogs = () => {
   const [universities, setUniversities] = useState<University[]>([]);
   const [headquarters, setHeadquarters] = useState<Headquarter[]>([]);
