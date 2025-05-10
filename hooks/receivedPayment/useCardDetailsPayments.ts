@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { router } from "expo-router";
-import { useSearchParams } from "expo-router/build/hooks";
-import { usePaymentDetails } from "./usePaymentsDetails";
-import { showToast } from "../../components/Toast";
-import useUpdatePaymentStatus from "./useUpdatePaymentStatus ";
 
-// Este hook se encarga de manejar la lógica de los detalles del pago recibido.
+import { usePaymentDetails } from "./usePaymentsDetails";
+import { useSearchParams } from "expo-router/build/hooks";
+import useUpdatePaymentStatus from "./useUpdatePaymentStatus ";
+import { showToast } from "../../components/Toast";
+
+// Este hook se encarga de manejar la lógica de los detalles de los pagos
 
 const useCardDetailsPayments = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showConfirmModalRejection, setShowConfirmModalRejection] =
     useState(false);
+  const [showComprobanteModal, setShowComprobanteModal] = useState(false); 
 
   const searchParams = useSearchParams();
   const pagoId = searchParams.get("pagoId");
@@ -42,6 +44,8 @@ const useCardDetailsPayments = () => {
     setShowConfirmModal,
     showConfirmModalRejection,
     setShowConfirmModalRejection,
+    showComprobanteModal,
+    setShowComprobanteModal,
     selectedPayment,
     loading,
     updating,

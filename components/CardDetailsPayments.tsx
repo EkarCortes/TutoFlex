@@ -1,5 +1,5 @@
-import React from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Modal, Text, TouchableOpacity, View, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 import LoadingScreen from "./LoadingScreen";
@@ -31,12 +31,16 @@ const CardDetailsPayments = () => {
         setShowConfirmModal,
         showConfirmModalRejection,
         setShowConfirmModalRejection,
+        showComprobanteModal,
+        setShowComprobanteModal,
         selectedPayment,
         loading,
         updating,
         managePaymentConfirmation,
         handlePaymentRejection,
     } = useCardDetailsPayments();
+
+
 
     if (loading) {
         return <LoadingScreen message="Cargando detalles del pago..." />;
@@ -120,15 +124,43 @@ const CardDetailsPayments = () => {
                         </Text>
                     </View>
                 </View>
-                <View className="bg-gray-200 mb-2 rounded-lg p-4 w-[90%] items-center">
-                    <Text className="text-lg text-black mb-2" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
+                <View className=" bg-[#086490] mb-2 rounded-lg p-4 w-[90%] items-center">
+                    <Text className="text-lg text-white mb-2" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
                         Comprobante de Pago:
                     </Text>
-                    <View className="w-full h-48 bg-gray-300 rounded-lg overflow-hidden">
-                        <Text className="text-center text-gray-500" style={{ fontFamily: "SpaceGrotesk-Regular" }}>
-                            Imagen del comprobante
-                        </Text>
-                    </View>
+                    <TouchableOpacity
+                        className="bg-[#FB8500] py-2 px-4 rounded-lg"
+                        onPress={() => setShowComprobanteModal(true)}
+                    >
+                        <Text className="text-white font-bold">Ver detalles del comprobante</Text>
+                    </TouchableOpacity>
+
+                    {/* Modal para mostrar la imagen */}
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={showComprobanteModal}
+                        onRequestClose={() => setShowComprobanteModal(false)}
+                    >
+                        <View className="flex-1 justify-center items-center bg-black/80">
+                            <View className="bg-white w-11/12 rounded-lg p-4 shadow-lg">
+                                <Text className="text-lg font-bold text-center mb-4">Comprobante de Pago</Text>
+                                <View className="w-full h-64 bg-gray-300 rounded-lg overflow-hidden">
+                                    <Image
+                                        source={{ uri: selectedPayment.comprobante }}
+                                        className="w-full h-full"
+                                        resizeMode="cover"
+                                    />
+                                </View>
+                                <TouchableOpacity
+                                    className="bg-[#FB8500] py-2 px-4 rounded-lg mt-4"
+                                    onPress={() => setShowComprobanteModal(false)}
+                                >
+                                    <Text className="text-white font-bold text-center">Cerrar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
                 </View>
                 <Modal
                     animationType="fade"
