@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getPaymentsReceived, Payment } from '../services/getPaymentsReceivedService';
+import { getPaymentsReceived, Payment } from '../../services/getPaymentsReceivedService';
 
 
 const usePaymentReceived = () => {

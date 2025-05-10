@@ -1,19 +1,18 @@
-import { router } from 'expo-router';
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import usePaymentReceived from '../hooks/usePaymentReceived';
-import LoadingScreen from './LoadingScreen';
+import React from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import LoadingScreen from "./LoadingScreen";
+import usePaymentCard from "../hooks/receivedPayment/usePaymentCard";
 
 const PaymentCard = () => {
-  const { students, loading, refreshPayments } = usePaymentReceived();
+  const { students, loading, refreshPayments, navigateToDetails } = usePaymentCard();
 
   if (loading) {
     return <LoadingScreen message="Cargando pagos recibidos..." />;
   }
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 p-4">
       <FlatList
         data={students}
         keyExtractor={(item) => item.pago_id.toString()}
@@ -21,29 +20,32 @@ const PaymentCard = () => {
         onRefresh={refreshPayments}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={styles.card}
-            onPress={() =>
-              router.push({
-                pathname: '../../(drawer)/receivedPayments/_detailsPayments',
-                params: { pagoId: item.pago_id },
-              })
-            }
+            className="bg-[#096491] p-4 my-2 h-32 rounded-lg flex-row items-center shadow-md"
+            onPress={() => navigateToDetails(item.pago_id)}
           >
             <Image
-              source={require('../assets/images/AvatarStudents.png')}
-              style={styles.avatar}
+              source={require("../assets/images/AvatarStudents.png")}
+              style={{
+                width: 115,
+                height: 115,
+                borderRadius: 24,
+                marginRight: 16,
+                borderWidth: 2,
+                borderColor: "#FFA500",
+              }}
+              resizeMode="cover"
             />
-            <View style={styles.cardContent}>
-              <Text style={styles.studentName}>{item.estudiante_nombre}</Text>
-              <Text style={styles.studentEmail}>{item.estudiante_email}</Text>
+            <View className="flex-1">
+              <Text className="text-lg font-bold text-white">{item.estudiante_nombre}</Text>
+              <Text className="text-sm text-white">{item.estudiante_email}</Text>
             </View>
             <MaterialIcons name="arrow-forward-ios" size={24} color="#FFA500" />
           </TouchableOpacity>
         )}
         ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyTitle}>No tienes pagos recibidos</Text>
-            <Text style={styles.emptySubtitle}>
+          <View className="flex-1 justify-center items-center mt-10">
+            <Text className="text-lg font-bold text-white mb-2">No tienes pagos recibidos</Text>
+            <Text className="text-sm text-white opacity-70 text-center px-5">
               Cuando un estudiante realice un pago, aparecerá aquí.
             </Text>
           </View>
@@ -52,64 +54,5 @@ const PaymentCard = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
-  card: {
-    backgroundColor: '#096491',
-    padding: 16,
-    marginVertical: 8,
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 16,
-    borderWidth: 2,
-    borderColor: '#FFA500',
-  },
-  cardContent: {
-    flex: 1,
-  },
-  studentName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  studentEmail: {
-    color: 'white',
-    fontSize: 14,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  emptyTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 8,
-  },
-  emptySubtitle: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.7,
-    textAlign: 'center',
-    paddingHorizontal: 20,
-  },
-});
 
 export default PaymentCard;

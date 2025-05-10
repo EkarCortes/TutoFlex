@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { updatePaymentStatus } from '../services/updatePaymentsStatus';
+import { updatePaymentStatus } from '../../services/updatePaymentsStatus';
 
 
 const useUpdatePaymentStatus = () => {
