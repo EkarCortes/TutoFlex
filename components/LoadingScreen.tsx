@@ -31,7 +31,7 @@ interface LoadingScreenProps {
   /**
    * Size of the activity indicator
    */
-  indicatorSize?: "small" | "large";
+indicatorSize?: "small" | "large" ;
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({
@@ -47,7 +47,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
   return (
     <Container className={`${fullScreen ? 'flex-1' : ''} justify-center items-center`} 
       style={{ backgroundColor }}>
-      <View className="p-6 rounded-xl items-center">
+      <View className="items-center">
         <ActivityIndicator size={indicatorSize} color={indicatorColor} />
         {message && (
           <Text className="mt-4 text-center text-lg font-medium" 

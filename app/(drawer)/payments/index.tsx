@@ -27,10 +27,13 @@ export default function PagosPendientesScreen() {
 
       {loading ? (
         <View className="flex-1">
-          <ActivityIndicator
-            size="large"
-            color="#FB8500"
-            className="flex-1 justify-center items-center"
+          <LoadingScreen
+            message=""
+            fullScreen={true}
+            backgroundColor="#023047"
+            indicatorColor="#FB8500"
+            textColor="white"
+            indicatorSize="large"
           />
         </View>
       ) : error ? (
@@ -45,7 +48,7 @@ export default function PagosPendientesScreen() {
           </TouchableOpacity>
         </View>
       ) : (
-        <View className="pb-2 pr-3 pl-3 pt-3 flex-1">
+        <View className="pb-2 pr-3 pl-3  flex-1">
           {tutorials.length === 0 ? (
             <View className="flex-1 justify-center items-center">
               <Text className="text-white text-lg mb-2">No tienes pagos pendientes</Text>
@@ -58,6 +61,7 @@ export default function PagosPendientesScreen() {
               data={tutorials}
               refreshing={loading}
               onRefresh={refreshTutorials}
+              showsVerticalScrollIndicator={false}
               keyExtractor={(item) => item.pago_id.toString()}
               renderItem={({ item }) => (
                 <PagoItem

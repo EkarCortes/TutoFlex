@@ -1,18 +1,18 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-type PagoItemProps = {
-  nombre: string;
-  telefono: string;
-  materia: string;
-  monto: string;
-  fecha: string;
-  estado: string;
-  onPress?: () => void;
-  onCancel?: () => void;
+const estadoColors: Record<string, { color: string; bg: string; text: string }> = {
+  pendiente: { color: "#FB8500", bg: "#0B4C6D", text: "Pendiente" },
+
 };
 
-const PagoItem: React.FC<PagoItemProps> = ({
+const getEstadoStyle = (estado: string) => {
+  const key = estado?.toLowerCase();
+  return estadoColors[key] || { color: "#FB8500", bg: "#0B4C6D", text: "En Revisión" };
+};
+
+const PagoItem = ({
   nombre,
   telefono,
   materia,
@@ -21,79 +21,77 @@ const PagoItem: React.FC<PagoItemProps> = ({
   estado,
   onPress,
   onCancel,
+}: {
+  nombre: string;
+  telefono: string;
+  materia: string;
+  monto: string;
+  fecha: string;
+  estado: string;
+  onPress: () => void;
+  onCancel?: () => void;
 }) => {
-  return (
-    <View className="bg-[#0d6a97] rounded-xl p-4 mr-3 ml-3 mt-5 relative">
-      <Text
-        className="text-white text-xl mb-1"
-        style={{ fontFamily: "SpaceGrotesk-Bold" }}
-      >
-        {nombre}
-      </Text>
-      <Text
-        className="text-white text-lg mb-1"
-        style={{ fontFamily: "SpaceGrotesk-Bold" }}
-      >
-        Teléfono:{" "}
-        <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{telefono}</Text>
-      </Text>
-      <Text
-        className="text-white text-lg mb-1"
-        style={{ fontFamily: "SpaceGrotesk-Bold" }}
-      >
-        Materia:{" "}
-        <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{materia}</Text>
-      </Text>
-      <Text
-        className="text-white text-lg mb-1"
-        style={{ fontFamily: "SpaceGrotesk-Bold" }}
-      >
-        Monto:{" "}
-        <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{monto}</Text>
-      </Text>
-      <Text
-        className="text-white text-s mb-2"
-        style={{ fontFamily: "SpaceGrotesk-Bold" }}
-      >
-        Fecha:{" "}
-        <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{fecha}</Text>
-      </Text>
+  const estadoStyle = getEstadoStyle(estado);
 
-      {estado === "en revision" ? (
-        <View className="absolute bottom-2 right-2 bg-[#FB8500] rounded p-2">
-          <Text
-            className="text-white"
-            style={{ fontFamily: "SpaceGrotesk-Bold" }}
+  return (
+    <View
+      className="rounded-xl shadow-md my-3 overflow-hidden"
+      style={{ backgroundColor: estadoStyle.bg }}
+    >
+      <View style={{ height: 4, backgroundColor: estadoStyle.color }} />
+      <View className="p-4">
+        <View className="flex-row justify-between items-center mb-3">
+          <Text className="text-xl font-bold text-white">{nombre}</Text>
+          <View
+            style={{
+              backgroundColor: estadoStyle.color,
+              paddingHorizontal: 12,
+              paddingVertical: 4,
+              borderRadius: 16,
+            }}
           >
-            En Revisión
-          </Text>
+            <Text style={{ color: "#fff", fontWeight: "bold" }}>{estadoStyle.text}</Text>
+          </View>
         </View>
-      ) : (
-        <View className="absolute bottom-2 right-2 flex-row space-x-2">
+
+        <View className="bg-[#2379A1] p-3 rounded-xl mb-3">
+          <View className="flex-row justify-between mb-1">
+            <Text className="text-[#fff] text-sm">Materia:</Text>
+            <Text className="font-bold text-white">{materia}</Text>
+          </View>
+          <View className="flex-row justify-between mb-1">
+            <Text className="text-[#fff] text-sm">Monto:</Text>
+            <Text className="font-bold text-white">{monto}</Text>
+          </View>
+          <View className="flex-row justify-between mb-1">
+            <Text className="text-[#fff] text-sm">Fecha:</Text>
+            <Text className="font-bold text-white">{fecha}</Text>
+          </View>
+          <View className="flex-row justify-between">
+            <Text className="text-[#fff] text-sm">Teléfono:</Text>
+            <Text className="font-bold text-white">{telefono}</Text>
+          </View>
+        </View>
+
+        <View className="flex-row justify-between mt-2">
           <TouchableOpacity
-            className="bg-red-600 rounded p-2 m-1"
-            onPress={onCancel}
-          >
-            <Text
-              className="text-white"
-              style={{ fontFamily: "SpaceGrotesk-Bold" }}
-            >
-              Cancelar
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="bg-green-600 rounded p-2 m-1"
+            className="flex-1 bg-[#FB8500] py-2.5 rounded-lg flex-row justify-center items-center mr-2"
             onPress={onPress}
           >
-            <Text
-              className="text-white"
-              style={{ fontFamily: "SpaceGrotesk-Bold" }}
-            >
-              Confirmar
-            </Text>
+            <Ionicons name="checkmark-circle-outline" size={18} color="#fff" />
+            <Text className="text-white font-semibold ml-1.5">Ver Detalle</Text>
           </TouchableOpacity>
+          {onCancel && (
+            <TouchableOpacity
+              className="flex-1 bg-[#E53E3E] py-2.5 rounded-lg flex-row justify-center items-center"
+              onPress={onCancel}
+            >
+              <MaterialIcons name="cancel" size={18} color="#fff" />
+              <Text className="text-white font-semibold ml-1.5">Cancelar</Text>
+            </TouchableOpacity>
+          )}
         </View>
-      )}
+      </View>
     </View>
   );
 };
