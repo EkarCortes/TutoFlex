@@ -1,9 +1,7 @@
 import React from "react";
-import HeaderScreens from '../../../components/HeaderScreens';
 import { SafeAreaView } from "react-native-safe-area-context";
+import HeaderScreens from '../../../components/HeaderScreens';
 import Points from "../../../components/Points";
-
-
 
 const MyPoints = () => {
   return (

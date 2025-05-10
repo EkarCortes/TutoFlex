@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'expo-router';
 import { useAuth } from '@/app/contexts/AuthContext';
-import useGetUserProfile from '../useGetUserProfile';
-import useFontsLoader from '../useFontsLoader';
+import { useRouter } from 'expo-router';
 import jwtDecode from 'jwt-decode';
+import { useEffect, useState } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
+import useGetUserProfile from '../points/useGetUserProfile';
+import useFontsLoader from '../useFontsLoader';
 
 export default function useHomeScreen() {
   const { user, logout, getToken } = useAuth();

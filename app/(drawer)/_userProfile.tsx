@@ -1,19 +1,19 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity, Modal, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import InputField from '../../components/InputField';
 import { useFocusEffect } from 'expo-router';
-import useGetUserProfile from "../../hooks/useGetUserProfile";
-import useUpdateStudent from "../../hooks/useUpdateStudent";
-import { Profile } from '../../services/updateStudentService';
-import { 
-  getCountriesFromUniversities, 
-  getUniversitiesForDropdown,
-  getHeadquartersForDropdown,
-  getEnclosuresForDropdown,
-  getCareersForDropdown
-} from '../../services/catalogsService';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ActivityIndicator, Image, Modal, ScrollView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import InputField from '../../components/InputField';
 import { showToast } from '../../components/Toast';
+import useGetUserProfile from "../../hooks/points/useGetUserProfile";
+import useUpdateStudent from "../../hooks/useUpdateStudent";
+import {
+    getCareersForDropdown,
+    getCountriesFromUniversities,
+    getEnclosuresForDropdown,
+    getHeadquartersForDropdown,
+    getUniversitiesForDropdown
+} from '../../services/catalogsService';
+import { Profile } from '../../services/updateStudentService';
 
 const UserProfile = () => {
 

@@ -1,11 +1,11 @@
+import { useAuth } from '@/app/contexts/AuthContext';
+import { MaterialIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import '../global.css';
-import { MaterialIcons } from '@expo/vector-icons';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { Text, TouchableOpacity, View } from 'react-native';
 import LoadingScreen from '../components/LoadingScreen';
-import useGetUserProfile from '../hooks/useGetUserProfile';
+import '../global.css';
+import useGetUserProfile from '../hooks/points/useGetUserProfile';
 
 interface DrawerScreen {
   name: string;
