@@ -1,71 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, ActivityIndicator } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
 import { MaterialIcons } from '@expo/vector-icons';
+import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBarComponent from "../../../components/StatusBarComponent";
 import HeaderScreens from "../../../components/HeaderScreens";
-import ToastComponent, { showToast } from "../../../components/Toast";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { submitTutorialReview } from "../../../services/reviewService";
+import ToastComponent from "../../../components/Toast";
+import { useReviewTutorialScreen } from "../../../hooks/qualifications/useReviewTutorialScreen";
 
 const ReviewTutorialScreen = () => {
-  const params = useLocalSearchParams();
-  const { id, profesor, curso,foto_profesor, profesor_id: profesorIdParam } = params;  // Renamed to avoid conflict
-  
-  const [review, setReview] = useState("");
-  const [rating, setRating] = useState(0);
-  const [submitting, setSubmitting] = useState(false);
-
-  const submitReview = async () => {
-    if (!review.trim()) {
-      showToast("error", "Por favor, ingrese una reseña antes de enviar.");
-      return;
-    }
-    if (rating === 0) {
-      showToast("error", "Por favor, seleccione una calificación.");
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-      const tutoria_id = parseInt(id as string, 10);
-      const profesor_id = parseInt(profesorIdParam as string, 10);  // Use the renamed parameter
-
-      console.log("Review params:", {
-        tutoria_id, 
-        profesor_id, 
-        estrellas: rating, 
-        comentario: review
-      });
-      
-      // Check if IDs are valid numbers
-      if (isNaN(tutoria_id) || isNaN(profesor_id)) {
-        showToast("error", "Datos de tutoría inválidos");
-        return;
-      }
-      
-      const payload = {
-        tutoria_id,
-        profesor_id,
-        estrellas: rating,
-        comentario: review
-      };
-
-      const response = await submitTutorialReview(payload);
-
-      if (response.success) {
-        showToast("success", "Reseña enviada con éxito.");
-        setTimeout(() => router.dismissTo("/(drawer)/qualifications"), 2000);
-      } else {
-        showToast("error", response.message || "Error al enviar la reseña");
-      }
-    } catch (error) {
-      console.error("Error submitting review:", error);
-      showToast("error", "Ocurrió un error al enviar la reseña");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const {
+    params: { profesor, curso, foto_profesor },
+    review,
+    setReview,
+    rating,
+    setRating,
+    submitting,
+    submitReview,
+  } = useReviewTutorialScreen();
 
   return (
     <SafeAreaView className="flex-1 bg-[#023046]" edges={['left', 'right', 'bottom']}>
@@ -73,7 +24,6 @@ const ReviewTutorialScreen = () => {
       <HeaderScreens title="Reseñar Tutoría" />
       
       <ScrollView className="flex-1 px-5">
-        {/* Header de tutoría */}
         <View className="bg-[#0d6a97] rounded-2xl p-4 my-4 flex-row items-center">
             <Image
             source={{ uri:foto_profesor || "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg" }}
@@ -86,7 +36,6 @@ const ReviewTutorialScreen = () => {
           </View>
         </View>
 
-        {/* Sección de estrellas */}
         <View className="items-center my-4">
           <Text className="text-white text-lg font-bold mb-2">¿Cómo calificarías esta tutoría?</Text>
           <View className="flex-row justify-center my-2">
@@ -109,7 +58,6 @@ const ReviewTutorialScreen = () => {
           </Text>
         </View>
 
-        {/* Sección de reseña */}
         <View className="bg-[#0d6a97] rounded-2xl p-5 mb-6 shadow-lg">
           <Text className="text-white text-lg font-bold mb-2">
             <MaterialIcons name="rate-review" size={20} color="white" /> Escribe tu reseña:

@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { getFinishedTutorials, FinishedTutorial } from "../services/reviewService";
+import { getFinishedTutorials, FinishedTutorial } from "../../services/reviewService";
+
+// Este hook se utiliza para obtener las tutorías finalizadas
+// y gestionar su estado en la pantalla de calificaciones.
 
 const useFinishedTutorials = () => {
   const [tutorials, setTutorials] = useState<FinishedTutorial[]>([]);

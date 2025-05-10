@@ -1,65 +1,30 @@
-import React, { useState } from "react";
-import { View, Text, Image, FlatList, TouchableOpacity, Modal, ActivityIndicator } from "react-native";
-import { router } from "expo-router";
+import React from "react";
+import { View, Text, Image, FlatList, TouchableOpacity, Modal } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import StatusBarComponent from "../../../components/StatusBarComponent";
 import HeaderScreens from "../../../components/HeaderScreens";
 import ToastComponent from "../../../components/Toast";
-import { SafeAreaView } from "react-native-safe-area-context";
-import useFinishedTutorials from "../../../hooks/useFinishedTutorials";
 import LoadingScreen from "../../../components/LoadingScreen";
+import useFinalizedTutorialsScreen from "../../../hooks/qualifications/useFinalizedTutorials";
 
 const FinalizedTutorialsScreen = () => {
-  const { tutorials, loading, error, refreshTutorials } = useFinishedTutorials();
-  const [selectedTutoria, setSelectedTutoria] = useState(null);
-
-  const openReviewModal = (tutoria) => setSelectedTutoria(tutoria);
-  const closeReviewModal = () => setSelectedTutoria(null);
-
-  const formatDate = (dateString) => {
-    try {
-      const date = new Date(dateString);
-      const localDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-      
-      const day = localDate.getDate().toString().padStart(2, '0');
-      const month = (localDate.getMonth() + 1).toString().padStart(2, '0');
-      const year = localDate.getFullYear();
-      return `${day}/${month}/${year}`;
-    } catch (e) {
-      console.error("Error formatting date:", e);
-      return dateString;
-    }
-  };
-  const formatTime = (timeString) => {
-    try {
-      const [hours, minutes] = timeString.split(':');
-      return `${hours}:${minutes}`;
-    } catch (e) {
-      console.error("Error formatting time:", e);
-      return timeString;
-    }
-  };
-
-  const handleReview = () => {
-    if (selectedTutoria) {
-      router.push({
-        pathname: "/(drawer)/qualifications/review",
-        params: { 
-          id: selectedTutoria.tutoria_id, 
-          profesor: selectedTutoria.nombre_profesor, 
-          curso: selectedTutoria.nombre_tutoria,
-          profesor_id: selectedTutoria.profesor_id,
-          foto_profesor: selectedTutoria.foto_profesor,
-        },
-      });
-    }
-    closeReviewModal();
-  };
+  const {
+    tutorials,
+    loading,
+    error,
+    refreshTutorials,
+    selectedTutoria,
+    openReviewModal,
+    closeReviewModal,
+    formatDate,
+    formatTime,
+    handleReview,
+  } = useFinalizedTutorialsScreen();
 
   return (
     <SafeAreaView className="flex-1 bg-[#023046]" edges={["left", "right", "bottom"]}>
       <StatusBarComponent />
       <HeaderScreens title="Tutorías Finalizadas" />
-      
       {loading ? (
         <View className="flex-1">
           <LoadingScreen 
@@ -99,7 +64,6 @@ const FinalizedTutorialsScreen = () => {
               renderItem={({ item }) => (
                 <View className="bg-[#0d6a97] rounded-xl p-4 mb-4 shadow-lg">
                   <View className="flex-row items-center">
-                    {/*item.foto_profesor || PEGAR ESTO DENTRO DE LA IMAGE CUANDOP ESTEN LAS IMAGENES EN LA BASE*/}
                     <Image 
                       source={{ uri:  item.foto_profesor || 'https://cdn-icons-png.flaticon.com/512/149/149071.png' }} 
                       className="w-16 h-16 rounded-full" 
@@ -127,14 +91,12 @@ const FinalizedTutorialsScreen = () => {
               )}
             />
           )}
-          
           <ToastComponent />
           <Modal visible={!!selectedTutoria} transparent animationType="fade">
             <View className="flex-1 justify-center items-center bg-black/80">
               <View className="bg-[#023047] p-6 rounded-lg w-80 shadow-lg">
                 {selectedTutoria && (
                   <>
-                      {/*item.foto_profesor || PEGAR ESTO DENTRO DE LA IMAGE CUANDOP ESTEN LAS IMAGENES EN LA BASE*/}
                     <Image
                       source={{ uri:selectedTutoria.foto_profesor || "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg" }}
                       className="w-24 h-24 rounded-full self-center mb-4"
