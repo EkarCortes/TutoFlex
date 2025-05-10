@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderScreens from "../../../components/HeaderScreens";
 import LoadingScreen from "../../../components/LoadingScreen";
@@ -27,11 +27,10 @@ export default function PagosPendientesScreen() {
 
       {loading ? (
         <View className="flex-1">
-          <LoadingScreen
-            fullScreen={true}
-            message="Cargando pagos pendientes..."
-            backgroundColor="transparent"
-            indicatorColor="#FB8400"
+          <ActivityIndicator
+            size="large"
+            color="#FB8500"
+            className="flex-1 justify-center items-center"
           />
         </View>
       ) : error ? (

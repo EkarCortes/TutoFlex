@@ -1,26 +1,24 @@
 import { useState, useEffect, useCallback } from "react";
 import { showToast } from "../../components/Toast";
-import  useGetCoupons  from "./useGetCoupons";
-import  useDeleteCoupon  from "./useDeleteCoupon";
+import useGetCoupons from "./useGetCoupons";
+import useDeleteCoupon from "./useDeleteCoupon";
 
 export const useCouponList = () => {
   const { coupons, loading: loadingCoupons, error, refreshCoupons } = useGetCoupons();
   const { removeCoupon, loading: loadingDelete } = useDeleteCoupon(refreshCoupons);
-  
+
   const [isDeleting, setIsDeleting] = useState<number | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [couponToDelete, setCouponToDelete] = useState<{id: number, name: string} | null>(null);
-
-  // Cargar cupones inicialmente
-  useEffect(() => {
-    loadCoupons();
-  }, []);
+  const [couponToDelete, setCouponToDelete] = useState<{ id: number, name: string } | null>(null);
 
   const loadCoupons = useCallback(async () => {
     await refreshCoupons();
   }, [refreshCoupons]);
 
-  // Manejar la eliminación de cupones
+  useEffect(() => {
+    loadCoupons();
+  }, []);
+
   const handleDelete = (id: number, couponName: string) => {
     setCouponToDelete({ id, name: couponName });
     setShowDeleteModal(true);
@@ -33,7 +31,7 @@ export const useCouponList = () => {
       setIsDeleting(null);
       setShowDeleteModal(false);
       setCouponToDelete(null);
-      
+
       if (success) {
         showToast("success", "Cupón eliminado correctamente.", "Éxito", "top");
       }
@@ -45,15 +43,12 @@ export const useCouponList = () => {
     setCouponToDelete(null);
   };
 
-  // Utilidades para renderizar cupones
   const formatDate = (dateString: string) => {
     const parts = dateString.split('T')[0].split('-');
     const year = parseInt(parts[0]);
-    const month = parseInt(parts[1]) - 1; 
+    const month = parseInt(parts[1]) - 1;
     const day = parseInt(parts[2]);
-    
     const date = new Date(year, month, day);
-    
     return date.toLocaleDateString('es-ES', {
       day: '2-digit',
       month: 'short',
@@ -65,7 +60,7 @@ export const useCouponList = () => {
     const now = new Date();
     const start = new Date(startDate);
     const end = new Date(endDate);
-    
+
     if (now < start) {
       return { status: 'pending', color: '#3182CE', text: 'Próximamente' };
     } else if (now > end) {
@@ -79,8 +74,22 @@ export const useCouponList = () => {
     }
   };
 
+  // Ordenar cupones por prioridad: expira pronto, activo, próximamente, expirado
+  const getPriority = (coupon: any) => {
+    const status = getCouponStatus(coupon.fecha_inicio, coupon.fecha_fin).status;
+    switch (status) {
+      case 'expiring-soon': return 1;
+      case 'active': return 2;
+      case 'pending': return 3;
+      case 'expired': return 4;
+      default: return 5;
+    }
+  };
+
+  const sortedCoupons = [...(coupons || [])].sort((a, b) => getPriority(a) - getPriority(b));
+
   return {
-    coupons,
+    coupons: sortedCoupons,
     loading: loadingCoupons || loadingDelete,
     error,
     isDeleting,

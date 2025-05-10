@@ -48,7 +48,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
     <Container className={`${fullScreen ? 'flex-1' : ''} justify-center items-center`} 
       style={{ backgroundColor }}>
       <View className="p-6 rounded-xl items-center">
-        <StatusBar barStyle="light-content" translucent={true} />
         <ActivityIndicator size={indicatorSize} color={indicatorColor} />
         {message && (
           <Text className="mt-4 text-center text-lg font-medium" 

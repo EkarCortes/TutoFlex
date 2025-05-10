@@ -21,7 +21,6 @@ const ListCoupons = () => {
 
         return (
             <View className="bg-white rounded-xl shadow-md my-2 overflow-hidden">
-            {/* Barra de estado del cupón en la parte superior */}
             <View style={{ 
                 height: 4, 
                 backgroundColor: couponStatus.color 
@@ -35,7 +34,7 @@ const ListCoupons = () => {
                     </View>
                 </View>
 
-                {/* Elemento de estado del cupón */}
+    
                 <View style={{ 
                     backgroundColor: couponStatus.color + '20', 
                     paddingVertical: 3, 
@@ -59,7 +58,7 @@ const ListCoupons = () => {
                         <Text className="font-bold text-[#023046]">{item.puntos_requeridos}</Text>
                     </View>
                     
-                    {/* Fechas simplificadas en una línea */}
+                
                     <View className="flex-row justify-between">
                         <Text className="text-[#4A5568] text-sm">Validez:</Text>
                         <Text className="font-bold text-[#023046]">
@@ -69,7 +68,6 @@ const ListCoupons = () => {
                 </View>
                 
                 <View className="flex-row justify-between mt-2">
-                    {/* Botón de Aplicar - Solo para estudiantes (rol_id === 2) */}
                     {user?.rol_id === 2 && (
                         <TouchableOpacity
                             className="flex-1 bg-[#EBF8FF] py-2.5 rounded-lg flex-row justify-center items-center"
@@ -82,7 +80,7 @@ const ListCoupons = () => {
                         </TouchableOpacity>
                     )}
 
-                    {/* Botón de Eliminar - Solo para administradores (rol_id === 1) */}
+            
                     {user?.rol_id === 1 && (
                         <TouchableOpacity
                             onPress={() => handleDelete(item.id, item.cupon)}
@@ -171,8 +169,6 @@ const ListCoupons = () => {
                     </TouchableOpacity>
                 </View>
             )}
-
-            {/* Modal de confirmación de eliminación */}
             {showDeleteModal && couponToDelete && (
                 <ModalDeleteConfirmation
                     title="Eliminar cupón"
