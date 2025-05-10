@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocalSearchParams } from 'expo-router';
-import useProfesor from '../useProfesor';
+import useProfesor from './useProfesor';
 import useClassifications from "../useClassifications";
 
 // Este hook se utiliza para gestionar la lógica de la pantalla de filtro a la hora de filtrar

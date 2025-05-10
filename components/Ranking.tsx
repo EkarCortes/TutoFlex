@@ -1,6 +1,5 @@
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { router } from 'expo-router';
 import useRanking from '../hooks/useRanking';
 
 const ListCoupons = () => {

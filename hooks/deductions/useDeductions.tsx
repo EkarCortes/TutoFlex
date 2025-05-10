@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getBillsProfessor, getDetailsBillProfessor, getTotalNetInvoices, payMultipleDeductions } from "../services/deductionsService";
+import { getBillsProfessor, getDetailsBillProfessor, getTotalNetInvoices, payMultipleDeductions } from "../../services/deductionsService";
 
 export const useDeductions = () => {
   const [deductions, setDeductions] = useState([]);

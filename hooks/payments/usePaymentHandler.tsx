@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 import { showToast } from "../../components/Toast";
 import { Coupon } from "../../services/CouponService";
-import usePayment from "../usePayment";
+import usePayment from "./usePayment";
 
 interface UsePaymentHandlerProps {
   tutorialData: any;

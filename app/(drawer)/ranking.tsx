@@ -1,8 +1,7 @@
 import React from "react";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderScreens from '../../components/HeaderScreens';
 import Ranking from "../../components/Ranking";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 
 
