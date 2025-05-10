@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "475801115098",
+    "project_id": "tuto-flex",
+    "storage_bucket": "tuto-flex.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475801115098:android:01b0eef0fee2f4c36b88e3",
+        "android_client_info": {
+          "package_name": "com.utn.tutoflex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgQ3kpgYERDY6huWGmwD9FKYdA78saJDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
