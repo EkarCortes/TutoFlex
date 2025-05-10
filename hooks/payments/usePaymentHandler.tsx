@@ -1,7 +1,7 @@
-import { showToast } from "../components/Toast";
-import usePayment from "./usePayment";
 import { Platform } from "react-native";
-import { Coupon } from "../services/CouponService";
+import { showToast } from "../../components/Toast";
+import { Coupon } from "../../services/CouponService";
+import usePayment from "../usePayment";
 
 interface UsePaymentHandlerProps {
   tutorialData: any;
@@ -12,6 +12,8 @@ interface UsePaymentHandlerProps {
   selectedCoupon: Coupon | null;
   router: any;
 }
+
+//Este hook se encarga de manejar la lógica de los pagos en la pantalla de confirmación de pago. Se encarga de validar los datos y confirmar el pago al backend.
 
 const usePaymentHandler = ({
   tutorialData,

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import axiosInstance from "../api/axiosConfig";
-import { cancelTutorial } from "../services/paymentService";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../api/axiosConfig";
+import { cancelTutorial } from "../../services/paymentService";
 
 export interface PendingPayment {
   pago_id: number;
@@ -19,6 +19,8 @@ export interface PendingPayment {
   estado: string;
   whatsapp: string;
 }
+
+// Este hook se encarga de manejar la lógica de los pagos pendientes del Estudiante.
 
 const usePendingPaymentsStudent = () => {
   const [tutorials, setTutorials] = useState<PendingPayment[]>([]);

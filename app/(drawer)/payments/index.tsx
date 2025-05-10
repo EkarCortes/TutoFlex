@@ -1,33 +1,25 @@
-import React, { useState } from "react";
-import { View, FlatList, Text, Modal, TouchableOpacity } from "react-native";
-import PagoItem from "../../../components/PagoItem";
-import { useRouter } from "expo-router";
-import HeaderScreens from "../../../components/HeaderScreens";
+import React from "react";
+import { FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import usePendingPaymentsStudent from "../../../hooks/usePendingPaymentsStudent";
+import HeaderScreens from "../../../components/HeaderScreens";
 import LoadingScreen from "../../../components/LoadingScreen";
-import ToastComponent, { showToast } from "../../../components/Toast";
+import PagoItem from "../../../components/PagoItem";
+import ToastComponent from "../../../components/Toast";
+import usePendingPaymentsScreen from "../../../hooks/payments/usePendingPaymentsScreen";
 
 export default function PagosPendientesScreen() {
-  const { tutorials, loading, error, refreshTutorials, handleCancelTutorial } = usePendingPaymentsStudent();
-  const router = useRouter();
-
-  const [showCancelModal, setShowCancelModal] = useState(false);
-  const [selectedTutoriaId, setSelectedTutoriaId] = useState<number | null>(null);
-
-  const confirmCancel = async () => {
-    if (selectedTutoriaId !== null) {
-      try {
-        await handleCancelTutorial(selectedTutoriaId);
-        showToast("success", "La tutoría ha sido cancelada correctamente.");
-      } catch (err) {
-        showToast("error", "No se pudo cancelar la tutoría. Inténtalo nuevamente.");
-      } finally {
-        setShowCancelModal(false);
-        refreshTutorials();
-      }
-    }
-  };
+  const {
+    tutorials,
+    loading,
+    error,
+    refreshTutorials,
+    showCancelModal,
+    setShowCancelModal,
+    selectedTutoriaId,
+    setSelectedTutoriaId,
+    confirmCancel,
+    navigateToConfirmPayment,
+  } = usePendingPaymentsScreen();
 
   return (
     <SafeAreaView className="flex-1 bg-[#023046]" edges={["left", "right", "bottom"]}>
@@ -77,23 +69,18 @@ export default function PagosPendientesScreen() {
                   fecha={`${item.fecha_tutoria.split("T")[0].split("-").reverse().join("/")}`}
                   estado={item.estado}
                   onPress={() =>
-                    router.push({
-                      pathname: "../(drawer)/payments/_confirmPayments",
-                      params: {
-                        tutorial: JSON.stringify({
-                          pago_id: item.pago_id,
-                          tutoria_id: item.tutoria_id,
-                          profesor_id: item.profesor_id,
-                          Nombre_Profesor: item.Nombre_Profesor,
-                          Nombre_Curso: item.nombre,
-                          modalidad: item.modalidad,
-                          fecha: item.fecha_tutoria,
-                          hora_inicio: item.hora_inicio_tutoria,
-                          hora_fin: item.hora_fin_tutoria,
-                          monto_total: item.monto,
-                          telefono: item.whatsapp,
-                        }),
-                      },
+                    navigateToConfirmPayment({
+                      pago_id: item.pago_id,
+                      tutoria_id: item.tutoria_id,
+                      profesor_id: item.profesor_id,
+                      Nombre_Profesor: item.Nombre_Profesor,
+                      Nombre_Curso: item.nombre,
+                      modalidad: item.modalidad,
+                      fecha: item.fecha_tutoria,
+                      hora_inicio: item.hora_inicio_tutoria,
+                      hora_fin: item.hora_fin_tutoria,
+                      monto_total: item.monto,
+                      telefono: item.whatsapp,
                     })
                   }
                   onCancel={() => {
@@ -141,4 +128,3 @@ export default function PagosPendientesScreen() {
     </SafeAreaView>
   );
 }
-

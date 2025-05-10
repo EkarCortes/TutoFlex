@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Coupon } from "../services/CouponService";
 import Toast from "react-native-toast-message";
+import { Coupon } from "../../services/CouponService";
 
 interface UsePaymentCouponResult {
   discountedAmount: number;
   selectedCoupon: Coupon | null;
   applyCoupon: (couponCode: string, coupons: Coupon[], userPoints: number) => void;
 }
+
+//Este hook se encarga de manejar la lógica de los cupones de pago en como se aplican los Cupones.
 
 const usePaymentCoupon = (originalAmount: number): UsePaymentCouponResult => {
   const [discountedAmount, setDiscountedAmount] = useState<number>(originalAmount);
