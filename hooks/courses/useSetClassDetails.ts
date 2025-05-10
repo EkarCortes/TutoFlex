@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { useSchedule } from "../../hooks/useSchedule";
-import { useAddTutoring } from "../../hooks/useAddTutoring";
-import { useSelectedDays } from "../../hooks/useSelectedDays";
-import useCourseDetails from "../../hooks/useCourseDetails";
-import useDeleteCourseProfesor from "../../hooks/useDeleteCourseProfesor";
-import { useHandleSaveClassDetails } from "../../hooks/useHandleSaveClassDetails";
-import { useInitializeCourseDetails } from "../../hooks/useInitializeCourseDetails";
+import { useSchedule } from "./useSchedule";
+import { useAddTutoring } from "./useAddTutoring";
+import { useSelectedDays } from "./useSelectedDays";
+import useCourseDetails from "./useCourseDetails";
+import useDeleteCourseProfesor from "./useDeleteCourseProfesor";
+import { useHandleSaveClassDetails } from "./useHandleSaveClassDetails";
+import { useInitializeCourseDetails } from "./useInitializeCourseDetails";
 import { showToast } from "../../components/Toast";
 
 // Este hook se utiliza para gestionar los detalles de una clase

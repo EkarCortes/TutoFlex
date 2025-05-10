@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { getTutorialDetails, TutorialDetails } from "../services/getTutorialService";
+import { getTutorialDetails, TutorialDetails } from "../../services/getTutorialService";
+
+// Este hook se utiliza para obtener los detalles de un curso
+// en la pantalla de _setClassDetails. Permite gestionar los detalles de un curso específico.
 
 const useCourseDetails = (curso_id: number) => {
   const [courseDetails, setCourseDetails] = useState<TutorialDetails | null>(null);

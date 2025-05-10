@@ -1,4 +1,7 @@
-import ToastComponent, { showToast } from "../components/Toast"; // Importar la función showToast
+import  { showToast } from "../../components/Toast"; // Importar la función showToast
+
+// Este hook se utiliza para gestionar la lógica de guardar los detalles de una clase
+// en _setClassDetails.tsx.
 
 interface UseHandleSaveClassDetailsProps {
   id: string;

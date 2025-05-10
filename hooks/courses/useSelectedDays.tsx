@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 
+// Este hook se utiliza para gestionar los días seleccionados en _setClassDetails
 export const useSelectedDays = () => {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
 

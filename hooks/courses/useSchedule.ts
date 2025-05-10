@@ -1,6 +1,6 @@
 // Hook para manejar la lógica de los horarios en la pantalla setClassDetails
 import { useState, useCallback } from "react";
-import { showToast } from "../components/Toast";
+import { showToast } from "../../components/Toast";
 
 export const useSchedule = () => {
   const [scheduleData, setScheduleData] = useState<string[]>([]);
