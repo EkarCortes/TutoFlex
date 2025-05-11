@@ -7,7 +7,7 @@ interface TransferenciaInfoProps {
 
 const TransferenciaInfo: React.FC<TransferenciaInfoProps> = ({ onTransferNumberChange }) => {
   return (
-    <View className="bg-[#0d6a97] rounded-2xl p-3 mb-5">
+    <View className="bg-[#0B4C6D] rounded-2xl p-3 mb-5">
       <View style={styles.gap}>
         <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
           Número de Transferencia

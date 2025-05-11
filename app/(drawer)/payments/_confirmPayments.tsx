@@ -57,14 +57,14 @@ const ConfirmarPagoScreen = () => {
             />
             <View className="flex-row justify-between mt-1 mb-5 mx-2">
               <TouchableOpacity
-                className={`flex-1 py-3 mr-2 rounded-lg ${paymentMethod === "efectivo" ? "bg-[#FB8500]" : "bg-[#0B4D6C]"
+                className={`flex-1 py-3 mr-2 rounded-lg ${paymentMethod === "efectivo" ? "bg-[#FB8500]" : "bg-[#09374d] border border-[#FB8500] opacity-70"
                   }`}
                 onPress={() => setPaymentMethod("efectivo")}
               >
                 <Text className="text-white text-center font-medium">En Efectivo</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                className={`flex-1 py-3 ml-2 rounded-lg ${paymentMethod === "transferencia" ? "bg-[#FB8500]" : "bg-[#0B4D6C]"
+                className={`flex-1 py-3 ml-2 rounded-lg ${paymentMethod === "transferencia" ? "bg-[#FB8500]" : "bg-[#09374d] border border-[#FB8500] opacity-70"
                   }`}
                 onPress={() => setPaymentMethod("transferencia")}
               >
@@ -72,7 +72,7 @@ const ConfirmarPagoScreen = () => {
               </TouchableOpacity>
             </View>
             {paymentMethod === "efectivo" ? (
-              <View className="bg-[#0d6a97] rounded-lg p-4 mx-2 mb-5">
+              <View className="bg-[#0B4C6D] rounded-lg p-4 mx-2 mb-5">
                 <Text className="text-white text-center text-lg font-bold mb-2">Monto a pagar</Text>
                 <Text className="text-white text-center text-2xl ">₡ {discountedAmount.toFixed(2)}</Text>
                 <Text className="text-white text-center mt-2 text-xs">

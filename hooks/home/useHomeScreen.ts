@@ -15,7 +15,7 @@ export default function useHomeScreen() {
   useFontsLoader();
 
   // NUEVA
-  const userName = user ? user.nombre.split(' ')[0] + ' ' + user.apellido : "Usuario";
+  const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido.charAt(0)}` : "Usuario";
 
   //VIEJA
   //const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido}` : "Usuario";

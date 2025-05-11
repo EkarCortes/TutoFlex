@@ -102,6 +102,8 @@ export default function PagosPendientesScreen() {
         animationType="fade"
         transparent={true}
         visible={showCancelModal}
+        hardwareAccelerated={true}
+        statusBarTranslucent={true}
         onRequestClose={() => setShowCancelModal(false)}
       >
         <View className="flex-1 justify-center items-center bg-black/80">
