@@ -8,7 +8,7 @@ import CardProfesor from '../../../components/CardProfesor';
 export default function Inicio() {
   const { searchQuery } = useLocalSearchParams();
   const [mostrarModalFiltro, setMostrarModalFiltro] = useState(false);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const {
     mostrarPaises, setMostrarPaises, mostrarUniversidad, setMostrarUniversidad, mostrarcarrera, setMostrarcarrera,
     mostrarclasificacion, setMostrarClasificacion, mostrarFecha, setMostrarFecha, mostrarModalidad, setMostrarModalidad,
@@ -22,7 +22,7 @@ export default function Inicio() {
     if (searchQuery) {
       setBusqueda(searchQuery);
     }
-    setTimeout(() => setLoading(false), 2000); 
+    setTimeout(() => setLoading(false), 2000);
   }, [searchQuery]);
 
   if (loading) {
@@ -73,7 +73,7 @@ export default function Inicio() {
 
       <FlatList
         data={datosFiltrados}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.usuario_id?.toString()}
         className="rounded-lg"
         renderItem={({ item }) => <CardProfesor datos={item} />}
         ListEmptyComponent={(
@@ -93,7 +93,7 @@ export default function Inicio() {
       <Modal visible={mostrarModalFiltro} animationType="fade" transparent>
         <View className="flex-1 items-center justify-center bg-black/80">
           <View className="max-h-[90vh] w-96 rounded-lg bg-[#0B4C6D] p-6">
-            
+
             <TouchableOpacity
               className="absolute top-2 right-4 p-2 z-10"
               onPress={() => setMostrarModalFiltro(false)}
@@ -115,7 +115,7 @@ export default function Inicio() {
                 />
               </TouchableOpacity>
 
-  
+
               {mostrarPaises && (
                 <View className="mt-2 rounded-lg bg-[#c2e4f4] p-2">
                   {loading ? (
@@ -137,8 +137,8 @@ export default function Inicio() {
                   )}
                 </View>
               )}
-              
-  
+
+
               <TouchableOpacity
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarUniversidad(!mostrarUniversidad)}>
@@ -219,7 +219,7 @@ export default function Inicio() {
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarClasificacion(!mostrarclasificacion)}>
                 <View className="flex-row items-center">
-                  <FontAwesome5 name="chalkboard-teacher" size={12} color="white" className="mr-4" />
+                  <FontAwesome name="chalkboard-teacher" size={12} color="white" className="mr-4" />
                   <Text className="font-bold text-white">Clasificación</Text>
                 </View>
                 <MaterialIcons
@@ -292,7 +292,7 @@ export default function Inicio() {
                 className="mt-5 flex-row items-center justify-between rounded-lg bg-[#2D81AD] p-3"
                 onPress={() => setMostrarModalidad(!mostrarModalidad)}>
                 <View className="flex-row items-center">
-                  <FontAwesome5 name="book-reader" size={12} color="white" className="mr-4" />
+                  <FontAwesome name="book-reader" size={12} color="white" className="mr-4" />
                   <Text className="font-bold text-white">Modalidad</Text>
                 </View>
                 <MaterialIcons
@@ -302,7 +302,7 @@ export default function Inicio() {
                 />
               </TouchableOpacity>
 
-              {mostrarModalidad && (                
+              {mostrarModalidad && (
                 <View className="mt-2 rounded-lg bg-[#c2e4f4] p-2">
                   {['virtual', 'presencial', 'híbrida'].map((mod) => (
                     <TouchableOpacity

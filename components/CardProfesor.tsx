@@ -1,9 +1,9 @@
-// CardProfesor.tsx
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { router } from "expo-router";
 import React from 'react';
 
 interface DatosProps {
+  usuario_id?: number;
   foto_profesor?: string;
   curso?: string;
   profesor?: string;
@@ -25,39 +25,50 @@ export default function CardProfesor({ datos }: { datos: DatosProps }) {
     });
   };
 
+  const handleViewProfile = () => {
+    router.push({
+      pathname: '/(drawer)/filter/tutorProfile',
+      params: datos.usuario_id ? { tutorId: datos.usuario_id } : {}
+    });
+  };
+
   if (!datos) return null;
 
   return (
-    <View className="mb-4 rounded-lg bg-[#2D80AD] p-4">
-      <View className="flex-row items-center">
-        <Image 
-          source={datos.foto_profesor ? { uri: datos.foto_profesor } : require('../assets/images/imagenProfesor1.jpg')} 
-          style={{ width: 70, height: 70, borderRadius: 40 }} 
-          className="mr-4" 
+    <View className="bg-[#185B7D] rounded-2xl mb-5 px-5 py-6 shadow-lg">
+      <View className="flex-row items-center mb-3">
+        <Image
+          source={datos.foto_profesor ? { uri: datos.foto_profesor } : { uri: 'https://cdn-icons-png.flaticon.com/512/149/149071.png' }}
+          style={{ width: 70, height: 70, borderRadius: 35, borderWidth: 2, borderColor: '#FB8400' }}
         />
-        <View className="flex-1">
-          <Text className="text-lg font-bold text-white">{datos.curso}</Text>
-          <Text className="text-white">{datos.profesor}</Text>
-          <Text className="text-white">{datos.universidad} · {datos.carrera || 'N/A'}</Text>
-          <Text className="text-white">{datos.pais} · {datos.modalidad}</Text>
-          <Text className="text-white">{datos.horarios || 'Horario no especificado'}</Text>
-          <Text className="text-white font-bold">₡{datos.monto_por_hora}</Text>
-          
-          {/* Mostrar clasificación */}
-          <View className="mt-1 flex-row items-center">
-            <Text className="text-white">
-              Clasificacion: {datos.clasificacion_nombre || 'Sin clasificación'}
-            </Text>
-          </View>
+        <View className="ml-5 flex-1">
+          <Text className="text-xl font-bold text-white">{datos.profesor}</Text>
+          <Text className="text-base text-[#FB8400] font-semibold">{datos.curso}</Text>
         </View>
+       
       </View>
+      <Text className="text-xs text-white opacity-80 mb-2">
+        {datos.universidad} · {datos.carrera || 'N/A'} · {datos.pais} · {datos.modalidad}
+      </Text>
+      <Text className="text-xs text-white opacity-60 mb-4">
+        {datos.horarios || 'Horario no especificado'}
+      </Text>
+      <View className="flex-row space-x-3">
+      <TouchableOpacity
+          className="flex-1 rounded-xl bg-[#8FCAE6] py-2 m-1"
+          onPress={handleViewProfile}
+        >
+          <Text className="text-center text-white font-bold">Perfil</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity 
-        className="mt-3 rounded-lg bg-[#0C4A6E] py-2"
-        onPress={handleScheduleAppointment}
-      >
-        <Text className="text-center text-white">Agendar Cita</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          className="flex-1 rounded-xl bg-[#FB8400] py-2 m-1"
+          onPress={handleScheduleAppointment}
+        >
+          <Text className="text-center text-white font-bold">Agendar</Text>
+        </TouchableOpacity>
+       
+      </View>
     </View>
   );
 }

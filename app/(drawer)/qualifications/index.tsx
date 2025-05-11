@@ -32,7 +32,7 @@ const FinalizedTutorialsScreen = () => {
         <View className="flex-1">
           <LoadingScreen 
             fullScreen={true} 
-            message="Cargando tutorías finalizadas..." 
+            message="" 
             backgroundColor="transparent"
             indicatorColor="#FB8400"
           />

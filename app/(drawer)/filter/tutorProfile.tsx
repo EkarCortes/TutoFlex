@@ -3,12 +3,12 @@ import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
-import HeaderScreens from '../../components/HeaderScreens';
-import useTutorProfile from '../../hooks/tutorProfileHome/useTutorProfile';
-import { useTutorTabs } from '../../hooks/tutorProfileHome/useTutorTabs';
-import { useTutorCourses } from '../../hooks/tutorProfileHome/useTutorCourses';
-import { useTutorContact } from '../../hooks/tutorProfileHome/useTutorContact';
-import '../../global.css';
+import HeaderScreens from '../../../components/HeaderScreens';
+import useTutorProfile from '../../../hooks/tutorProfileHome/useTutorProfile';
+import { useTutorTabs } from '../../../hooks/tutorProfileHome/useTutorTabs';
+import { useTutorCourses } from '../../../hooks/tutorProfileHome/useTutorCourses';
+import { useTutorContact } from '../../../hooks/tutorProfileHome/useTutorContact';
+import '../../../global.css';
 
 const TutorProfileScreen = () => {
   const { tutorId } = useLocalSearchParams<{ tutorId: string }>();

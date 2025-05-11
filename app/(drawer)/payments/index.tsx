@@ -6,6 +6,7 @@ import LoadingScreen from "../../../components/LoadingScreen";
 import PagoItem from "../../../components/PagoItem";
 import ToastComponent from "../../../components/Toast";
 import usePendingPaymentsScreen from "../../../hooks/payments/usePendingPaymentsScreen";
+import { useRefreshOnFocus } from "@/hooks/useRefreshOnFocus";
 
 export default function PagosPendientesScreen() {
   const {
@@ -20,6 +21,8 @@ export default function PagosPendientesScreen() {
     confirmCancel,
     navigateToConfirmPayment,
   } = usePendingPaymentsScreen();
+
+    useRefreshOnFocus(refreshTutorials);
 
   return (
     <SafeAreaView className="flex-1 bg-[#023046]" edges={["left", "right", "bottom"]}>
