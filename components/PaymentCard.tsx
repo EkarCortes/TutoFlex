@@ -3,13 +3,13 @@ import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import LoadingScreen from "./LoadingScreen";
 import usePaymentCard from "../hooks/receivedPayment/usePaymentCard";
-import {formatTime } from '../hooks/receivedPayment/useCardDetailsPayments';
+import { formatTime } from '../hooks/receivedPayment/useCardDetailsPayments';
 
 
 const estadoColors: Record<string, { color: string; bg: string; text: string }> = {
   pendiente: { color: "#FB8500", bg: "#0B4C6D", text: "Pendiente" }
 };
-  
+
 const getEstadoStyle = (estado: string) => {
   const key = estado?.toLowerCase();
   return estadoColors[key] || { color: "#FB8500", bg: "#0B4C6D", text: "En Revisión" };
@@ -31,7 +31,8 @@ const PaymentCard = () => {
         refreshing={loading}
         onRefresh={refreshPayments}
         ListEmptyComponent={
-          <View className="flex-1 justify-center items-center mt-10">
+          <View className="flex-1 justify-center items-center mt-48">
+            <Ionicons name="cash-outline" size={48} color="#FB8500" style={{ marginBottom: 12 }} />
             <Text className="text-lg font-bold text-white mb-2">No tienes pagos recibidos</Text>
             <Text className="text-sm text-white opacity-70 text-center px-5">
               Cuando un estudiante realice un pago, aparecerá aquí.
