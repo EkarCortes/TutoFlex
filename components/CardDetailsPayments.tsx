@@ -5,25 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import LoadingScreen from "./LoadingScreen";
 import ToastComponent from "./Toast";
 import useCardDetailsPayments from "../hooks/receivedPayment/useCardDetailsPayments";
-
-export const formatTime = (time: string): string => {
-    const [hours, minutes] = time.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours, minutes);
-    return date.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-    });
-};
-
-export const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-};
+import { formatTime } from '../hooks/receivedPayment/useCardDetailsPayments';
 
 const CardDetailsPayments = () => {
     const {
@@ -55,7 +37,7 @@ const CardDetailsPayments = () => {
     }
 
     return (
-        <ScrollView>
+        <>
             <View className="flex-1 bg-[#023047] items-center">
                 <View className="bg-[#086490] rounded-xl p-4 mb-2 mt-1 w-[90%]">
                     <Text className="text-xl text-white mb-4" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
@@ -94,7 +76,7 @@ const CardDetailsPayments = () => {
                         <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
                             Fecha:{" "}
                             <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>
-                                {formatDate(selectedPayment.fecha_tutoria)}
+                                {(selectedPayment.fecha_tutoria.split("T")[0].split("-").reverse().join("/"))}
                             </Text>
                         </Text>
                     </View>
@@ -124,7 +106,8 @@ const CardDetailsPayments = () => {
                         </Text>
                     </View>
                 </View>
-                <View className=" bg-[#086490] mb-2 rounded-lg p-4 w-[90%] items-center">
+                <View className=" bg-[#086490] 
+                 mb-2 rounded-lg p-4 w-[90%] items-center">
                     <Text className="text-lg text-white mb-2" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
                         Comprobante de Pago:
                     </Text>
@@ -136,31 +119,34 @@ const CardDetailsPayments = () => {
                     </TouchableOpacity>
 
                     {/* Modal para mostrar la imagen */}
+
                     <Modal
                         animationType="fade"
                         transparent={true}
                         visible={showComprobanteModal}
                         onRequestClose={() => setShowComprobanteModal(false)}
                     >
-                        <View className="flex-1 justify-center items-center bg-black/80">
-                            <View className="bg-white w-11/12 rounded-lg p-4 shadow-lg">
-                                <Text className="text-lg font-bold text-center mb-4">Comprobante de Pago</Text>
-                                <View className="w-full h-64 bg-gray-300 rounded-lg overflow-hidden">
-                                    <Image
-                                        source={{ uri: selectedPayment.comprobante }}
-                                        className="w-full h-full"
-                                        resizeMode="cover"
-                                    />
+                        <View className="flex-1 justify-center pt-48 items-center bg-black/80">
+                            <ScrollView>
+                                <View className="bg-white w-full max-w-[600px] rounded-lg p-4 shadow-lg mx-2">
+                                    <Text className="text-lg font-bold text-center mb-4">Comprobante de Pago</Text>
+                                    <View className="w-full h-[420px] bg-gray-300 rounded-lg overflow-hidden">
+                                        <Image
+                                            source={{ uri: selectedPayment.comprobante }}
+                                            style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                                            resizeMode="cover" />
+                                    </View>
+                                    <TouchableOpacity
+                                        className="bg-[#FB8500] py-2 px-4 rounded-lg mt-4"
+                                        onPress={() => setShowComprobanteModal(false)}
+                                    >
+                                        <Text className="text-white font-bold text-center">Cerrar</Text>
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity
-                                    className="bg-[#FB8500] py-2 px-4 rounded-lg mt-4"
-                                    onPress={() => setShowComprobanteModal(false)}
-                                >
-                                    <Text className="text-white font-bold text-center">Cerrar</Text>
-                                </TouchableOpacity>
-                            </View>
+                            </ScrollView>
                         </View>
                     </Modal>
+
                 </View>
                 <Modal
                     animationType="fade"
@@ -226,25 +212,26 @@ const CardDetailsPayments = () => {
                         </View>
                     </View>
                 </Modal>
-                <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">
-                    <View className="flex-row justify-between">
-                        <TouchableOpacity
-                            onPress={() => setShowConfirmModalRejection(true)}
-                            className="bg-[#0B4D6D] rounded-xl py-3 px-6 w-[48%] items-center"
-                        >
-                            <Text className="text-white font-semibold">Rechazar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => setShowConfirmModal(true)}
-                            className="bg-[#FB8500] rounded-xl py-3 px-6 w-[48%] items-center"
-                        >
-                            <Text className="text-white font-semibold">Confirmar</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
                 <ToastComponent />
             </View>
-        </ScrollView>
+            <View className="bg-[#023046] mt-24 px-5 py-4 border-t border-[#FFF]/30">
+                <View className="flex-row justify-between">
+                    <TouchableOpacity
+                        onPress={() => setShowConfirmModalRejection(true)}
+                        className="bg-[#0B4D6D] rounded-xl py-3 px-6 w-[48%] items-center"
+                    >
+                        <Text className="text-white font-semibold">Rechazar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => setShowConfirmModal(true)}
+                        className="bg-[#FB8500] rounded-xl py-3 px-6 w-[48%] items-center"
+                    >
+                        <Text className="text-white font-semibold">Confirmar</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </>
+
     );
 };
 

@@ -6,13 +6,26 @@ import { useSearchParams } from "expo-router/build/hooks";
 import useUpdatePaymentStatus from "./useUpdatePaymentStatus ";
 import { showToast } from "../../components/Toast";
 
+//Funciones para formatear la hora
+
+export const formatTime = (time: string): string => {
+  const [hours, minutes] = time.split(":").map(Number);
+  const date = new Date();
+  date.setHours(hours, minutes);
+  return date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
+
 // Este hook se encarga de manejar la lógica de los detalles de los pagos
 
 const useCardDetailsPayments = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showConfirmModalRejection, setShowConfirmModalRejection] =
     useState(false);
-  const [showComprobanteModal, setShowComprobanteModal] = useState(false); 
+  const [showComprobanteModal, setShowComprobanteModal] = useState(false);
 
   const searchParams = useSearchParams();
   const pagoId = searchParams.get("pagoId");
@@ -23,7 +36,9 @@ const useCardDetailsPayments = () => {
     try {
       await updateStatus(Number(pagoId), "realizado");
       showToast("success", "Pago confirmado correctamente");
-      router.push("/(drawer)/receivedPayments");
+      setTimeout(() => {
+        router.push("/(drawer)/receivedPayments");
+      }, 3000);
     } catch (error) {
       showToast("error", "Error al confirmar el pago");
     }
@@ -33,7 +48,9 @@ const useCardDetailsPayments = () => {
     try {
       await updateStatus(Number(pagoId), "pendiente");
       showToast("success", "Pago rechazado correctamente");
-      router.push("/(drawer)/receivedPayments");
+      setTimeout(() => {
+        router.push("/(drawer)/receivedPayments");
+      }, 3000);
     } catch (error) {
       showToast("error", "Error al rechazar el pago");
     }
