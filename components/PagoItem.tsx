@@ -77,6 +77,8 @@ const PagoItem = ({
           <TouchableOpacity
             className="flex-1 bg-[#FB8500] py-2.5 rounded-lg flex-row justify-center items-center mr-2"
             onPress={onPress}
+            disabled={estado === "en revision"}
+            style={estado === "en revision" ? { opacity: 0.5 } : {}}
           >
             <Ionicons name="checkmark-circle-outline" size={18} color="#fff" />
             <Text className="text-white font-semibold ml-1.5">Ver Detalle</Text>
@@ -85,6 +87,8 @@ const PagoItem = ({
             <TouchableOpacity
               className="flex-1 bg-[#E53E3E] py-2.5 rounded-lg flex-row justify-center items-center"
               onPress={onCancel}
+              disabled={estado === "en revision"}
+              style={estado === "en revision" ? { opacity: 0.5 } : {}}
             >
               <MaterialIcons name="cancel" size={18} color="#fff" />
               <Text className="text-white font-semibold ml-1.5">Cancelar</Text>

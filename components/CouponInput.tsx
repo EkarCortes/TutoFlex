@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { usePaymentCoupon } from '../hooks/payments/useDropdownCoupon';
 import CustomDropdown from './CustomDropdown';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -24,10 +24,6 @@ const CouponInput: React.FC<CouponInputProps> = ({ onApplyCoupon }) => {
     })),
   ];
 
-  const handleApply = () => {
-    onApplyCoupon(selectedCoupon || null);
-  };
-
   return (
     <View className="bg-[#0B4D6D] rounded-2xl p-4 mb-5">
       <View className="flex-row items-center mb-3">
@@ -41,19 +37,14 @@ const CouponInput: React.FC<CouponInputProps> = ({ onApplyCoupon }) => {
           <CustomDropdown
             data={dropdownData}
             value={selectedCoupon}
-            onChange={setSelectedCoupon}
+            onChange={(value) => {
+              setSelectedCoupon(value);
+              onApplyCoupon(value || null);
+            }}
             placeholder="Elige un cupón"
             iconName=""
           />
         </View>
-        <TouchableOpacity
-          className="bg-[#FB8501] rounded-xl px-4 py-2"
-          onPress={handleApply}
-        >
-          <Text className="text-white text-base" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-            Aplicar
-          </Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

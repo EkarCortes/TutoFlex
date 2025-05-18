@@ -106,7 +106,11 @@ const usePaymentHandler = ({
 
     handlePayment(formData, () => {
       setShowConfirmModal(false);
+      showToast("success", "Pago confirmado con éxito.");
+      setTimeout(() => {
       router.dismissTo("/(drawer)/payments");
+      }
+      , 2000);
     });
   };
 

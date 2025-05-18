@@ -52,7 +52,7 @@ const PaymentInfo: React.FC<PagoInfoProps> = ({
        
       <View className="flex-row justify-between items-center mb-4">
         <View className="flex-row items-center">
-          <Text className="text-xl text-white font-bold ml-1" >
+          <Text className="text-lg text-white font-bold ml-1" >
             {monto}
           </Text>
         </View>

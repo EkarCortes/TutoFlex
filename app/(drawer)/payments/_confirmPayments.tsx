@@ -104,7 +104,8 @@ const ConfirmarPagoScreen = () => {
               setShowConfirmModal(true);
             }
           }}
-          disabled={loading}
+          disabled={loading || tutorialData.estado === "en revision"}
+          style={tutorialData.estado?.toLowerCase() === "en revision" ? { opacity: 0.5 } : {}}
         >
           <Text className="text-white font-bold text-lg ml-2">Pagar</Text>
         </TouchableOpacity>
@@ -112,6 +113,8 @@ const ConfirmarPagoScreen = () => {
       <Modal
         animationType="fade"
         transparent={true}
+        statusBarTranslucent={true}
+        hardwareAccelerated={true}
         visible={showConfirmModal}
         onRequestClose={() => setShowConfirmModal(false)}
       >
