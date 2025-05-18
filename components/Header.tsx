@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { router, useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useState } from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import StatusBarComponent from './StatusBarComponent';
-import { router } from 'expo-router';
 
 interface HeaderProps {
   userName: string;
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userPoints, searchQuery, setS
               if (searchQuery.length > 0) {
                 router.push({
                   pathname: '/(drawer)/filter',
-                  params: { searchQuery },
+                  params: { searchQuery }, // Ya lo tienes así, solo asegúrate de que filter/index.tsx lo use
                 });
               }
             }}

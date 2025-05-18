@@ -3,13 +3,13 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const estadoColors: Record<string, { color: string; bg: string; text: string }> = {
-  pendiente: { color: "#FB8500", bg: "#0B4C6D", text: "Pendiente" },
+  pendiente: { color: "#FB8500", bg: "#0B4D6D", text: "Pendiente" },
 
 };
 
 const getEstadoStyle = (estado: string) => {
   const key = estado?.toLowerCase();
-  return estadoColors[key] || { color: "#FB8500", bg: "#0B4C6D", text: "En Revisión" };
+  return estadoColors[key] || { color: "#FB8500", bg: "#0B4D6D", text: "En Revisión" };
 };
 
 const PagoItem = ({

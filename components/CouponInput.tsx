@@ -29,7 +29,7 @@ const CouponInput: React.FC<CouponInputProps> = ({ onApplyCoupon }) => {
   };
 
   return (
-    <View className="bg-[#085276] rounded-2xl p-4 mb-5">
+    <View className="bg-[#0B4D6D] rounded-2xl p-4 mb-5">
       <View className="flex-row items-center mb-3">
         <MaterialIcons name="local-offer" size={24} color="#FEB602" />
         <Text className="text-lg text-white ml-2" style={{ fontFamily: "SpaceGrotesk-Bold" }}>

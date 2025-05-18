@@ -1,11 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
-import { View, Text, TouchableOpacity, Animated, Easing, Platform, UIManager } from "react-native";
-
-// Habilita LayoutAnimation en Android (opcional, pero no usado aquí)
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
+import React from "react";
+import { Text, View } from "react-native";
 
 const InfoTeacher = ({
   tutorData,
@@ -18,147 +13,66 @@ const InfoTeacher = ({
     monto_por_hora?: string;
   } | null;
 }) => {
-  const [open, setOpen] = useState(false);
-  const animation = useRef(new Animated.Value(0)).current;
+  const nombre = tutorData?.profesor || "Sin nombre";
+  const curso = tutorData?.curso || "Sin curso";
+  const modalidad = tutorData?.modalidad || "Sin modalidad";
+  const horario = tutorData?.horarios || "Sin horario";
+  const monto = tutorData?.monto_por_hora
+    ? "₡ " + Math.floor(Number(tutorData.monto_por_hora))
+    : "Sin precio";
 
-  const teacherInfo = [
-    {
-      icon: "account-circle",
-      label: "Profesor",
-      value: tutorData?.profesor || "Sin nombre",
-    },
-    {
-      icon: "book",
-      label: "Curso",
-      value: tutorData?.curso || "Sin nombre",
-    },
-    {
-      icon: "location-on",
-      label: "Modalidad",
-      value: tutorData?.modalidad || "Sin modalidad",
-    },
-    {
-      icon: "access-time",
-      label: "Horario",
-      value: tutorData?.horarios || "Sin horario",
-    },
-    {
-      icon: "attach-money",
-      label: "Precio",
-      value:
-        "₡ " +
-        (tutorData?.monto_por_hora
-          ? Math.floor(Number(tutorData.monto_por_hora))
-          : "Sin horario"),
-    },
-  ];
-
-  const [contentHeight, setContentHeight] = useState(0);
-
-  const toggleCard = () => {
-    if (open) {
-      Animated.timing(animation, {
-        toValue: 0,
-        duration: 250,
-        easing: Easing.out(Easing.ease),
-        useNativeDriver: false,
-      }).start(() => setOpen(false));
-    } else {
-      setOpen(true);
-      Animated.timing(animation, {
-        toValue: 1,
-        duration: 250,
-        easing: Easing.out(Easing.ease),
-        useNativeDriver: false,
-      }).start();
-    }
-  };
-
-  const animatedHeight = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, contentHeight],
-  });
-
-  const animatedOpacity = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
-  });
-
-  const rotateArrow = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "180deg"],
-  });
+  const capitalizeFirstLetter = (text: string) =>
+    text.charAt(0).toUpperCase() + text.slice(1);
 
   return (
-    <View className="bg-[#096491] rounded-xl mb-3 shadow-md overflow-hidden">
-      <TouchableOpacity
-        className="flex-row justify-between items-center p-4"
-        onPress={toggleCard}
-        activeOpacity={0.8}
-      >
-        <Text className="text-xl text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-          Información del Profesor
-        </Text>
-        <Animated.View style={{ transform: [{ rotate: rotateArrow }] }}>
-          <MaterialIcons name="keyboard-arrow-down" size={28} color="#FEB602" />
-        </Animated.View>
-      </TouchableOpacity>
-      {/* Animated.View para el contenido colapsable */}
-      <Animated.View
-        style={{
-          height: animatedHeight,
-          opacity: animatedOpacity,
-          overflow: "hidden",
-        }}
-      >
-        {/* Medimos la altura real del contenido solo una vez */}
-        <View
-          style={{ position: "absolute", top: 0, left: 0, right: 0, opacity: 0, zIndex: -1 }}
-          pointerEvents="none"
-          onLayout={e => {
-            if (contentHeight === 0) setContentHeight(e.nativeEvent.layout.height);
-          }}
-        >
-          <View className="px-4 pb-3">
-            {teacherInfo.map((info, index) => (
-              <View key={index} className="flex-row items-start mb-2">
-                <MaterialIcons name={info.icon} size={24} color="#FEB602" style={{ marginTop: 2 }} />
-                <View style={{ flex: 1 }}>
-                  <Text
-                    className="text-lg text-white ml-2"
-                    style={{ fontFamily: "SpaceGrotesk-Bold", flexWrap: "wrap" }}
-                    numberOfLines={undefined}
-                  >
-                    {info.label}:{" "}
-                    <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{info.value}</Text>
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </View>
-        {/* Contenido visible animado */}
-        {open && (
-          <View className="px-4 pb-3">
-            {teacherInfo.map((info, index) => (
-              <View key={index} className="flex-row items-start mb-2">
-                <MaterialIcons name={info.icon} size={24} color="#FEB602" style={{ marginTop: 2 }} />
-                <View style={{ flex: 1 }}>
-                  <Text
-                    className="text-lg text-white ml-2"
-                    style={{ fontFamily: "SpaceGrotesk-Bold", flexWrap: "wrap" }}
-                    numberOfLines={undefined}
-                  >
-                    {info.label}:{" "}
-                    <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{info.value}</Text>
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        )}
-      </Animated.View>
-    </View>
+    <View className="rounded-2xl shadow-xl my-3 overflow-hidden" style={{ backgroundColor: "#0B4C6C" }}>
+              <View style={{ height: 4, backgroundColor: '#FB8500' }} />
+       
+       
+       <View className="bg-[#0B4D6D] rounded-3xl p-6  shadow-xl">
+   
+         <View className="flex-row items-center justify-between mb-4">
+           <View className="flex-row items-center">
+             <MaterialIcons name="account-circle" size={28} color="#FEB602" />
+             <Text className="text-2xl text-white ml-3 font-bold" >
+               {nombre}
+             </Text>
+           </View>
+            <View className="flex-row items-center rounded-full">
+                     <View className="bg-[#FB8500] px-4 py-1 rounded-full mr-2">
+                       <Text className="text-white text-xs font-bold">
+                         {capitalizeFirstLetter(modalidad)}
+                       </Text>
+                     </View>
+                   </View>
+         </View>
+   
+         <View>
+       
+          
+         <View className="flex-row justify-between items-center mb-4">
+           <View className="flex-row items-center">
+             <Text className="text-xl text-white font-bold ml-1" >
+               {monto}
+             </Text>
+           </View>
+           <View className="flex-row items-center">
+             <Text className="text-base text-white font-bold ml-1" >
+               {curso}
+             </Text>
+           </View>
+         </View>
+   
+         <View className="h-0.5 bg-[#fff] opacity-60 mb-4 rounded-full" />
+         <View className="mb-3 flex-row items-center">
+           <MaterialIcons name="access-time" size={22} color="#FEB602" />
+           <Text className="text-base text-white ml-2 font-semibold">
+             {horario}
+           </Text>
+         </View>
+         </View>
+         </View>
+       </View>
   );
 };
 

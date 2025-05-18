@@ -5,7 +5,7 @@ const toastConfig = {
     success: (props: any) => (
         <BaseToast
             {...props}
-            style={{ borderLeftColor: '#2C81AC', backgroundColor: '#E6F4FA' }} // Azul
+            style={{ borderLeftColor: '#2C81AC', backgroundColor: '#E6F4FA' }} 
             text1Style={{
                 fontSize: 16,
                 fontWeight: 'bold',
@@ -20,7 +20,7 @@ const toastConfig = {
     error: (props: any) => (
         <ErrorToast
             {...props}
-            style={{ borderLeftColor: '#FB8500', backgroundColor: '#FFF4E6' }} // Naranja
+            style={{ borderLeftColor: '#FB8500', backgroundColor: '#FFF4E6' }} 
             text1Style={{
                 fontSize: 16,
                 fontWeight: 'bold',
@@ -35,7 +35,7 @@ const toastConfig = {
     info: (props: any) => (
         <BaseToast
             {...props}
-            style={{ borderLeftColor: '#023047', backgroundColor: '#D9EAF3' }} // Azul oscuro
+            style={{ borderLeftColor: '#023047', backgroundColor: '#D9EAF3' }}
             text1Style={{
                 fontSize: 16,
                 fontWeight: 'bold',

@@ -25,7 +25,12 @@ const PaymentInfo: React.FC<PagoInfoProps> = ({
     text.charAt(0).toUpperCase() + text.slice(1);
 
   return (
-    <View className="bg-[#0B4C6C] rounded-3xl p-6 mb-6 shadow-xl">
+      <View className="rounded-2xl shadow-xl my-3 overflow-hidden" style={{ backgroundColor: "#0B4C6C" }}>
+           <View style={{ height: 4, backgroundColor: '#FB8500' }} />
+    
+    
+    <View className="bg-[#0B4D6D] rounded-3xl p-6  shadow-xl">
+
       <View className="flex-row items-center justify-between mb-4">
         <View className="flex-row items-center">
           <MaterialIcons name="account-circle" size={28} color="#FEB602" />
@@ -33,12 +38,18 @@ const PaymentInfo: React.FC<PagoInfoProps> = ({
             {nombre}
           </Text>
         </View>
-        <View className="bg-[#FB8500] px-3 py-1 rounded-full">
-          <Text className="text-white text-xs font-bold" >
-            {capitalizeFirstLetter(modalidad)}
-          </Text>
-        </View>
+         <View className="flex-row items-center rounded-full">
+                  <View className="bg-[#FB8500] px-4 py-1 rounded-full mr-2">
+                    <Text className="text-white text-xs font-bold">
+                      {capitalizeFirstLetter(modalidad)}
+                    </Text>
+                  </View>
+                </View>
       </View>
+
+      <View>
+    
+       
       <View className="flex-row justify-between items-center mb-4">
         <View className="flex-row items-center">
           <Text className="text-xl text-white font-bold ml-1" >
@@ -74,6 +85,8 @@ const PaymentInfo: React.FC<PagoInfoProps> = ({
         <Text className="text-base text-white ml-2 font-semibold" >
           {telefono}
         </Text>
+      </View>
+      </View>
       </View>
     </View>
   );

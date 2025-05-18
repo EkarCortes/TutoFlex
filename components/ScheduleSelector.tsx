@@ -6,8 +6,8 @@ interface ScheduleSelectorProps {
   horarios: string[];
   selectedHorarios: number[];
   toggleHorario: (index: number) => void;
-  dateSelected: boolean; // New prop to know if date was selected
-  occupiedHorarios?: number[]; // Array of indices of occupied time slots
+  dateSelected: boolean; 
+  occupiedHorarios?: number[]; 
 }
 
 const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({ 
@@ -15,14 +15,15 @@ const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({
   selectedHorarios, 
   toggleHorario,
   dateSelected,
-  occupiedHorarios = [] // Default to empty array if not provided
+  occupiedHorarios = [] 
 }) => {
   return (
     <View className="mb-6">
-      <Text className="text-lg font-semibold text-white mb-3">Hora</Text>
+      <Text className="text-xl font-semibold text-white mb-3 ">Hora</Text>
+        <View className="h-0.5 bg-[#8ECAE6] opacity-60 mb-6 mx-0 rounded-full w-full" />
       
       {!dateSelected ? (
-        // When no date has been selected
+  
         <View className="bg-[#0B4C6D] py-6 px-4 rounded-xl items-center">
           <MaterialIcons name="calendar-today" size={40} color="#fff" />
           <Text className="text-white text-center mt-3 text-base">
@@ -30,7 +31,7 @@ const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({
           </Text>
         </View>
       ) : horarios.length === 1 && horarios[0] === "No hay horarios disponibles" ? (
-        // When date is selected but no hours available
+
         <View className="bg-[#0B4C6D] py-6 px-4 rounded-xl items-center">
           <MaterialIcons name="access-time-off" size={40} color="#fff" />
           <Text className="text-white text-center mt-3 text-base">
@@ -38,10 +39,10 @@ const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({
           </Text>
         </View>
       ) : (
-        // When date is selected and hours are available
+    
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row rounded-xl">
           {horarios.map((horario, index) => {
-            // Verificamos explícitamente si este horario está ocupado
+         
             const isOccupied = Array.isArray(occupiedHorarios) && occupiedHorarios.includes(index);
             console.log(`Horario ${horario} (índice ${index}): ${isOccupied ? 'ocupado' : 'disponible'}`);
             
@@ -52,7 +53,7 @@ const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({
                   ${selectedHorarios.includes(index) ? 'bg-[#FA8401]' : 
                     isOccupied ?  'bg-[#0B4C6D]' : 'bg-[#093c56]' }`}
                 onPress={() => !isOccupied && toggleHorario(index)}
-                disabled={isOccupied} // Aseguramos que se deshabilita si está ocupado
+                disabled={isOccupied}
               >
                 <MaterialIcons 
                   name={isOccupied ? "access-time-filled" : "access-time"} 

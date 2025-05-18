@@ -16,6 +16,7 @@ import RoundedHeader from "../../../components/HeaderScreens";
 import CouponInput from "../../../components/CouponInput";
 import ToastComponent from "../../../components/Toast";
 import useConfirmarPago from "../../../hooks/payments/useConfirmPayment";
+import HeaderScreens from "../../../components/HeaderScreens";
 
 const ConfirmarPagoScreen = () => {
   const {
@@ -39,9 +40,10 @@ const ConfirmarPagoScreen = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-[#023047]" edges={["bottom", "left", "right"]}>
-      <RoundedHeader title={"Confirmar Pago"} />
+      <HeaderScreens title={"Confirmar Pago"} />
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}>
           <View className="p-2 mt-2">
             <PaymentInfo
               nombre={tutorialData.Nombre_Profesor}
@@ -57,14 +59,14 @@ const ConfirmarPagoScreen = () => {
             />
             <View className="flex-row justify-between mt-1 mb-5 mx-2">
               <TouchableOpacity
-                className={`flex-1 py-3 mr-2 rounded-lg ${paymentMethod === "efectivo" ? "bg-[#FB8500]" : "bg-[#09374d] border border-[#FB8500] opacity-70"
+                className={`flex-1 py-3 mr-2 rounded-lg ${paymentMethod === "efectivo" ? "bg-[#FB8500]" : "bg-[#2379A1] opacity-70"
                   }`}
                 onPress={() => setPaymentMethod("efectivo")}
               >
                 <Text className="text-white text-center font-medium">En Efectivo</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                className={`flex-1 py-3 ml-2 rounded-lg ${paymentMethod === "transferencia" ? "bg-[#FB8500]" : "bg-[#09374d] border border-[#FB8500] opacity-70"
+                className={`flex-1 py-3 ml-2 rounded-lg ${paymentMethod === "transferencia" ? "bg-[#FB8500]" : "bg-[#2379A1] opacity-70"
                   }`}
                 onPress={() => setPaymentMethod("transferencia")}
               >
@@ -72,7 +74,7 @@ const ConfirmarPagoScreen = () => {
               </TouchableOpacity>
             </View>
             {paymentMethod === "efectivo" ? (
-              <View className="bg-[#0B4C6D] rounded-lg p-4 mx-2 mb-5">
+              <View className="bg-[#0B4D6D] rounded-lg p-4 mx-2 mb-5">
                 <Text className="text-white text-center text-lg font-bold mb-2">Monto a pagar</Text>
                 <Text className="text-white text-center text-2xl ">₡ {discountedAmount.toFixed(2)}</Text>
                 <Text className="text-white text-center mt-2 text-xs">

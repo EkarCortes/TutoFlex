@@ -7,7 +7,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  ActivityIndicator
+  ActivityIndicator,
+  SafeAreaView
 } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
@@ -22,7 +23,6 @@ import ToastComponent, { showToast } from "../../../components/Toast";
 import useTutorialDetails from "../../../hooks/tutorial/useTutorialDetails";
 import "../../../global.css";
 
-// ConfirmationModal component definition
 interface ConfirmationModalProps {
   visible: boolean;
   onClose: () => void;
@@ -36,7 +36,6 @@ interface ConfirmationModalProps {
   selectedModalidad: string | null; 
 }
 
-// Calendar modal component
 interface CalendarModalProps {
   visible: boolean;
   onClose: () => void;
@@ -246,7 +245,7 @@ const TutoriaScreen = () => {
   } = useTutorialDetails(tutorData);
 
   return (
-    <View className="flex-1 bg-[#023046]">
+ <SafeAreaView className="flex-1 bg-[#023047]" edges={["bottom", "left", "right"]}>
       <StatusBarComponent />
       <HeaderScreens title={"Detalles Tutoría"} />
 
@@ -255,16 +254,20 @@ const TutoriaScreen = () => {
         keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
         style={{ flex: 1 }}
       >
-        <ScrollView
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
           bounces={true}
           keyboardShouldPersistTaps="handled"
           scrollEventThrottle={16}
         >
-          <View className="p-4 mt-1">
+          <View className="p-2 mt-1">
             <InfoTeacher tutorData={tutorData} />
-            <View className="bg-[#096491] rounded-2xl p-5 shadow-lg mb-4">
-              <Text className="text-white text-lg font-bold mb-2">Fecha</Text>
+            
+            <View className="rounded-2xl shadow-xl my-3 overflow-hidden">
+              <View style={{ height: 4, backgroundColor: '#FB8500' }} />
+              <View className="bg-[#0A4D6C] rounded-lg p-5 shadow-lg mb-4">
+              <Text className="text-white text-xl font-bold mb-2">Fecha</Text>
+                 <View className="h-0.5 bg-[#8ECAE6] opacity-60 mb-6 mx-0 rounded-full w-full" />
               <TouchableOpacity
                 onPress={() => setShowCalendarModal(true)}
                 className="flex-row items-center bg-[#FB8500] rounded-xl px-4 py-3 mb-4"
@@ -293,6 +296,7 @@ const TutoriaScreen = () => {
                 setTopics={setTopics}
               />
             </View>
+          </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -348,7 +352,7 @@ const TutoriaScreen = () => {
         isSubmitting={isSubmitting}
         selectedModalidad={selectedModalidad}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
