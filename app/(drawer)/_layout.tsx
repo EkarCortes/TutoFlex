@@ -115,6 +115,19 @@ export default function Layout() {
       },
     },
     {
+      name: "profesorTutorials",
+      roles: [ 3],
+      showInDrawer: true,
+      options: {
+        drawerLabel: "Tutorias Pendientes",
+        title: "",
+        drawerItemStyle: { height: 0 },
+        drawerIcon: ({ color, size }) => (
+          <MaterialIcons name="assignment" color={color} size={size} />
+        ),
+      },
+    },
+    {
       name: "deductions",
       roles: [3],
       showInDrawer: true,
@@ -223,6 +236,7 @@ export default function Layout() {
         ),
       },
     },
+   
   ];
 
   const drawerScreens = allScreens.filter(screen =>

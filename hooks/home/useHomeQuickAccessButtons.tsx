@@ -55,6 +55,12 @@ export default function renderQuickAccessButtons() {
           label2="Recibidos"
           onPress={() => router.push('../(drawer)/receivedPayments')}
         />
+        <QuickAccessButton
+          iconName="assignment"
+          label1="Tutorias"
+          label2="Pendientes"
+          onPress={() => router.push('../(drawer)/profesorTutorials')}
+        />
       </>
     );
   } else {
