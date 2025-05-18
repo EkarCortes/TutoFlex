@@ -14,10 +14,8 @@ export interface Tutorial {
 export const fetchPendingTutorials = async (): Promise<Tutorial[]> => {
   try {
     const response = await axiosInstance.get("tutorials/getPendingTutorialsProfessor");
-    const flatData: Tutorial[] = response.data.data.flat().filter(
-      (item: any) => typeof item.estudiante === "string"
-    );
-    return flatData;
+   
+     return response.data.data;
   } catch (error: any) {
     throw new Error("Error fetching pending tutorials: " + error.message);
   }
