@@ -17,7 +17,7 @@ const getEstadoStyle = (estado: string) => {
 
 const PaymentCard = () => {
 
-  const { students, loading, refreshPayments, navigateToDetails, isDetailDisabled } = usePaymentCard();
+  const { students, loading, refreshPayments, navigateToDetails, isDetailDisabled, renderMonto } = usePaymentCard();
 
   if (loading) {
     return <LoadingScreen message="Cargando pagos recibidos..." />;
@@ -72,7 +72,7 @@ const PaymentCard = () => {
                   </View>
                   <View className="flex-row justify-between mb-1">
                     <Text className="text-[#fff] text-sm">Materia:</Text>
-                    <Text className="font-bold text-white">{item.nombre}</Text>
+                    <Text className="font-bold text-white">{item.nombre_curso}</Text>
                   </View>
                   <View className="flex-row justify-between mb-1">
                     <Text className="text-[#fff] text-sm">Fecha:</Text>
@@ -86,7 +86,7 @@ const PaymentCard = () => {
                   </View>
                   <View className="flex-row justify-between mb-1">
                     <Text className="text-[#fff] text-sm">Monto:</Text>
-                    <Text className="font-bold text-white">₡{item.monto}</Text>
+                    {renderMonto(item)}
                   </View>
                 </View>
                 <View className="w-full mt-2">
