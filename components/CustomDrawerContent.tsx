@@ -1,11 +1,12 @@
 import { useAuth } from '@/app/contexts/AuthContext';
 import { MaterialIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import LoadingScreen from '../components/LoadingScreen';
 import '../global.css';
 import useGetUserProfile from '../hooks/points/useGetUserProfile';
+import { getProfileProfesor } from '../services/GetUserProfileService';
 
 interface DrawerScreen {
   name: string;
@@ -25,9 +26,38 @@ interface CustomDrawerContentProps {
 function CustomDrawerContent(props: CustomDrawerContentProps) {
     const { logout, user } = useAuth();
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const { profile } = useGetUserProfile();
+
     const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido.split(' ')[0]}` : "Usuario";
-    const userPoints = profile?.total_puntos ?? "";
+
+    // Solo usar el hook si es estudiante
+    const { profile } = user?.rol_id === 2 ? useGetUserProfile() : { profile: null };
+    const [profesorProfile, setProfesorProfile] = useState<any>(null);
+
+    useEffect(() => {
+        if (user?.rol_id === 3) {
+            getProfileProfesor().then(setProfesorProfile);
+        }
+    }, [user?.rol_id]);
+
+    // Mostrar puntos si es estudiante, promedio si es profesor
+    let userPointsOrRating = null;
+    if (user?.rol_id === 2) {
+        userPointsOrRating = (
+            <View className="flex-row items-center mt-1">
+                <MaterialIcons name="star-outline" size={16} color="#FEB702" className="ml-1" />
+                <Text className="text-gray-300 text-sm">{profile?.total_puntos ?? ""} puntos</Text>
+            </View>
+        );
+    } else if (user?.rol_id === 3) {
+        userPointsOrRating = (
+            <View className="flex-row items-center mt-1">
+                <MaterialIcons name="star-rate" size={16} color="#FEB702" className="ml-1" />
+                <Text className="text-gray-300 text-sm">
+                    Promedio: {profesorProfile?.calificacion_promedio ?? "--"}
+                </Text>
+            </View>
+        );
+    }
 
     const handleLogout = async () => {
         try {
@@ -57,12 +87,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
                     />
 
                     <Text className="text-white font-bold text-lg mt-2">{userName}</Text>
-                    {user?.rol_id === 2 && (
-                        <View className="flex-row items-center mt-1">
-                            <MaterialIcons name="star-outline" size={16} color="#FEB702" className="ml-1" />
-                            <Text className="text-gray-300 text-sm">{userPoints} puntos</Text>
-                        </View>
-                    )}
+                    {userPointsOrRating}
                 </View>
             </View>
 

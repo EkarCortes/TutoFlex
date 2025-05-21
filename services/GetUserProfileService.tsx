@@ -23,6 +23,27 @@ export interface Profile {
     
 }
 
+// Solo los datos personales del profesor
+export interface ProfesorProfile {
+  usuario_id: number;
+  profesor_id: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  whatsapp: string;
+  foto: string;
+  descripcion: string;
+  universidad: string;
+  sede: string | null;
+  recinto: string | null;
+  carrera: string;
+  universidad_id: number;
+  sede_id: number | null;
+  recinto_id: number | null;
+  carrera_id: number;
+  calificacion_promedio: string;
+}
+
 export const getProfile = async (): Promise<{ data: Profile } | null> => {
     try {
         const response = await axiosInstance.get("/users/getProfileStudent");
@@ -32,5 +53,35 @@ export const getProfile = async (): Promise<{ data: Profile } | null> => {
         console.error("Error al obtener el perfil del usuario:", error);
         return null;
     }
+};
+
+export const getProfileProfesor = async (): Promise<ProfesorProfile | null> => {
+  try {
+    const response = await axiosInstance.get("users/getProfileProfesor");
+    const data = response.data?.data;
+    if (!data) return null;
+    return {
+      usuario_id: data.usuario_id,
+      profesor_id: data.profesor_id,
+      nombre: data.nombre,
+      apellido: data.apellido,
+      email: data.email,
+      whatsapp: data.whatsapp,
+      foto: data.foto,
+      descripcion: data.descripcion,
+      universidad: data.universidad,
+      sede: data.sede,
+      recinto: data.recinto,
+      carrera: data.carrera,
+      universidad_id: data.universidad_id,
+      sede_id: data.sede_id,
+      recinto_id: data.recinto_id,
+      carrera_id: data.carrera_id,
+      calificacion_promedio: data.calificacion_promedio,
+    };
+  } catch (error) {
+    console.error("Error al obtener el perfil del profesor:", error);
+    return null;
+  }
 };
 

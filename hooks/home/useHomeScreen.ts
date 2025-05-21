@@ -1,25 +1,24 @@
-import { useAuth } from '@/app/contexts/AuthContext';
 import { useRouter } from 'expo-router';
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
+import { useAuth } from '@/app/contexts/AuthContext';
 import useGetUserProfile from '../points/useGetUserProfile';
 import useFontsLoader from '../useFontsLoader';
 
 export default function useHomeScreen() {
   const { user, logout, getToken } = useAuth();
-  const { profile } = useGetUserProfile();
+
+  // Solo ejecuta el hook si es estudiante
+  const { profile } = user?.rol_id === 2 ? useGetUserProfile() : { profile: null };
+
   const [searchQuery, setSearchQuery] = useState("");
   const [showSessionExpired, setShowSessionExpired] = useState(false);
   const router = useRouter();
   useFontsLoader();
 
-  // NUEVA
   const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido.charAt(0)}` : "Usuario";
 
-  //VIEJA
-  //const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido}` : "Usuario";
-  
   // Verifica si el token ha expirado y configura el temporizador adecuadamente
   useEffect(() => {
     let tokenExpirationTimer: NodeJS.Timeout;
@@ -112,7 +111,6 @@ export default function useHomeScreen() {
     searchQuery,
     setSearchQuery,
     showSessionExpired,
-    setShowSessionExpired,
     userName,
     handleLogin,
   };

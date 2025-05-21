@@ -9,15 +9,15 @@ interface HeaderProps {
   userName: string;
   userPoints: string;
   searchQuery: string;
-  rolId: number; 
+  rolId: number;
   setSearchQuery: (query: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ userName, userPoints, searchQuery, setSearchQuery, rolId }) => {
   const navigation = useNavigation();
-  
+
   // Definir qué roles pueden ver la barra de búsqueda
-  const showSearchBar = [ 2].includes(rolId); // Solo para roles 1 (admin) y 2 (estudiante) 
+  const showSearchBar = [2].includes(rolId); // Solo para roles 1 (admin) y 2 (estudiante) 
 
   return (
     <View
@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userPoints, searchQuery, setS
       }}
     >
       <StatusBarComponent />
-  
+
       <View className="flex-row justify-between items-center mb-2">
         <View>
           <Text className="text-3xl text-white mb-1.5" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
@@ -44,10 +44,10 @@ const Header: React.FC<HeaderProps> = ({ userName, userPoints, searchQuery, setS
               </Text>
             </View>
           )}
+         
         </View>
       </View>
-      
-      {/* Mostrar barra de búsqueda solo para roles permitidos */}
+
       {showSearchBar && (
         <View className="flex-row bg-[#8ECBE6] items-center rounded-xl px-3 py-2 m-1.5">
           <MaterialIcons name="search" size={20} color="#2192BC" className="mr-2" />
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userPoints, searchQuery, setS
               if (searchQuery.length > 0) {
                 router.push({
                   pathname: '/(drawer)/filter',
-                  params: { searchQuery }, // Ya lo tienes así, solo asegúrate de que filter/index.tsx lo use
+                  params: { searchQuery },
                 });
               }
             }}
