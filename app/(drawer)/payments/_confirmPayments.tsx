@@ -12,11 +12,10 @@ import {
 import PaymentInfo from "../../../components/PaymentInfo";
 import TransferenciaInfo from "../../../components/TransferenciaInfo";
 import UploadComprobante from "../../../components/UploadComprobante";
-import RoundedHeader from "../../../components/HeaderScreens";
 import CouponInput from "../../../components/CouponInput";
 import ToastComponent from "../../../components/Toast";
-import useConfirmarPago from "../../../hooks/payments/useConfirmPayment";
 import HeaderScreens from "../../../components/HeaderScreens";
+import useConfirmarPago from "../../../hooks/payments/useConfirmPayment";
 
 const ConfirmarPagoScreen = () => {
   const {

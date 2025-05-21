@@ -39,7 +39,7 @@ const useTotalFee = () => {
     fetchFeeTotal();
   }, []);
 
-  return { feeTotal, deductions, loading, error };
+  return { feeTotal, deductions, loading, error, refresh: fetchFeeTotal };
 };
 
 export default useTotalFee;

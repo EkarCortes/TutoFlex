@@ -25,7 +25,7 @@ const useAllDeductionsPaid = () => {
     fetchDeductionsPaid();
   }, []);
 
-  return { deductionsPaid, loading, error, refresh: fetchDeductionsPaid };
+  return { deductionsPaid, loading, error, refresh: fetchDeductionsPaid,data: deductionsPaid }; // Se agrega la propiedad data para que sea más fácil de usar en otros componentes
 };
 
 export default useAllDeductionsPaid;

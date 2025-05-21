@@ -5,9 +5,10 @@ import StatusBarComponent from "../../../components/StatusBarComponent";
 import HeaderScreens from "../../../components/HeaderScreens";
 import ToastComponent from "../../../components/Toast";
 import LoadingScreen from "../../../components/LoadingScreen";
+import ReviewCard from "@/components/ReviewCard";
 import useFinalizedTutorialsScreen from "../../../hooks/qualifications/useFinalizedTutorials";
 import { useRefreshOnFocus } from "@/hooks/useRefreshOnFocus";
-import ReviewCard from "@/components/ReviewCard";
+
 
 const FinalizedTutorialsScreen = () => {
   const {

@@ -78,8 +78,12 @@ const usePayDeductionsHandler = ({
 
     await handlePayment(formData, () => {
       setShowModal(false);
-      router.push("/(drawer)/deductions");
-    });
+      showToast("success", "Pago realizado con éxito", 'Éxito', 'top');
+      setTimeout(() => {
+        router.dismissTo("/(drawer)/deductions");
+        }
+        , 2000);
+      });
   };
 
   return {
