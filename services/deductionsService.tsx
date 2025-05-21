@@ -7,7 +7,7 @@ export interface DeductionPaidItem {
 }
 export const getAllDeductionsPaid = async (): Promise<DeductionPaidItem[]> => {
   try {
-    const response = await axiosInstance.get("/deductions/getAllDeductionsPaid");
+    const response = await axiosInstance.get("deductions/getAllDeductionsByProfessor");
     if (response.data.success && Array.isArray(response.data.data)) {
       return response.data.data.map((item: any) => ({
         deduccion_id: item.deduccion_id,

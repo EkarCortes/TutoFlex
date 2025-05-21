@@ -1,76 +1,74 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, RefreshControl } from 'react-native';
 import { router } from 'expo-router';
-import ButtonBotton from '../../../components/ButtonBottom';
-import InvoicesCard from '../../../components/InvoicesCard';
-import RoundedHeader from '../../../components/HeaderScreens';
-import DeductionsPaidList from '../../../components/DeductionsPaidList';
-import useTotalFee from '../../../hooks/deductions/useTotalFee';
-import useAllDeductionsPaid from '../../../hooks/deductions/useAllDeductionsPaid';
+import React from 'react';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
+import RoundedHeader from '../../../components/HeaderScreens';
+import InvoicesCard from '../../../components/InvoicesCard';
+import useTotalFee from '../../../hooks/deductions/useTotalFee';
+import { useRefreshOnFocus } from '@/hooks/useRefreshOnFocus';
 
 const Index = () => {
-  const [showAll, setShowAll] = useState(false);
-  const { feeTotal } = useTotalFee();
-  const { deductionsPaid, loading, error, refresh } = useAllDeductionsPaid();
+  const { feeTotal, deductions,refresh } = useTotalFee();
 
   const handleConfirm = () => {
     router.push('../../(drawer)/deductions/_confirmPaymentsTeacher');
   };
 
+  const goToHistory = () => {
+    router.push('../../(drawer)/deductions/history');
+  };
+  
+  useRefreshOnFocus(refresh);
+
+
+  // Desactivar el botón si no hay deducciones pendientes o feeTotal es 0
+  const isPayDisabled = !deductions || deductions.length === 0 || Number(feeTotal) === 0;
+
   return (
-    <View className="flex-1 bg-[#023046]">
+    <View className="flex-1 bg-gradient-to-b from-[#023046] to-[#045a8d]">
       <RoundedHeader title={'Deducciones'} />
 
       <ScrollView
-        contentContainerStyle={{ padding: 20 }}
+        contentContainerStyle={{ padding: 12, gap: 24 }}
         showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} />}
       >
-        {/* Deducciones Pendientes */}
-        <View className="mb-8">
-          <Text className="text-xl font-bold text-white text-center mb-3">
-            Deducciones Pendientes
-          </Text>
-
-          <View className="bg-[#0d6a97] p-5 rounded-2xl shadow">
-            <InvoicesCard />
-
-            <View className="mt-6 items-center">
-              <ButtonBotton
-                title="Pagar"
-                onPress={handleConfirm}
-                style={{ width: '40%' }}
-              />
+        <View
+          className="rounded-2xl shadow-lg overflow-hidden"
+          style={{ backgroundColor: "#0B4D6D" }}
+        >
+          <View style={{ height: 4, backgroundColor: "#FB8500" }} />
+          <View className="p-6">
+            <Text className="text-2xl font-bold text-white mb-2 text-center">
+              Resumen de Deducciones
+            </Text>
+            <View className="flex-row justify-between items-center mb-6">
+              <Text className="text-lg text-white">Total pendiente:</Text>
+              <Text className="text-2xl font-bold text-[#FB8500]">₡{feeTotal ?? '0.00'}</Text>
             </View>
+            <InvoicesCard />
           </View>
         </View>
-
-        {/* Historial de Deducciones */}
-        <Text className="text-xl font-bold text-white text-center mb-3">
-          Historial de Deducciones
-        </Text>
-
-        <View className="bg-white rounded-xl overflow-hidden">
-          <DeductionsPaidList 
-            data={deductionsPaid} 
-            showAll={showAll}
-            loading={loading}
-            error={error}
-            refresh={refresh}
-          />
-        </View>
-
-        {deductionsPaid?.length > 3 && (
-          <View className="mt-4 items-center">
-            <ButtonBotton
-              title={showAll ? 'Ver menos' : 'Ver más'}
-              onPress={() => setShowAll(!showAll)}
-              style={{ width: '40%' }}
-            />
-          </View>
-        )}
       </ScrollView>
+      <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">
+        <View className="flex-row justify-between">
+          <TouchableOpacity
+            onPress={goToHistory}
+            className="bg-[#1A6386] rounded-xl py-3 px-6 w-[48%] items-center"
+          >
+            <Text className="text-white font-semibold">Ver Historial</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleConfirm}
+            className="bg-[#FB8500] rounded-xl py-3 px-6 w-[48%] items-center"
+            disabled={isPayDisabled}
+            style={{
+              opacity: isPayDisabled ? 0.5 : 1,
+            }}
+          >
+            <Text className="text-white font-semibold">Pagar</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };

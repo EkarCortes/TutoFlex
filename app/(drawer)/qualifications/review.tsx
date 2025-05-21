@@ -24,16 +24,21 @@ const ReviewTutorialScreen = () => {
       <HeaderScreens title="Reseñar Tutoría" />
       
       <ScrollView className="flex-1 px-5">
-        <View className="bg-[#0d6a97] rounded-2xl p-4 my-4 flex-row items-center">
+          <View className="rounded-xl shadow-md my-3 overflow-hidden"
+              style={{ backgroundColor: "#0B4D6D" }}>
+
+          <View style={{ height: 4, backgroundColor: "#FB8500" }} />
+        <View className="bg-[#0B4D6D] rounded-2xl p-4 my-4 flex-row items-center">
             <Image
             source={{ uri:foto_profesor || "https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg" }}
             className="h-14 w-14 rounded-full mr-3"
-            style={{ backgroundColor: "#FB8500" }}
+            style={{ width:60, height: 60, borderRadius: 35, borderWidth: 2, borderColor: '#FB8400' }}
             />
           <View className="flex-1">
             <Text className="text-white text-lg font-bold">{curso}</Text>
             <Text className="text-white opacity-80">Tutor: {profesor}</Text>
           </View>
+        </View>
         </View>
 
         <View className="items-center my-4">
@@ -58,9 +63,9 @@ const ReviewTutorialScreen = () => {
           </Text>
         </View>
 
-        <View className="bg-[#0d6a97] rounded-2xl p-5 mb-6 shadow-lg">
+        <View className="bg-[#0B4D6D] rounded-2xl p-5 mb-6 shadow-lg">
           <Text className="text-white text-lg font-bold mb-2">
-            <MaterialIcons name="rate-review" size={20} color="white" /> Escribe tu reseña:
+            <MaterialIcons name="rate-review" size={16} color="white" /> Escribe tu reseña:
           </Text>
           
           <TextInput

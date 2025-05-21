@@ -12,9 +12,9 @@ import {
 import PaymentInfo from "../../../components/PaymentInfo";
 import TransferenciaInfo from "../../../components/TransferenciaInfo";
 import UploadComprobante from "../../../components/UploadComprobante";
-import RoundedHeader from "../../../components/HeaderScreens";
 import CouponInput from "../../../components/CouponInput";
 import ToastComponent from "../../../components/Toast";
+import HeaderScreens from "../../../components/HeaderScreens";
 import useConfirmarPago from "../../../hooks/payments/useConfirmPayment";
 
 const ConfirmarPagoScreen = () => {
@@ -39,9 +39,10 @@ const ConfirmarPagoScreen = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-[#023047]" edges={["bottom", "left", "right"]}>
-      <RoundedHeader title={"Confirmar Pago"} />
+      <HeaderScreens title={"Confirmar Pago"} />
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}>
           <View className="p-2 mt-2">
             <PaymentInfo
               nombre={tutorialData.Nombre_Profesor}
@@ -57,14 +58,14 @@ const ConfirmarPagoScreen = () => {
             />
             <View className="flex-row justify-between mt-1 mb-5 mx-2">
               <TouchableOpacity
-                className={`flex-1 py-3 mr-2 rounded-lg ${paymentMethod === "efectivo" ? "bg-[#FB8500]" : "bg-[#0B4D6C]"
+                className={`flex-1 py-3 mr-2 rounded-lg ${paymentMethod === "efectivo" ? "bg-[#FB8500]" : "bg-[#2379A1] opacity-70"
                   }`}
                 onPress={() => setPaymentMethod("efectivo")}
               >
                 <Text className="text-white text-center font-medium">En Efectivo</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                className={`flex-1 py-3 ml-2 rounded-lg ${paymentMethod === "transferencia" ? "bg-[#FB8500]" : "bg-[#0B4D6C]"
+                className={`flex-1 py-3 ml-2 rounded-lg ${paymentMethod === "transferencia" ? "bg-[#FB8500]" : "bg-[#2379A1] opacity-70"
                   }`}
                 onPress={() => setPaymentMethod("transferencia")}
               >
@@ -72,7 +73,7 @@ const ConfirmarPagoScreen = () => {
               </TouchableOpacity>
             </View>
             {paymentMethod === "efectivo" ? (
-              <View className="bg-[#0d6a97] rounded-lg p-4 mx-2 mb-5">
+              <View className="bg-[#0B4D6D] rounded-lg p-4 mx-2 mb-5">
                 <Text className="text-white text-center text-lg font-bold mb-2">Monto a pagar</Text>
                 <Text className="text-white text-center text-2xl ">₡ {discountedAmount.toFixed(2)}</Text>
                 <Text className="text-white text-center mt-2 text-xs">
@@ -102,7 +103,8 @@ const ConfirmarPagoScreen = () => {
               setShowConfirmModal(true);
             }
           }}
-          disabled={loading}
+          disabled={loading || tutorialData.estado === "en revision"}
+          style={tutorialData.estado?.toLowerCase() === "en revision" ? { opacity: 0.5 } : {}}
         >
           <Text className="text-white font-bold text-lg ml-2">Pagar</Text>
         </TouchableOpacity>
@@ -110,6 +112,8 @@ const ConfirmarPagoScreen = () => {
       <Modal
         animationType="fade"
         transparent={true}
+        statusBarTranslucent={true}
+        hardwareAccelerated={true}
         visible={showConfirmModal}
         onRequestClose={() => setShowConfirmModal(false)}
       >

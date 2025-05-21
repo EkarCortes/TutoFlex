@@ -15,6 +15,18 @@ const usePaymentCoupon = (originalAmount: number): UsePaymentCouponResult => {
   const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
 
   const applyCoupon = (couponCode: string, coupons: Coupon[], userPoints: number) => {
+    if (!couponCode) {
+      setDiscountedAmount(originalAmount);
+      setSelectedCoupon(null);
+      Toast.show({
+        type: "info",
+        text1: "Cupón removido",
+        text2: "No se está usando ningún cupón.",
+        position: "top",
+      });
+      return;
+    }
+
     const coupon = coupons.find((c) => c.codigo === couponCode);
 
     if (!coupon) {

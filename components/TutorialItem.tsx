@@ -12,10 +12,9 @@ const getEstadoStyle = (estado: string) => {
   return estadoColors[key] || { color: "#FB8500", bg: "#0B4D6D", text: "En Revisión" };
 };
 
-const PagoItem = ({
+const TutorialItem = ({
   nombre,
-  telefono,
-  materia,
+  curso,
   monto,
   fecha,
   estado,
@@ -23,8 +22,7 @@ const PagoItem = ({
   onCancel,
 }: {
   nombre: string;
-  telefono: string;
-  materia: string;
+  curso: string;
   monto: string;
   fecha: string;
   estado: string;
@@ -57,7 +55,7 @@ const PagoItem = ({
         <View className="bg-[#2379A1] p-3 rounded-xl mb-3">
           <View className="flex-row justify-between mb-1">
             <Text className="text-[#fff] text-sm">Materia:</Text>
-            <Text className="font-bold text-white">{materia}</Text>
+            <Text className="font-bold text-white">{curso}</Text>
           </View>
           <View className="flex-row justify-between mb-1">
             <Text className="text-[#fff] text-sm">Monto:</Text>
@@ -67,18 +65,13 @@ const PagoItem = ({
             <Text className="text-[#fff] text-sm">Fecha:</Text>
             <Text className="font-bold text-white">{fecha}</Text>
           </View>
-          <View className="flex-row justify-between">
-            <Text className="text-[#fff] text-sm">Teléfono:</Text>
-            <Text className="font-bold text-white">{telefono}</Text>
-          </View>
+         
         </View>
 
         <View className="flex-row justify-between mt-2">
           <TouchableOpacity
             className="flex-1 bg-[#FB8500] py-2.5 rounded-lg flex-row justify-center items-center mr-2"
             onPress={onPress}
-            disabled={estado === "en revision"}
-            style={estado === "en revision" ? { opacity: 0.5 } : {}}
           >
             <Ionicons name="checkmark-circle-outline" size={18} color="#fff" />
             <Text className="text-white font-semibold ml-1.5">Ver Detalle</Text>
@@ -87,8 +80,6 @@ const PagoItem = ({
             <TouchableOpacity
               className="flex-1 bg-[#E53E3E] py-2.5 rounded-lg flex-row justify-center items-center"
               onPress={onCancel}
-              disabled={estado === "en revision"}
-              style={estado === "en revision" ? { opacity: 0.5 } : {}}
             >
               <MaterialIcons name="cancel" size={18} color="#fff" />
               <Text className="text-white font-semibold ml-1.5">Cancelar</Text>
@@ -100,4 +91,4 @@ const PagoItem = ({
   );
 };
 
-export default PagoItem;
+export default TutorialItem;

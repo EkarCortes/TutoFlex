@@ -14,13 +14,16 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({
   setSelectedModalidad,
 }) => {
   return (
-    <View className="mb-6 px-4 py-4">
+    <View className="mb-6  py-4">
+         <Text className="text-white text-xl font-bold mb-2">Modalidad</Text>
+             <View className="h-0.5 bg-[#8ECAE6] opacity-60 mb-6 mx-0 rounded-full w-full" />
       <View className="flex-row gap-2">
+        
         {modalidades.map((modalidad) => (
           <TouchableOpacity
             key={modalidad}
             className={`flex-1 flex-row items-center justify-center py-3 px-2 rounded-md ${
-              selectedModalidad === modalidad ? "bg-[#FA8401]" : "bg-[#0B4C6D]"
+              selectedModalidad === modalidad ? "bg-[#FA8401]" : "bg-[#2379A1] opacity-70"
             }`}
             onPress={() => setSelectedModalidad(modalidad)}
             accessibilityRole="button"

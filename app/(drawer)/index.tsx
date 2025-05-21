@@ -62,6 +62,8 @@ export default function HomeScreen() {
           animationType="fade"
           transparent={true}
           visible={showSessionExpired}
+          hardwareAccelerated={true} 
+          statusBarTranslucent={true}
           onRequestClose={() => setShowSessionExpired(false)}
         >
           <View className="flex-1 justify-center items-center bg-black/80">

@@ -6,9 +6,7 @@ import PaymentInfoTeacher from '../../../components/PaymentInfoTeacher';
 import TransferenciaInfo from '../../../components/TransferenciaInfo';
 import UploadComprobante from '../../../components/UploadComprobante';
 import RoundedHeader from '../../../components/HeaderScreens';
-import ButtonBotton from '../../../components/ButtonBottom';
 import ToastComponent from '../../../components/Toast';
-import useGetProfesorProfile from '../../../hooks/profesorProfile/useGetProfesorProfile';
 import useTotalFee from '../../../hooks/deductions/useTotalFee';
 import useDeductionsPaymentHandler from '../../../hooks/deductions/useDeductionsPaymentHandler';
 import '../../../global.css';
@@ -18,7 +16,6 @@ const ConfirmarPagoScreen = () => {
   const [comprobanteUri, setComprobanteUri] = useState<string | null>(null);
   const [transferNumber, setTransferNumber] = useState<string>("");
 
-  const { profile, loading, error } = useGetProfesorProfile();
   const { feeTotal, deductions, loading: loadingFee } = useTotalFee();
 
   const deduccionIds = deductions.map(d => Number(d.deduccion_id));
@@ -29,7 +26,7 @@ const ConfirmarPagoScreen = () => {
     deductions,
     router,
   });
-  
+
 
   const fechaActual = new Date().toLocaleDateString("es-ES");
   const monto = `₡ ${feeTotal.toFixed(2)}`;
@@ -43,20 +40,15 @@ const ConfirmarPagoScreen = () => {
     <SafeAreaView className="flex-1 bg-[#023046]" edges={['left', 'right', 'bottom']}>
       <RoundedHeader title={'Confirmar Pago'} />
 
-      <ScrollView contentContainerStyle={{ padding: 8 }} className="mt-5">
-        {loading || loadingFee ? (
-          <ActivityIndicator size="large" color="#FEB602" />
-        ) : error ? (
-          <Text className="text-white text-center mb-4">{error}</Text>
-        ) : profile ? (
-          <PaymentInfoTeacher
-            nombre={profile.nombre}
-            email={profile.email}
-            telefono={profile.whatsapp}
-            monto={monto}
-            fecha={fechaActual}
-          />
-        ) : null}
+      <ScrollView contentContainerStyle={{ padding: 8 }}>
+
+        <PaymentInfoTeacher
+          nombre="Tutoflex"
+          email="Tutoflex@gmail.com"
+          telefono="8888-8888"
+          monto={monto}
+          fecha={fechaActual}
+        />
 
         <TransferenciaInfo onTransferNumberChange={setTransferNumber} />
         <UploadComprobante
@@ -65,19 +57,14 @@ const ConfirmarPagoScreen = () => {
           onChangeImage={() => setComprobanteUri(null)}
         />
 
-        <View className="items-center mb-6">
-          <ButtonBotton
-            title="Pagar"
-            onPress={() => setShowConfirmModal(true)}
-            style={{ width: '40%'}}
-            disabled={loadingPago}
-          />
-        </View>
+
       </ScrollView>
 
       <Modal
         animationType="fade"
         transparent={true}
+        statusBarTranslucent={true}
+        hardwareAccelerated={true}
         visible={showConfirmModal}
         onRequestClose={() => setShowConfirmModal(false)}
       >
@@ -109,6 +96,18 @@ const ConfirmarPagoScreen = () => {
         </View>
       </Modal>
 
+      <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">
+        <View className="">
+          <TouchableOpacity
+            className="bg-[#FB8500] h-14 rounded-xl items-center justify-center flex-row shadow-lg"
+            onPress={() => setShowConfirmModal(true)}
+          >
+            <Text className="text-white font-bold text-lg ml-2">
+              Pagar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
       <ToastComponent />
     </SafeAreaView>
   );

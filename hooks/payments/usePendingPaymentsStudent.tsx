@@ -36,6 +36,7 @@ const usePendingPaymentsStudent = () => {
 
       if (response.data && response.data.success) {
         setTutorials(response.data.data);
+        console.log("Pagos pendientes obtenidos Ekar:", response.data.data);
       } else {
         setError(response.data?.message || "No se pudieron obtener los pagos pendientes");
       }

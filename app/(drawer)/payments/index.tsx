@@ -1,5 +1,7 @@
-import React from "react";
-import { ActivityIndicator, FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
+import { useRefreshOnFocus } from "@/hooks/useRefreshOnFocus";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderScreens from "../../../components/HeaderScreens";
 import LoadingScreen from "../../../components/LoadingScreen";
@@ -20,6 +22,22 @@ export default function PagosPendientesScreen() {
     confirmCancel,
     navigateToConfirmPayment,
   } = usePendingPaymentsScreen();
+
+  const [filtro, setFiltro] = useState<"pendiente" | "en revision">("pendiente");
+
+  // Filtrar las tutorías según el filtro seleccionado
+  const tutorialsFiltrados = tutorials.filter(t =>
+    filtro === "en revision"
+      ? t.estado?.toLowerCase() === "en revision"
+      : t.estado?.toLowerCase() === "pendiente"
+  );
+
+  // Función para alternar el filtro
+  const toggleFiltro = () => {
+    setFiltro(filtro === "pendiente" ? "en revision" : "pendiente");
+  };
+
+  useRefreshOnFocus(refreshTutorials);
 
   return (
     <SafeAreaView className="flex-1 bg-[#023046]" edges={["left", "right", "bottom"]}>
@@ -49,7 +67,7 @@ export default function PagosPendientesScreen() {
         </View>
       ) : (
         <View className="pb-2 pr-3 pl-3  flex-1">
-          {tutorials.length === 0 ? (
+          {tutorialsFiltrados.length === 0 ? (
             <View className="flex-1 justify-center items-center">
               <Text className="text-white text-lg mb-2">No tienes pagos pendientes</Text>
               <Text className="text-white opacity-70 text-center mb-6">
@@ -58,7 +76,7 @@ export default function PagosPendientesScreen() {
             </View>
           ) : (
             <FlatList
-              data={tutorials}
+              data={tutorialsFiltrados}
               refreshing={loading}
               onRefresh={refreshTutorials}
               showsVerticalScrollIndicator={false}
@@ -102,6 +120,8 @@ export default function PagosPendientesScreen() {
         animationType="fade"
         transparent={true}
         visible={showCancelModal}
+        hardwareAccelerated={true}
+        statusBarTranslucent={true}
         onRequestClose={() => setShowCancelModal(false)}
       >
         <View className="flex-1 justify-center items-center bg-black/80">
@@ -126,6 +146,46 @@ export default function PagosPendientesScreen() {
           </View>
         </View>
       </Modal>
+      
+      {/* FAB para filtro */}
+      <View
+        style={{
+          position: "absolute",
+          bottom: 32,
+          right: 24,
+          alignItems: "center",
+        }}
+        pointerEvents="box-none"
+      >
+        <TouchableOpacity
+          onPress={toggleFiltro}
+          activeOpacity={0.8}
+          style={{
+            backgroundColor: "#096491",
+            borderWidth: 1,
+            borderColor: "#ccc",
+            borderRadius: 32,
+            width: 56,
+            height: 56,
+            justifyContent: "center",
+            alignItems: "center",
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+            elevation: 5,
+          }}
+        >
+          <Ionicons
+            name={filtro === "pendiente" ? "time-outline" : "eye-outline"}
+            size={28}
+            color="#fff"
+          />
+        </TouchableOpacity>
+        <Text style={{ color: "#fff", marginTop: 6, fontSize: 13, opacity: 0.8 }}>
+          {filtro === "pendiente" ? "Pendiente" : "Revisión"}
+        </Text>
+      </View>
 
       <ToastComponent />
     </SafeAreaView>
