@@ -20,7 +20,7 @@ const ListCoupons = () => {
         const couponStatus = getCouponStatus(item.fecha_inicio, item.fecha_expiracion);
 
         return (
-            <View className="bg-white rounded-xl shadow-md my-2 overflow-hidden">
+            <View className="bg-[#0B4C6C] rounded-xl shadow-md my-2 overflow-hidden">
             <View style={{ 
                 height: 4, 
                 backgroundColor: couponStatus.color 
@@ -28,7 +28,7 @@ const ListCoupons = () => {
             
             <View className="p-4">
                 <View className="flex-row justify-between items-center mb-3">
-                    <Text className="text-xl font-bold text-[#023046]">{item.cupon}</Text>
+                    <Text className="text-xl font-bold text-white">{item.cupon}</Text>
                     <View className="bg-[#FB8500] px-3 py-1 rounded-full">
                         <Text className="text-white font-bold">{item.descuento}% OFF</Text>
                     </View>
@@ -48,20 +48,20 @@ const ListCoupons = () => {
                     </Text>
                 </View>
                 
-                <View className="bg-[#F7FAFC] p-3 rounded-lg mb-3">
+                <View className="bg-[#2379A1] p-3 rounded-lg mb-3">
                     <View className="flex-row justify-between mb-1">
-                        <Text className="text-[#4A5568] text-sm">Código:</Text>
-                        <Text className="font-bold text-[#023046]">{item.codigo}</Text>
+                        <Text className="text-[#fff] text-sm">Código:</Text>
+                        <Text className="font-bold text-[#fff]">{item.codigo}</Text>
                     </View>
                     <View className="flex-row justify-between mb-1">
-                        <Text className="text-[#4A5568] text-sm">Puntos requeridos:</Text>
-                        <Text className="font-bold text-[#023046]">{item.puntos_requeridos}</Text>
+                        <Text className="text-[#fff] text-sm">Puntos requeridos:</Text>
+                        <Text className="font-bold text-[#fff]">{item.puntos_requeridos}</Text>
                     </View>
                     
                 
                     <View className="flex-row justify-between">
-                        <Text className="text-[#4A5568] text-sm">Validez:</Text>
-                        <Text className="font-bold text-[#023046]">
+                        <Text className="text-[#fff] text-sm">Validez:</Text>
+                        <Text className="font-bold text-[#fff]">
                             {formatDate(item.fecha_inicio)} - {formatDate(item.fecha_expiracion)}
                         </Text>
                     </View>
@@ -70,13 +70,13 @@ const ListCoupons = () => {
                 <View className="flex-row justify-between mt-2">
                     {user?.rol_id === 2 && (
                         <TouchableOpacity
-                            className="flex-1 bg-[#EBF8FF] py-2.5 rounded-lg flex-row justify-center items-center"
+                            className="flex-1 bg-[#FB8500] py-2.5 rounded-lg flex-row justify-center items-center"
                             onPress={() => {
                                 router.push('../../(drawer)/payments');
                             }}
                         >
-                            <Ionicons name="checkmark-circle-outline" size={18} color="#0077B6" />
-                            <Text className="text-[#0077B6] font-semibold ml-1.5">Aplicar</Text>
+                            <Ionicons name="checkmark-circle-outline" size={18} color="#fff" />
+                            <Text className="text-[#fff] font-semibold ml-1.5">Aplicar</Text>
                         </TouchableOpacity>
                     )}
 

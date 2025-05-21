@@ -62,7 +62,7 @@ export const useCouponList = () => {
     const end = new Date(endDate);
 
     if (now < start) {
-      return { status: 'pending', color: '#3182CE', text: 'Próximamente' };
+      return { status: 'pending', color: '#fff', text: 'Próximamente' };
     } else if (now > end) {
       return { status: 'expired', color: '#E53E3E', text: 'Expirado' };
     } else {
