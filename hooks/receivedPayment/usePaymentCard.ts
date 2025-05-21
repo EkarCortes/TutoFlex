@@ -13,11 +13,16 @@ const usePaymentCard = () => {
     });
   };
 
+  const isDetailDisabled = (estado: string) => {
+    return estado?.toLowerCase() === "pendiente";
+  };
+
   return {
     students,
     loading,
     refreshPayments,
     navigateToDetails,
+    isDetailDisabled,
   };
 };
 
