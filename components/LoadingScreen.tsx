@@ -3,34 +3,11 @@ import { View, Text, ActivityIndicator, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface LoadingScreenProps {
-  /**
-   * Custom message to display during loading
-   */
   message?: string;
-  
-  /**
-   * Whether to make the loading screen fullscreen or not
-   */
   fullScreen?: boolean;
-  
-  /**
-   * Custom background color
-   */
   backgroundColor?: string;
-  
-  /**
-   * Custom loading indicator color
-   */
   indicatorColor?: string;
-  
-  /**
-   * Custom text color
-   */
-  textColor?: string;
-  
-  /**
-   * Size of the activity indicator
-   */
+  textColor?: string; 
 indicatorSize?: "small" | "large" ;
 }
 

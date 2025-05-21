@@ -18,7 +18,7 @@ const TransferenciaInfo: React.FC<TransferenciaInfoProps> = ({ onTransferNumberC
             className="flex-1 text-base pl-2"
             placeholder="Ingrese el número de transferencia"
             placeholderTextColor="#A9A9A9"
-            onChangeText={onTransferNumberChange} // Captura el número ingresado
+            onChangeText={onTransferNumberChange} 
           />
         </View>
       </View>

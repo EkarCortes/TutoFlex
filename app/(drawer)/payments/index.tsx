@@ -25,14 +25,13 @@ export default function PagosPendientesScreen() {
 
   const [filtro, setFiltro] = useState<"pendiente" | "en revision">("pendiente");
 
-  // Filtrar las tutorías según el filtro seleccionado
+
   const tutorialsFiltrados = tutorials.filter(t =>
     filtro === "en revision"
       ? t.estado?.toLowerCase() === "en revision"
       : t.estado?.toLowerCase() === "pendiente"
   );
 
-  // Función para alternar el filtro
   const toggleFiltro = () => {
     setFiltro(filtro === "pendiente" ? "en revision" : "pendiente");
   };
@@ -147,7 +146,6 @@ export default function PagosPendientesScreen() {
         </View>
       </Modal>
       
-      {/* FAB para filtro */}
       <View
         style={{
           position: "absolute",

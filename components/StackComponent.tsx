@@ -15,13 +15,13 @@ const Layout = () => {
             headerShown: false,
                   ...(Platform.OS === "android" && {
                     contentStyle: { backgroundColor: BG_COLOR },
-                    presentation: "transparentModal", // Cambiado para mejor transición
+                    presentation: "transparentModal", 
                   }),
           
             detachPreviousScreen: false,
             freezeOnBlur: true,
-            cardStyle: { backgroundColor: BG_COLOR }, // Importante para prevenir parpadeos
-            animationTypeForReplace: "pop", // Específico para navegación hacia atrás
+            cardStyle: { backgroundColor: BG_COLOR },
+            animationTypeForReplace: "pop", 
             gestureEnabled: false,
           }} 
         />

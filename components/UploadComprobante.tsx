@@ -25,17 +25,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ comprobante, onPickImage, onC
 
   return (
     <TouchableOpacity
-      onPress={pickImage} // Esto abre el selector de imagen
+      onPress={pickImage} 
       className="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-6 justify-center items-center"
     >
       {comprobante ? (
         <View className="w-full h-48 rounded-2xl overflow-hidden">
           <Image
-            source={{ uri: comprobante }} // Mostramos la imagen seleccionada
+            source={{ uri: comprobante }} 
             className="w-full h-full object-cover"
           />
           <TouchableOpacity
-            onPress={onChangeImage} // Esto permite cambiar la imagen
+            onPress={onChangeImage} 
             className="absolute bottom-4 left-4 bg-black/50 px-4 py-2 rounded-full"
           >
             <Text className="text-white text-sm font-medium">Cambiar comprobante</Text>
