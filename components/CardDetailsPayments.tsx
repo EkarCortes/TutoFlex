@@ -23,7 +23,6 @@ const CardDetailsPayments = () => {
     } = useCardDetailsPayments();
 
 
-
     if (loading) {
         return <LoadingScreen message="Cargando detalles del pago..." />;
     }
@@ -38,183 +37,172 @@ const CardDetailsPayments = () => {
 
     return (
         <>
-            <View className="flex-1 bg-[#023047] items-center">
-                <View className="bg-[#086490] rounded-xl p-4 mb-2 mt-1 w-[90%]">
-                    <Text className="text-xl text-white mb-4" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                        Detalles de Pago de Tutoría:
-                    </Text>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="account-circle" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Estudiante:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{selectedPayment.estudiante_nombre}</Text>
-                        </Text>
+            <ScrollView>
+                <View className="flex-1 bg-[#023047] items-center">
+                    <View className="rounded-2xl shadow-xl my-3 overflow-hidden w-[90%]" style={{ backgroundColor: "#0B4C6C" }}>
+                        <View style={{ height: 4, backgroundColor: '#FB8500' }} />
+                        <View className="bg-[#0B4D6D] rounded-3xl p-6 shadow-xl">
+                            <View className="flex-row items-center justify-between mb-4">
+                                <View className="flex-row items-center">
+                                    <MaterialIcons name="account-circle" size={28} color="#FEB602" />
+                                    <Text className="text-2xl text-white ml-3 font-bold" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
+                                        {selectedPayment.estudiante_nombre}
+                                    </Text>
+                                </View>
+                                <View className="flex-row items-center rounded-full">
+                                    <View className="bg-[#FB8500] px-4 py-1 rounded-full mr-2">
+                                        <Text className="text-white text-xs font-bold">
+                                            {selectedPayment.modalidad.charAt(0).toUpperCase() + selectedPayment.modalidad.slice(1)}
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+                            <View>
+                                <View className="flex-row justify-between items-center mb-4">
+                                    <View className="flex-row items-center">
+                                        <MaterialIcons name="attach-money" size={22} color="#FEB602" />
+                                        <Text className="text-lg text-white font-bold ml-1" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
+                                            {selectedPayment.monto}
+                                        </Text>
+                                    </View>
+                                    <View className="flex-row items-center">
+                                        <MaterialIcons name="calendar-month" size={22} color="#FEB602" />
+                                        <Text className="text-base text-white font-bold ml-1" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
+                                            {selectedPayment.fecha_tutoria.split("T")[0].split("-").reverse().join("/")}
+                                        </Text>
+                                    </View>
+                                </View>
+                                <View className="h-0.5 bg-[#fff] opacity-60 mb-4 rounded-full" />
+                                <View className="mb-3 flex-row items-center">
+                                    <MaterialIcons name="book" size={22} color="#FEB602" />
+                                    <Text className="text-base text-white ml-2 font-semibold" style={{ fontFamily: "SpaceGrotesk-Regular" }}>
+                                        {selectedPayment.nombre_curso}
+                                    </Text>
+                                </View>
+                                <View className="mb-3 flex-row items-center">
+                                    <MaterialIcons name="access-time" size={22} color="#FEB602" />
+                                    <Text className="text-base text-white ml-2 font-semibold" style={{ fontFamily: "SpaceGrotesk-Regular" }}>
+                                        {formatTime(selectedPayment.hora_inicio_tutoria)} - {formatTime(selectedPayment.hora_fin_tutoria)}
+                                    </Text>
+                                </View>
+                                <View className="mb-3 flex-row items-center">
+                                    <MaterialIcons name="email" size={22} color="#FEB602" />
+                                    <Text className="text-base text-white ml-2 font-semibold" style={{ fontFamily: "SpaceGrotesk-Regular" }}>
+                                        {selectedPayment.email}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
                     </View>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="book" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Materia:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{selectedPayment.nombre_curso}</Text>
+                    <View className=" bg-[#0B4C6C] mb-2 rounded-lg p-4 w-[90%] items-center">
+                        <Text className="text-lg text-white mb-2" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
+                            Comprobante de Pago:
                         </Text>
-                    </View>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="location-on" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Modalidad:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{selectedPayment.modalidad}</Text>
-                        </Text>
-                    </View>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="attach-money" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Monto:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{selectedPayment.monto}</Text>
-                        </Text>
-                    </View>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="calendar-month" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Fecha:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>
-                                {(selectedPayment.fecha_tutoria.split("T")[0].split("-").reverse().join("/"))}
-                            </Text>
-                        </Text>
-                    </View>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="access-time" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Hora Inicio:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>
-                                {formatTime(selectedPayment.hora_inicio_tutoria)}
-                            </Text>
-                        </Text>
-                    </View>
-                    <View className="flex-row items-center mb-2">
-                        <MaterialIcons name="access-time" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Hora Fin:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>
-                                {formatTime(selectedPayment.hora_fin_tutoria)}
-                            </Text>
-                        </Text>
-                    </View>
-                    <View className="flex-row items-center">
-                        <MaterialIcons name="email" size={28} color="#FEB602" />
-                        <Text className="text-lg text-white" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                            Correo:{" "}
-                            <Text style={{ fontFamily: "SpaceGrotesk-Regular" }}>{selectedPayment.email}</Text>
-                        </Text>
-                    </View>
-                </View>
-                <View className=" bg-[#086490] 
-                 mb-2 rounded-lg p-4 w-[90%] items-center">
-                    <Text className="text-lg text-white mb-2" style={{ fontFamily: "SpaceGrotesk-Bold" }}>
-                        Comprobante de Pago:
-                    </Text>
-                    <TouchableOpacity
-                        className="bg-[#FB8500] py-2 px-4 rounded-lg"
-                        onPress={() => setShowComprobanteModal(true)}
-                    >
-                        <Text className="text-white font-bold">Ver detalles del comprobante</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            className="bg-[#FB8500] py-2 px-4 rounded-lg"
+                            onPress={() => setShowComprobanteModal(true)}
+                        >
+                            <Text className="text-white font-bold">Ver detalles del comprobante</Text>
+                        </TouchableOpacity>
 
-                    {/* Modal para mostrar la imagen */}
+                        {/* Modal para mostrar la imagen */}
 
+                        <Modal
+                            animationType="fade"
+                            transparent={true}
+                            visible={showComprobanteModal}
+                            onRequestClose={() => setShowComprobanteModal(false)}
+                        >
+                            <View className="flex-1 justify-start items-center bg-black/80" style={{ paddingTop: 60 }}>
+                                <ScrollView>
+                                    <View className="bg-white w-full max-w-[600px] rounded-lg p-4 shadow-lg mx-2">
+                                        <Text className="text-lg font-bold text-center mb-4">Comprobante de Pago</Text>
+                                        <View className="w-full h-[420px] bg-gray-300 rounded-lg overflow-hidden">
+                                            <Image
+                                                source={{ uri: selectedPayment.comprobante }}
+                                                style={{ width: "100%", height: "100%", borderRadius: 12 }}
+                                                resizeMode="cover" />
+                                        </View>
+                                        <TouchableOpacity
+                                            className="bg-[#FB8500] py-2 px-4 rounded-lg mt-4"
+                                            onPress={() => setShowComprobanteModal(false)}
+                                        >
+                                            <Text className="text-white font-bold text-center">Cerrar</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </ScrollView>
+                            </View>
+                        </Modal>
+
+                    </View>
                     <Modal
                         animationType="fade"
                         transparent={true}
-                        visible={showComprobanteModal}
-                        onRequestClose={() => setShowComprobanteModal(false)}
+                        visible={showConfirmModal}
+                        onRequestClose={() => setShowConfirmModal(false)}
                     >
-                        <View className="flex-1 justify-center pt-48 items-center bg-black/80">
-                            <ScrollView>
-                                <View className="bg-white w-full max-w-[600px] rounded-lg p-4 shadow-lg mx-2">
-                                    <Text className="text-lg font-bold text-center mb-4">Comprobante de Pago</Text>
-                                    <View className="w-full h-[420px] bg-gray-300 rounded-lg overflow-hidden">
-                                        <Image
-                                            source={{ uri: selectedPayment.comprobante }}
-                                            style={{ width: "100%", height: "100%", borderRadius: 12 }}
-                                            resizeMode="cover" />
-                                    </View>
+                        <View className="flex-1 justify-center items-center bg-black/80">
+                            <View className="bg-[#023047] w-11/12 rounded-xl p-4 shadow-lg">
+                                <Text className="text-white text-xl font-bold text-center mb-4">
+                                    ¿Realmente deseas confirmar el pago?
+                                </Text>
+                                <View className="flex-row justify-between">
                                     <TouchableOpacity
-                                        className="bg-[#FB8500] py-2 px-4 rounded-lg mt-4"
-                                        onPress={() => setShowComprobanteModal(false)}
+                                        className="bg-[#2D81AD] py-3 px-6 rounded-lg w-5/12"
+                                        onPress={() => setShowConfirmModal(false)}
                                     >
-                                        <Text className="text-white font-bold text-center">Cerrar</Text>
+                                        <Text className="text-white text-center font-medium">Cancelar</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        className="bg-[#FB8500] py-3 px-6 rounded-lg w-5/12"
+                                        onPress={() => {
+                                            setShowConfirmModal(false);
+                                            managePaymentConfirmation();
+                                        }}
+                                        disabled={updating}
+                                    >
+                                        <Text className="text-white text-center font-medium">Confirmar</Text>
                                     </TouchableOpacity>
                                 </View>
-                            </ScrollView>
+                            </View>
                         </View>
                     </Modal>
-
+                    <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={showConfirmModalRejection}
+                        onRequestClose={() => setShowConfirmModalRejection(false)}
+                    >
+                        <View className="flex-1 justify-center items-center bg-black/80">
+                            <View className="bg-[#023047] w-11/12 rounded-xl p-4 shadow-lg">
+                                <Text className="text-white text-xl font-bold text-center mb-4">
+                                    ¿Realmente deseas rechazar el pago?
+                                </Text>
+                                <View className="flex-row justify-between">
+                                    <TouchableOpacity
+                                        className="bg-[#2D81AD] py-3 px-6 rounded-lg w-5/12"
+                                        onPress={() => setShowConfirmModalRejection(false)}
+                                    >
+                                        <Text className="text-white text-center font-medium">Cancelar</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        className="bg-[#FB8500] py-3 px-6 rounded-lg w-5/12"
+                                        onPress={() => {
+                                            setShowConfirmModalRejection(false);
+                                            handlePaymentRejection();
+                                        }}
+                                        disabled={updating}
+                                    >
+                                        <Text className="text-white text-center font-medium">Confirmar</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
+                    <ToastComponent />
                 </View>
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={showConfirmModal}
-                    onRequestClose={() => setShowConfirmModal(false)}
-                >
-                    <View className="flex-1 justify-center items-center bg-black/80">
-                        <View className="bg-[#023047] w-11/12 rounded-xl p-4 shadow-lg">
-                            <Text className="text-white text-xl font-bold text-center mb-4">
-                                ¿Realmente deseas confirmar el pago?
-                            </Text>
-                            <View className="flex-row justify-between">
-                                <TouchableOpacity
-                                    className="bg-[#2D81AD] py-3 px-6 rounded-lg w-5/12"
-                                    onPress={() => setShowConfirmModal(false)}
-                                >
-                                    <Text className="text-white text-center font-medium">Cancelar</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    className="bg-[#FB8500] py-3 px-6 rounded-lg w-5/12"
-                                    onPress={() => {
-                                        setShowConfirmModal(false);
-                                        managePaymentConfirmation();
-                                    }}
-                                    disabled={updating}
-                                >
-                                    <Text className="text-white text-center font-medium">Confirmar</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={showConfirmModalRejection}
-                    onRequestClose={() => setShowConfirmModalRejection(false)}
-                >
-                    <View className="flex-1 justify-center items-center bg-black/80">
-                        <View className="bg-[#023047] w-11/12 rounded-xl p-4 shadow-lg">
-                            <Text className="text-white text-xl font-bold text-center mb-4">
-                                ¿Realmente deseas rechazar el pago?
-                            </Text>
-                            <View className="flex-row justify-between">
-                                <TouchableOpacity
-                                    className="bg-[#2D81AD] py-3 px-6 rounded-lg w-5/12"
-                                    onPress={() => setShowConfirmModalRejection(false)}
-                                >
-                                    <Text className="text-white text-center font-medium">Cancelar</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    className="bg-[#FB8500] py-3 px-6 rounded-lg w-5/12"
-                                    onPress={() => {
-                                        setShowConfirmModalRejection(false);
-                                        handlePaymentRejection();
-                                    }}
-                                    disabled={updating}
-                                >
-                                    <Text className="text-white text-center font-medium">Confirmar</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
-                <ToastComponent />
-            </View>
-            <View className="bg-[#023046] mt-24 px-5 py-4 border-t border-[#FFF]/30">
+            </ScrollView>
+            <View className="bg-[#023046]  px-5 py-4 border-t border-[#FFF]/30">
                 <View className="flex-row justify-between">
                     <TouchableOpacity
                         onPress={() => setShowConfirmModalRejection(true)}
