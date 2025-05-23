@@ -8,6 +8,7 @@ export const registerStudent = async (userData: {
   universidad_id: number;
   pais_id: number;
   carrera_id: number;
+  telefono: string; 
 }) => {
   try {
     console.log('Datos enviados al API (Estudiante):', userData);
@@ -29,17 +30,11 @@ export const registerProfessor = async (userData: {
   universidad_id: number;
   carrera_id: number;
   pais_id: number;
-  whatsapp?: string; // Hacemos que sea opcional
+  telefono: string;
 }) => {
   try {
-    // Aseguramos que el campo whatsapp esté vacío si no se proporciona
-    const dataToSend = {
-      ...userData,
-      whatsapp: userData.whatsapp || "", // Si no se proporciona, se envía como cadena vacía
-    };
-
-    console.log('Datos enviados al API (Profesor):', dataToSend);
-    const response = await axiosInstance.post('/users/registerProfesor', dataToSend);
+    console.log('Datos enviados al API (Profesor):', userData);
+    const response = await axiosInstance.post('/users/registerProfesor', userData);
     return response.data;
   } catch (error: any) {
     if (error.response) {
