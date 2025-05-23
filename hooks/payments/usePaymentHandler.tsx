@@ -69,7 +69,7 @@ const usePaymentHandler = ({
 
     const formData = new FormData();
     formData.append("pago_id", tutorialData.pago_id.toString());
-    formData.append("monto", tutorialData.monto_total.toString());
+    formData.append("monto", discountedAmount.toString());
     formData.append("tipo_pago", paymentMethod);
 
     if (selectedCoupon?.id) {
@@ -107,6 +107,9 @@ const usePaymentHandler = ({
     handlePayment(formData, () => {
       setShowConfirmModal(false);
       showToast("success", "Pago confirmado con éxito.");
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
       setTimeout(() => {
       router.dismissTo("/(drawer)/payments");
       }

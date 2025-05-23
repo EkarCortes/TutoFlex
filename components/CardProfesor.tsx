@@ -4,6 +4,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 interface DatosProps {
   usuario_id?: number;
+  profesor_id?: number;
   foto_profesor?: string;
   curso?: string;
   profesor?: string;
@@ -30,7 +31,7 @@ export default function CardProfesor({ datos }: { datos: DatosProps }) {
   const handleViewProfile = () => {
     router.push({
       pathname: '/(drawer)/filter/tutorProfile',
-      params: datos.usuario_id ? { tutorId: datos.usuario_id } : {}
+      params: datos.profesor_id ? { tutorId: datos.profesor_id } : {}
     });
   };
 

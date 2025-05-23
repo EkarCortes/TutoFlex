@@ -38,6 +38,11 @@ export interface TutorProfile {
   calificacion_promedio: string;
 }
 
+export interface Review {
+  estrellas: number;
+  comentario: string;
+  nombre_estudiante: string;
+}
 
 // Cache to store tutor data and avoid unnecessary API calls
 let tutorsCache: TutorProfile[] | null = null;
@@ -68,9 +73,9 @@ export const getTopTutors = async (limit: number = 5): Promise<TutorProfile[]> =
   }
 };
 
-export const getTutorById = async (tutorId: number): Promise<TutorProfile | null> => {
+export const getTutorById = async (profesorId: number): Promise<TutorProfile | null> => {
   try {
-    console.log(`Searching for tutor with ID: ${tutorId}`);
+    console.log(`Searching for tutor with profesor_id: ${profesorId}`);
     
     // Use cached data if available
     if (!tutorsCache) {
@@ -78,20 +83,34 @@ export const getTutorById = async (tutorId: number): Promise<TutorProfile | null
       tutorsCache = response.data.data;
     }
     
-    // Find tutor by ID, check both profesor_id and usuario_id
+    // Find tutor ONLY by profesor_id
     const tutor = tutorsCache.find(
-      t => t.profesor_id === tutorId || t.usuario_id === tutorId
+      t => t.profesor_id === profesorId
     );
     
     if (!tutor) {
-      console.log(`Tutor with ID ${tutorId} not found. Available IDs:`, 
-        tutorsCache.map(t => `profesor_id: ${t.profesor_id}, usuario_id: ${t.usuario_id}`).join(', '));
+      console.log(`Tutor with profesor_id ${profesorId} not found. Available profesor_ids:`, 
+        tutorsCache.map(t => t.profesor_id).join(', '));
     }
     
     return tutor || null;
   } catch (error) {
-    console.error("Error fetching tutor by ID:", error);
+    console.error("Error fetching tutor by profesor_id:", error);
     return null;
   }
 };
 
+export const getReviewsByProfesorId = async (profesorId: number): Promise<Review[]> => {
+  try {
+    const response = await axiosInstance.get<{ data: { data: { reseñas: Review[] }[] } }>(
+      `/reviews/getReviewByProfesorId/${profesorId}`
+    );
+    // Acceso correcto a las reseñas
+    const reseñas = response.data.data?.data?.[0]?.reseñas || [];
+    console.log(`Fetched ${reseñas.length} reviews for profesor ID ${profesorId}`);
+    return reseñas;
+  } catch (error) {
+    console.error("Error fetching reviews by profesor ID:", error);
+    return [];
+  }
+};

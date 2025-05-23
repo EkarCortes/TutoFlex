@@ -25,7 +25,6 @@ const TopTutorsComponent = () => {
   }
 
   const formatName = (nombre, apellido) => {
-    // If last name is longer than 8 characters, use just the initial
     const formattedLastName = apellido.length > 6
       ? `${apellido.charAt(0)}.`
       : apellido;
@@ -34,10 +33,9 @@ const TopTutorsComponent = () => {
   };
 
   const handleTutorPress = (tutor) => {
-    console.log(`Navigating to tutor profile with ID: ${tutor.profesor_id}`);
     router.push({
       pathname: '/(drawer)/filter/tutorProfile',
-      params: { tutorId: tutor.usuario_id.toString() }
+      params: { tutorId: tutor.profesor_id.toString() }
     });
   };
 

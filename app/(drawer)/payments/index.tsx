@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderScreens from "../../../components/HeaderScreens";
 import LoadingScreen from "../../../components/LoadingScreen";
 import PagoItem from "../../../components/PagoItem";
-import ToastComponent from "../../../components/Toast";
+import ToastComponent, { showToast } from "../../../components/Toast";
 import usePendingPaymentsScreen from "../../../hooks/payments/usePendingPaymentsScreen";
 
 export default function PagosPendientesScreen() {
@@ -104,6 +104,18 @@ export default function PagosPendientesScreen() {
                     })
                   }
                   onCancel={() => {
+                    // --- NUEVA LÓGICA ---
+                    const fechaTutoria = item.fecha_tutoria.split("T")[0];
+                    const horaInicio = item.hora_inicio_tutoria;
+                    const fechaHoraTutoria = new Date(`${fechaTutoria}T${horaInicio}`);
+                    const ahora = new Date();
+                    const diffMs = fechaHoraTutoria.getTime() - ahora.getTime();
+                    const diffHoras = diffMs / (1000 * 60 * 60);
+
+                    if (diffHoras < 4) {
+                        showToast("error", "No puedes cancelar con menos de 4 horas.");
+                      return;
+                    }
                     setSelectedTutoriaId(item.tutoria_id);
                     setShowCancelModal(true);
                   }}
