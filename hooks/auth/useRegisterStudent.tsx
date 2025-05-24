@@ -12,9 +12,11 @@ const useRegisterStudent = (email: string, password: string) => {
   const [country, setCountry] = useState<number | null>(null);
   const [university, setUniversity] = useState<number | null>(null);
   const [career, setCareer] = useState<number | null>(null);
+  const [telefono, setTelefono] = useState(''); // <-- Nuevo estado para teléfono
 
   const handleRegister = async () => {
-    if (!name || !lastname || !country || !university || !career) {
+    
+    if (!name || !lastname || !country || !university || !career || !telefono) {
       showToast('error', 'Por favor completa todos los campos', 'Aviso', 'bottom');
       return;
     }
@@ -27,17 +29,17 @@ const useRegisterStudent = (email: string, password: string) => {
       universidad_id: university!,
       pais_id: country!,
       carrera_id: career!,
+      telefono, 
     };
 
     try {
       await registerStudent(userData);
       showToast('success', 'Registro completado con éxito', 'Éxito', 'bottom');
       setTimeout(() => {
-      router.push('/loginScreen');
-      }
-      , 2000);
+        router.push('/loginScreen');
+      }, 2000);
     } catch (error: any) {
-     console.log('Error', error.message || 'Error en el registro');
+      console.log('Error', error.message || 'Error en el registro');
     }
   };
 
@@ -52,6 +54,8 @@ const useRegisterStudent = (email: string, password: string) => {
     setUniversity,
     career,
     setCareer,
+    telefono, // <-- Exportar teléfono y su setter
+    setTelefono,
     campus: "",
     setCampus: () => { },
     facility: "",

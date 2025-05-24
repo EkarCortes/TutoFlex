@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator } from "react-native";
-import InputField from "./InputField";
+import React from "react";
+import { ActivityIndicator, View } from "react-native";
+import { useStudentFormData } from "../hooks/auth/useStudentFormData";
 import ButtonBottom from "./ButtonBottom";
 import CustomDropdown from "./CustomDropdown";
-import {
-  getCountriesFromUniversities,
-  getUniversitiesForDropdown,
-  getCareersForDropdown,
-} from "../services/catalogsService";
+import InputField from "./InputField";
 
 interface StudentFormProps {
   name: string;
@@ -20,6 +16,8 @@ interface StudentFormProps {
   setUniversity: (value: number) => void;
   career: number;
   setCareer: (value: number) => void;
+  telefono: string;
+  setTelefono: (value: string) => void;
   handleRegister: () => void;
 }
 
@@ -34,81 +32,16 @@ const StudentForm: React.FC<StudentFormProps> = ({
   setUniversity,
   career,
   setCareer,
+  telefono,
+  setTelefono,
   handleRegister,
 }) => {
-  const [loading, setLoading] = useState(true);
-  const [countryOptions, setCountryOptions] = useState<
-    { label: string; value: number }[]
-  >([]);
-  const [universityOptions, setUniversityOptions] = useState<
-    { label: string; value: number }[]
-  >([]);
-  const [careerOptions, setCareerOptions] = useState<
-    { label: string; value: number }[]
-  >([]);
-
-  // Cargar países al iniciar
-  useEffect(() => {
-    const loadCountries = async () => {
-      try {
-        const countries = await getCountriesFromUniversities();
-        setCountryOptions(countries);
-      } catch (error) {
-        console.error("Error cargando países:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCountries();
-  }, []);
-
-  // Cargar universidades cuando cambia el país
-  useEffect(() => {
-    const loadUniversities = async () => {
-      if (country > 0) {
-        try {
-          const universities = await getUniversitiesForDropdown(country);
-          setUniversityOptions(universities);
-
-          if (
-            university &&
-            !universities.some((uni) => uni.value === university)
-          ) {
-            setUniversity(0);
-          }
-        } catch (error) {
-          console.error("Error cargando universidades:", error);
-        }
-      } else {
-        setUniversityOptions([]);
-      }
-    };
-
-    loadUniversities();
-  }, [country]);
-
-  // Cargar carreras cuando cambia la universidad
-  useEffect(() => {
-    const loadCareers = async () => {
-      if (university > 0) {
-        try {
-          const careers = await getCareersForDropdown(university);
-          setCareerOptions(careers);
-
-          if (career && !careers.some((c) => c.value === career)) {
-            setCareer(0);
-          }
-        } catch (error) {
-          console.error("Error cargando carreras:", error);
-        }
-      } else {
-        setCareerOptions([]);
-      }
-    };
-
-    loadCareers();
-  }, [university]);
+  const {
+    loading,
+    countryOptions,
+    universityOptions,
+    careerOptions,
+  } = useStudentFormData(country, setCountry, university, setUniversity, career, setCareer);
 
   if (loading) {
     return (
@@ -132,11 +65,18 @@ const StudentForm: React.FC<StudentFormProps> = ({
         value={lastname}
         onChangeText={setLastName}
       />
+      <InputField
+        icon="phone"
+        placeholder="Teléfono"
+        value={telefono}
+        onChangeText={setTelefono}
+        keyboardType="phone-pad"
+      />
 
       <CustomDropdown
         data={countryOptions}
         value={country}
-        onChange={(value) => setCountry(value)}
+        onChange={setCountry}
         placeholder="Seleccione su país"
         iconName="public"
       />
