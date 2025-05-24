@@ -14,6 +14,11 @@ const useRegisterProfessor = (email: string, password: string) => {
   const [career, setCareer] = useState<number | null>(null);
   const [telefono, setTelefono] = useState(''); // <-- Nuevo estado
 
+  const setTelefonoValidated = (value: string) => {
+    const numeric = value.replace(/\D/g, '').slice(0, 10);
+    setTelefono(numeric);
+  };
+
   const handleRegister = async () => {
     if (!name || !lastname || !country || !university || !career || !telefono) {
       console.log('estoso son los datos' + name + lastname + country + university + career + telefono);
@@ -57,7 +62,7 @@ const useRegisterProfessor = (email: string, password: string) => {
     career,
     setCareer,
     telefono,
-    setTelefono,
+    setTelefono: setTelefonoValidated,
     handleRegister,
   };
 };

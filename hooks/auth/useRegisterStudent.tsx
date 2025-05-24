@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { registerStudent } from '../../services/RegisterService';
+import { useState } from 'react';
 import { showToast } from '../../components/Toast';
+import { registerStudent } from '../../services/RegisterService';
 
 // Hook para manejar el registro de un estudiante 
 
@@ -12,7 +12,12 @@ const useRegisterStudent = (email: string, password: string) => {
   const [country, setCountry] = useState<number | null>(null);
   const [university, setUniversity] = useState<number | null>(null);
   const [career, setCareer] = useState<number | null>(null);
-  const [telefono, setTelefono] = useState(''); // <-- Nuevo estado para teléfono
+  const [telefono, setTelefono] = useState(''); 
+
+  const setTelefonoValidated = (value: string) => {
+    const numeric = value.replace(/\D/g, '').slice(0, 10);
+    setTelefono(numeric);
+  };
 
   const handleRegister = async () => {
     
@@ -55,7 +60,7 @@ const useRegisterStudent = (email: string, password: string) => {
     career,
     setCareer,
     telefono, // <-- Exportar teléfono y su setter
-    setTelefono,
+    setTelefono: setTelefonoValidated,
     campus: "",
     setCampus: () => { },
     facility: "",

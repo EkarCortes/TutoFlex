@@ -51,7 +51,7 @@ const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({
                 key={horario}
                 className={`flex-row items-center p-3 px-4 rounded-lg mr-3 border-none 
                   ${selectedHorarios.includes(index) ? 'bg-[#FA8401]' : 
-                    isOccupied ?  'bg-[#0B4C6D]' : 'bg-[#093c56]' }`}
+                    isOccupied ?  'bg-[#205b7a]' : 'bg-[#093c56]' }`}
                 onPress={() => !isOccupied && toggleHorario(index)}
                 disabled={isOccupied}
               >
