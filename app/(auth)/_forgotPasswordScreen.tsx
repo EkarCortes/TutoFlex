@@ -29,8 +29,8 @@ const ForgotPasswordScreen = () => {
                             className="flex-row items-center"
                             onPress={navigateBack}
                         >
-                            <MaterialIcons name="arrow-back" size={24} color="#FFB703" />
-                            <Text className="text-[#FFB703] ml-2 text-base">Volver</Text>
+                            <MaterialIcons name="arrow-back-ios-new" size={24} color="#fff" />
+
                         </TouchableOpacity>
                     </View>
 

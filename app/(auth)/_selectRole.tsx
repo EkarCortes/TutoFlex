@@ -63,8 +63,7 @@ const SelectRoleScreen = () => {
             className="flex-row items-center w-auto"
             onPress={() => router.back()}
           >
-            <MaterialIcons name="arrow-back" size={26} color="#FFB703" />
-            <Text className="text-[#FFB703] ml-2 text-base font-medium">Volver</Text>
+            <MaterialIcons name="arrow-back-ios-new" size={24} color="#fff" />
           </TouchableOpacity>
         </View>
 
