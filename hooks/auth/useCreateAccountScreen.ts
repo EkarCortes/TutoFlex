@@ -61,7 +61,7 @@ export const useCreateAccountScreen = () => {
 
   const getButtonClass = (isActive: boolean) =>
     `flex-1 items-center justify-center rounded-lg px-4 py-3 ${
-      isActive ? "bg-[#FB8500]" : "bg-[#053d55]"
+      isActive ? "bg-[#FB8500]" : "bg-[#023047]"
     }`;
 
   return {

@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { registerProfessor } from '../../services/RegisterService';
+import { useState } from 'react';
 import { showToast } from '../../components/Toast';
+import { registerProfessor } from '../../services/RegisterService';
 
 // Hook para manejar el registro de un estudiante 
 
@@ -12,9 +12,11 @@ const useRegisterProfessor = (email: string, password: string) => {
   const [country, setCountry] = useState<number | null>(null);
   const [university, setUniversity] = useState<number | null>(null);
   const [career, setCareer] = useState<number | null>(null);
+  const [telefono, setTelefono] = useState(''); // <-- Nuevo estado
 
   const handleRegister = async () => {
-    if (!name || !lastname || !country || !university || !career) {
+    if (!name || !lastname || !country || !university || !career || !telefono) {
+      console.log('estoso son los datos' + name + lastname + country + university + career + telefono);
       showToast('error', 'Por favor completa todos los campos', 'Aviso', 'bottom');
 
       return;
@@ -28,7 +30,7 @@ const useRegisterProfessor = (email: string, password: string) => {
       universidad_id: university!,
       carrera_id: career!,
       pais_id: country!,
-      whatsapp: '', 
+      telefono, // <-- Nuevo campo
     };
 
     try {
@@ -54,6 +56,8 @@ const useRegisterProfessor = (email: string, password: string) => {
     setUniversity,
     career,
     setCareer,
+    telefono,
+    setTelefono,
     handleRegister,
   };
 };

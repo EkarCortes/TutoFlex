@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator } from "react-native";
-import InputField from "./InputField";
-import CustomDropdown from "./CustomDropdown";
-import ButtonBottom from "./ButtonBottom";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, View } from "react-native";
 import {
-  getCountriesFromUniversities,
-  getUniversitiesForDropdown,
   getCareersForDropdown,
-  getHeadquartersForDropdown,
+  getCountriesFromUniversities,
   getEnclosuresForDropdown,
+  getHeadquartersForDropdown,
+  getUniversitiesForDropdown,
 } from "../services/catalogsService";
+import ButtonBottom from "./ButtonBottom";
+import CustomDropdown from "./CustomDropdown";
+import InputField from "./InputField";
 
 interface ProfessorFormProps {
   name: string;
@@ -26,6 +26,8 @@ interface ProfessorFormProps {
   setHeadquarter: (value: number) => void;
   enclosure: number;
   setEnclosure: (value: number) => void;
+  telefono: string;
+  setTelefono: (value: string) => void;
   handleRegister: () => void;
 }
 
@@ -42,6 +44,8 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
   setCareer,
   enclosure,
   setEnclosure,
+  telefono,
+  setTelefono,
   handleRegister,
 }) => {
   const [loading, setLoading] = useState(true);
@@ -184,6 +188,14 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
         onChangeText={setLastName}
       />
 
+      <InputField
+        icon="phone"
+        placeholder="Teléfono"
+        value={telefono}
+        onChangeText={setTelefono}
+        keyboardType="phone-pad"
+      />
+
       <CustomDropdown
         data={countryOptions}
         value={country}
@@ -206,7 +218,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
         data={headquarterOptions}
         value={headquarter}
         onChange={(value) => {
-          setHeadquarter(value); // Establece directamente el valor seleccionado
+          setHeadquarter(value);
         }}
         placeholder={
           university
@@ -239,6 +251,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
         }
         iconName="school"
       />
+
 
       <ButtonBottom title="Registrar" onPress={handleRegister} />
     </View>
