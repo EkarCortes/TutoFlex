@@ -54,22 +54,22 @@ const UserProfile = () => {
       <View className={`mb-${isLast ? '0' : '4'} z-10`} key={dropdownKey}>
         <Text className="text-white text-lg font-semibold mb-2">{label}</Text>
         <TouchableOpacity
-          className="flex-row items-center bg-white/10 rounded-md px-3 py-3 border border-[#086491]"
+          className="flex-row items-center bg-white rounded-md px-3 py-3 border border-[#086491]"
           onPress={() => toggleDropdown(dropdownKey)}
         >
-          <MaterialIcons name={iconName as keyof typeof MaterialIcons.glyphMap} size={20} color="#FB8500" />
-          <Text className="text-white ml-2 flex-1">
+          <MaterialIcons name={iconName as keyof typeof MaterialIcons.glyphMap} size={20} color="#023047" />
+          <Text className="text-[#023047] ml-2 flex-1">
             {selectedItem?.label || `Seleccionar ${label.toLowerCase()}`}
           </Text>
           <MaterialIcons
             name={activeDropdown === dropdownKey ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
             size={24}
-            color="#FB8500"
+            color="#023047"
           />
         </TouchableOpacity>
 
         {activeDropdown === dropdownKey && (
-          <View className="mt-1 bg-[#0B4D6C] rounded-md border border-[#086491] max-h-40">
+          <View className="mt-1 bg-[#FFF] rounded-md max-h-40">
             <ScrollView nestedScrollEnabled={true}>
               {items.map((item) => (
                 <TouchableOpacity
@@ -77,7 +77,7 @@ const UserProfile = () => {
                   className="py-3 px-4 border-b border-[#086491]"
                   onPress={() => onSelect(item)}
                 >
-                  <Text className="text-white">{item.label}</Text>
+                  <Text className="text-[#023047]">{item.label}</Text>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -98,26 +98,26 @@ const UserProfile = () => {
 
   return (
     <View className="flex-1 bg-[#023047]">
-      <ScrollView className="flex-1">
-    <View className="bg-[#086491] rounded-b-3xl items-center shadow-md">
-          <Image
-            source={{ uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png" }}
-            className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-          />
-          <Text className="text-2xl font-bold text-white mt-2">
-            {getProfileValue(profile?.nombre)} {getProfileValue(profile?.apellido)}
-          </Text>
-          <Text className="text-white text-lg opacity-80">{getProfileValue(profile?.email)}</Text>
-          <View className="flex-row mt-3 mb-6">
-            <TouchableOpacity
-              className="bg-[#FB8500] py-1.5 px-3 rounded-full"
-              onPress={() => setModalVisible(true)}
-            >
-              <Text className="text-white text-sm font-bold">Editar Perfil</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
 
+      <View className="bg-[#086491] rounded-b-3xl items-center shadow-md">
+        <Image
+          source={{ uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png" }}
+          className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+        />
+        <Text className="text-2xl font-bold text-white mt-2">
+          {getProfileValue(profile?.nombre)} {getProfileValue(profile?.apellido)}
+        </Text>
+        <Text className="text-white text-lg opacity-80">{getProfileValue(profile?.email)}</Text>
+        <View className="flex-row mt-3 mb-6">
+          <TouchableOpacity
+            className="bg-[#FB8500] py-1.5 px-3 rounded-full"
+            onPress={() => setModalVisible(true)}
+          >
+            <Text className="text-white text-sm font-bold">Editar Perfil</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <ScrollView className="flex-1">
         <View className="mt-8 w-full px-5">
           <View className="flex-row justify-around rounded-xl bg-white p-3 shadow-md">
             <View className="items-center">
@@ -144,18 +144,16 @@ const UserProfile = () => {
         <View className="mt-8 flex-row px-5">
           <TouchableOpacity
             onPress={() => setActiveSection('Informacion Personal')}
-            className={`flex-1 items-center rounded-xl p-3 ${
-              activeSection === 'Informacion Personal' ? 'bg-[#FB8500]' : 'bg-[#0B4D6C]'
-            }`}
+            className={`flex-1 items-center rounded-xl p-3 ${activeSection === 'Informacion Personal' ? 'bg-[#FB8500]' : 'bg-[#0B4D6C]'
+              }`}
           >
             <Text className="font-[Space-Grotesk] font-bold text-white">Personal</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => setActiveSection('Informacion Academica')}
-            className={`ml-2 flex-1 items-center rounded-xl p-3 ${
-              activeSection === 'Informacion Academica' ? 'bg-[#FB8500]' : 'bg-[#0B4D6C]'
-            }`}
+            className={`ml-2 flex-1 items-center rounded-xl p-3 ${activeSection === 'Informacion Academica' ? 'bg-[#FB8500]' : 'bg-[#0B4D6C]'
+              }`}
           >
             <Text className="font-[Space-Grotesk] font-bold text-white">Académica</Text>
           </TouchableOpacity>
@@ -243,6 +241,8 @@ const UserProfile = () => {
 
       <Modal
         animationType="fade"
+        statusBarTranslucent={true}
+        hardwareAccelerated={true}
         transparent
         visible={modalVisible}
         onRequestClose={handleCancel}
@@ -255,7 +255,7 @@ const UserProfile = () => {
 
                 <ScrollView className="max-h-[70vh]">
                   <View className="bg-[#0B4D6C] rounded-lg p-4 mb-4">
-  
+
                     <Text className="text-white text-lg font-semibold mb-2">Editar Nombre</Text>
                     <InputField
                       icon="account-circle"
@@ -271,6 +271,16 @@ const UserProfile = () => {
                       value={editData.apellido}
                       onChangeText={(text: string) => handleFieldChange('apellido', text)}
                     />
+                    <Text className="text-white text-lg font-semibold mb-2 mt-3">Editar Teléfono</Text>
+
+                    
+                    <InputField
+                      icon="phone"
+                      placeholder="Teléfono"
+                      value={""}
+                      onChangeText={(text: string) => handleFieldChange('telefono', text)}
+                      keyboardType="phone-pad"
+                    />
 
                     <Text className="text-white text-lg font-semibold mb-2 mt-3">Editar Carnet</Text>
                     <InputField
@@ -280,7 +290,7 @@ const UserProfile = () => {
                       onChangeText={(text: string) => handleFieldChange('carnet', text)}
                     />
 
-  
+
                     {renderDropdown(
                       'País',
                       selectedCountry,
@@ -335,9 +345,8 @@ const UserProfile = () => {
                     <Text className="text-white text-center font-medium">Cancelar</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className={`py-3 px-6 rounded-lg w-5/12 ${
-                      isLoading ? 'bg-[#FB8500]/70' : 'bg-[#FB8500]'
-                    }`}
+                    className={`py-3 px-6 rounded-lg w-5/12 ${isLoading ? 'bg-[#FB8500]/70' : 'bg-[#FB8500]'
+                      }`}
                     onPress={handleSave}
                     disabled={isLoading}
                   >
