@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, SafeAreaView, ScrollView, Modal, Text, TouchableOpacity } from 'react-native';
-import '../../global.css';
-import Header from '../../components/Header';
+import { SafeAreaView, ScrollView, View } from 'react-native';
 import ImageCarousel from '../../components/CarouselComponent';
 import RecommendedCourses from '../../components/CoursesComponent';
-import TitleText from '../../components/TitleText';
+import Header from '../../components/Header';
 import StatusBarComponent from '../../components/StatusBarComponent';
-import renderQuickAccessButtons from '../../hooks/home/useHomeQuickAccessButtons';
+import TitleText from '../../components/TitleText';
 import TopTutorsComponent from '../../components/TopTutorsComponent';
-import { MaterialIcons } from "@expo/vector-icons";
+import '../../global.css';
+import renderQuickAccessButtons from '../../hooks/home/useHomeQuickAccessButtons';
 import useHomeScreen from '../../hooks/home/useHomeScreen';
 import useNotificaciones from '../../hooks/useNotifications';
+import { getProfileProfesor } from '../../services/GetUserProfileService';
 
 export default function HomeScreen() {
   const {
@@ -25,17 +25,34 @@ export default function HomeScreen() {
 
   const { expoPushToken, notifications } = useNotificaciones();
 
+  // Estado para el promedio del profesor
+  const [profesorProfile, setProfesorProfile] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    if (user?.rol_id === 3) {
+      getProfileProfesor().then(setProfesorProfile);
+    }
+  }, [user?.rol_id]);
+
   React.useEffect(() => {
     console.log('expoPushToken', expoPushToken);
     console.log('notifications', notifications);
   }, [expoPushToken, notifications]);
+
+  // Determinar qué mostrar en userPoints
+  const userPoints =
+    user?.rol_id === 2
+      ? profile?.total_puntos ?? ''
+      : user?.rol_id === 3
+      ? profesorProfile?.calificacion_promedio ?? ''
+      : '';
 
   return (
     <SafeAreaView className={`flex-1 bg-[#023046]`}>
       <StatusBarComponent />
       <Header
         userName={userName}
-        userPoints={profile?.total_puntos ?? '' }
+        userPoints={userPoints}
         searchQuery={searchQuery}
         rolId={user?.rol_id}
         setSearchQuery={setSearchQuery}
@@ -53,7 +70,6 @@ export default function HomeScreen() {
         <TitleText textTitle={'Cursos Recomendados'}></TitleText>
         <RecommendedCourses />
         <TitleText textTitle={'Tutores Recomendados'}></TitleText>
-      
         <TopTutorsComponent />
       </ScrollView>
     </SafeAreaView>
