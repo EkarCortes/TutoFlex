@@ -102,7 +102,7 @@ const UserProfile = () => {
       <View className="bg-[#086491] rounded-b-3xl items-center shadow-md">
         <Image
           source={{ uri: "https://cdn-icons-png.flaticon.com/512/149/149071.png" }}
-          className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+          className="w-24 h-24 rounded-full border-2 border-[#FB8500] shadow-lg"
         />
         <Text className="text-2xl font-bold text-white mt-2">
           {getProfileValue(profile?.nombre)} {getProfileValue(profile?.apellido)}
@@ -110,7 +110,7 @@ const UserProfile = () => {
         <Text className="text-white text-lg opacity-80">{getProfileValue(profile?.email)}</Text>
         <View className="flex-row mt-3 mb-6">
           <TouchableOpacity
-            className="bg-[#FB8500] py-1.5 px-3 rounded-full"
+            className="bg-[#FB8500] py-1.5 px-3 rounded-xl"
             onPress={() => setModalVisible(true)}
           >
             <Text className="text-white text-sm font-bold">Editar Perfil</Text>
@@ -162,28 +162,28 @@ const UserProfile = () => {
         {activeSection === 'Informacion Personal' && (
           <View className="px-6 mt-6">
             <Text className="text-2xl font-bold text-white mb-6 text-center">Información Personal</Text>
-            <View className="bg-[#0d6a97] p-6 rounded-2xl shadow-lg">
-              <View className="mb-4">
-                <Text className="text-white text-lg font-semibold">Nombre Completo:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+            <View className="mb-8 rounded-2xl shadow-lg p-6" style={{ backgroundColor: "#0B4C6C" }}>
+              <View className="mb-4 flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="person" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.nombre)} {getProfileValue(profile?.apellido)}
                 </Text>
               </View>
-              <View className="mb-4">
-                <Text className="text-white text-lg font-semibold">Carnet:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+              <View className="mb-4 flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="credit-card" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.carnet)}
                 </Text>
               </View>
-              <View className="mb-4">
-                <Text className="text-white text-lg font-semibold">Teléfono:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+              <View className="mb-4 flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="call" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.telefono_estudiante)}
                 </Text>
               </View>
-              <View>
-                <Text className="text-white text-lg font-semibold">Correo Electrónico:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+              <View className="flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="email" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.email)}
                 </Text>
               </View>
@@ -194,28 +194,28 @@ const UserProfile = () => {
         {activeSection === 'Informacion Academica' && (
           <View className="px-6 mt-6">
             <Text className="text-2xl font-bold text-white mb-6 text-center">Información Académica</Text>
-            <View className="bg-[#0d6a97] p-6 rounded-2xl shadow-lg">
-              <View className="mb-4">
-                <Text className="text-white text-lg font-semibold">Universidad:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+            <View className="mb-8 rounded-2xl shadow-lg p-6" style={{ backgroundColor: "#0B4C6C" }}>
+              <View className="mb-4 flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="school" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.universidad)}
                 </Text>
               </View>
-              <View className="mb-4">
-                <Text className="text-white text-lg font-semibold">Sede:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+              <View className="mb-4 flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="business" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.sede)}
                 </Text>
               </View>
-              <View className="mb-4">
-                <Text className="text-white text-lg font-semibold">Recinto:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+              <View className="mb-4 flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="meeting-room" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.recinto)}
                 </Text>
               </View>
-              <View>
-                <Text className="text-white text-lg font-semibold">Carrera:</Text>
-                <Text className="bg-white/10 text-lg py-2 px-2 rounded-md text-white opacity-90 mt-2">
+              <View className="flex-row items-center border-b-2" style={{ borderColor: "#2379A1" }}>
+                <MaterialIcons name="menu-book" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                <Text className="flex-1 text-base py-2 text-white">
                   {getProfileValue(profile?.carrera)}
                 </Text>
               </View>
@@ -225,15 +225,16 @@ const UserProfile = () => {
 
         <View className="px-6 mt-6 mb-8">
           <Text className="text-2xl font-bold text-white mb-6 text-center">Cursos Pendientes</Text>
-          <View className="bg-[#0d6a97] p-6 rounded-2xl shadow-lg">
+          <View className="mb-8 rounded-2xl shadow-lg p-6" style={{ backgroundColor: "#0B4C6C" }}>
             {profile?.mis_cursos && profile.mis_cursos.length > 0 ? (
               profile.mis_cursos.map((curso: string, index: number) => (
                 <View
                   key={index}
-                  className="flex-row items-center bg-white/10 p-4 rounded-lg mb-3"
+                  className="flex-row items-center border-b-2 mb-3"
+                  style={{ borderColor: "#2379A1" }}
                 >
-                  <MaterialIcons name="book" size={24} color="#FEB702" className="mr-3" />
-                  <Text className="text-white text-lg font-medium">{curso}</Text>
+                  <MaterialIcons name="book" size={22} color="#8FCBE6" style={{ marginRight: 8 }} />
+                  <Text className="flex-1 text-base py-2 text-white">{curso}</Text>
                 </View>
               ))
             ) : (
