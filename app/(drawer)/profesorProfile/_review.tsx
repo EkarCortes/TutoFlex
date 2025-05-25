@@ -76,6 +76,7 @@ const ReviewScreen = () => {
                 )}
               </>
             ) : (
+              
               <Text className="text-white text-center mt-10">No hay reseñas disponibles.</Text>
             )}
           </ScrollView>
@@ -101,7 +102,7 @@ const ReviewScreen = () => {
                   bottom: 84,
                   right: 24,
                   backgroundColor: '#0B4C6C',
-                  borderRadius: 16,
+                  borderRadius: 8,
                   paddingVertical: 8,
                   minWidth: 140,
                   shadowColor: "#000",
@@ -138,7 +139,7 @@ const ReviewScreen = () => {
                         paddingVertical: 8,
                         paddingHorizontal: 18,
                         backgroundColor: starFilter === star ? '#FB8500' : 'transparent',
-                        borderRadius: 12,
+                        borderRadius: 5,
                       }}
                     >
                       <View style={{ flexDirection: 'row', marginRight: 6 }}>
@@ -181,7 +182,7 @@ const ReviewScreen = () => {
               }}
               activeOpacity={0.85}
             >
-              <MaterialIcons name="filter-list" size={26} color="#fff" />
+              <MaterialIcons name="filter-alt" size={26} color="#fff" />
             </TouchableOpacity>
           </View>
         </>

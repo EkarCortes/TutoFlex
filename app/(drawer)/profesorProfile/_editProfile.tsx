@@ -6,6 +6,7 @@ import CustomDropdown from "../../../components/CustomDropdown";
 import UploadImage from "../../../components/EditImageProfesor";
 import ToastComponent from '../../../components/Toast';
 import useEditProfile from "../../../hooks/profesorProfile/useEditProfile";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const EditProfile = () => {
   const {
@@ -32,9 +33,14 @@ const EditProfile = () => {
       >
         <HeaderScreens title={"Editar Perfil"} />
         {loadingProfile || !profile ? (
-          <View className="flex-1 justify-center items-center">
-            <Text className="text-white text-lg text-center">Cargando perfil...</Text>
-          </View>
+          <LoadingScreen
+            message=""
+            fullScreen={true}
+            backgroundColor="#023047"
+            indicatorColor="#FB8500"
+            textColor="white"
+            indicatorSize="large"
+          />
         ) : (
           <>
             <ScrollView
@@ -99,7 +105,7 @@ const EditProfile = () => {
                     placeholder="Teléfono"
                     keyboardType="phone-pad"
                     value={formData.telefono_profesor}
-                    onChangeText={(t) => handleInputChange("telefono_profesor", t)}
+                    onChangeText={(t) => handleInputChange("telefono_profesor", t.replace(/[^0-9]/g, ""))}
                     placeholderTextColor="#fff"
                     maxLength={15}
                     selectionColor="#FB8500"
