@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { showToast } from "../../components/Toast";
 import useGetUserProfile from "../points/useGetUserProfile";
-import useUpdateStudent from "./useUpdateStudent";
 import { useUniversityCatalogs } from "../useCatalogsService";
+import useUpdateStudent from "./useUpdateStudent";
 
 // Este hook se utiliza en la pantalla de edición de perfil del estudiante
 // y permite gestionar la información del perfil, incluyendo la foto, descripción,
@@ -18,6 +18,7 @@ export default function useUserProfileLogic() {
     nombre: '',
     apellido: '',
     carnet: '',
+    telefono_estudiante: '',
     universidad: '',
     carrera: '',
     sede: '',
@@ -50,6 +51,7 @@ export default function useUserProfileLogic() {
         nombre: profile.nombre || '',
         apellido: profile.apellido || '',
         carnet: profile.carnet || '',
+        telefono_estudiante: profile.telefono_estudiante || '',
         universidad: profile.universidad || '',
         carrera: profile.carrera || '',
         sede: profile.sede || '',
@@ -198,6 +200,7 @@ export default function useUserProfileLogic() {
         nombre: profile.nombre || '',
         apellido: profile.apellido || '',
         carnet: profile.carnet || '',
+        telefono_estudiante: profile.telefono_estudiante || '',
         universidad: profile.universidad || '',
         carrera: profile.carrera || '',
         sede: profile.sede || '',
@@ -219,6 +222,7 @@ export default function useUserProfileLogic() {
         nombre: editData.nombre.trim() || profile.nombre,
         apellido: editData.apellido.trim() || profile.apellido,
         carnet: editData.carnet.trim() || profile.carnet,
+        telefono: editData.telefono_estudiante.trim(), // Cambiado aquí
         universidad: editData.universidad || profile.universidad,
         carrera: editData.carrera || profile.carrera,
         sede: editData.sede || profile.sede,

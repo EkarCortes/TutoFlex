@@ -22,6 +22,7 @@ const PaymentInfoExampleScreen = () => {
             curso={tutorial.curso}
             tema={tutorial.tema}
             modalidad={tutorial.modalidad}
+            telefono_estudiante={tutorial.telefono_estudiante}
           />
         </ScrollView>
         <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">

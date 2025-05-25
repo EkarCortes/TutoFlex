@@ -76,7 +76,7 @@ export default function TutoriasPendientesScreen() {
                   monto={item.monto}
                   fecha={item.fecha_tutoria}
                   estado={item.modalidad}
-                  telefono={item.telefono_estudiante}
+                  telefono_estudiante={item.telefono_estudiante}
                   onPress={() => navigation.navigate("_tutorialDetails", { tutorial: item })}
                   onCancel={() => handleOpenCancelModal(item)}
                 />

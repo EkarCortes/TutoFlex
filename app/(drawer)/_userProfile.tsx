@@ -175,6 +175,12 @@ const UserProfile = () => {
                   {getProfileValue(profile?.carnet)}
                 </Text>
               </View>
+              <View className="mb-4">
+                <Text className="text-white text-lg font-semibold">Teléfono:</Text>
+                <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
+                  {getProfileValue(profile?.telefono_estudiante)}
+                </Text>
+              </View>
               <View>
                 <Text className="text-white text-lg font-semibold">Correo Electrónico:</Text>
                 <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
@@ -277,8 +283,8 @@ const UserProfile = () => {
                     <InputField
                       icon="phone"
                       placeholder="Teléfono"
-                      value={""}
-                      onChangeText={(text: string) => handleFieldChange('telefono', text)}
+                      value={editData.telefono_estudiante}
+                      onChangeText={(text: string) => handleFieldChange('telefono_estudiante', text)}
                       keyboardType="phone-pad"
                     />
 

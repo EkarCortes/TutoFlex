@@ -17,8 +17,8 @@ const TutorialItem = ({
   curso,
   monto,
   fecha,
-  telefono_estudiante,
   estado,
+  telefono_estudiante,
   onPress,
   onCancel,
 }: {

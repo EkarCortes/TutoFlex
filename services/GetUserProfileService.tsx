@@ -6,6 +6,7 @@ export interface Profile {
     nombre: string;
     apellido: string;
     email: string;
+    telefono_estudiante: string;
     estudiante_id: number;
     carnet: string;
     total_puntos: string;
