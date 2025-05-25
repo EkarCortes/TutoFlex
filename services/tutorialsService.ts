@@ -9,6 +9,7 @@ export interface Tutorial {
   curso: string;
   tema: string;
   modalidad: string;
+  telefono_estudiante: string;
 }
 
 export const fetchPendingTutorials = async (): Promise<Tutorial[]> => {

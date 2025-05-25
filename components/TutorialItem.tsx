@@ -17,6 +17,7 @@ const TutorialItem = ({
   curso,
   monto,
   fecha,
+  telefono_estudiante,
   estado,
   onPress,
   onCancel,
@@ -26,6 +27,7 @@ const TutorialItem = ({
   monto: string;
   fecha: string;
   estado: string;
+  telefono_estudiante: string;
   onPress: () => void;
   onCancel?: () => void;
 }) => {
@@ -64,6 +66,10 @@ const TutorialItem = ({
           <View className="flex-row justify-between mb-1">
             <Text className="text-[#fff] text-sm">Fecha:</Text>
             <Text className="font-bold text-white">{fecha}</Text>
+          </View>
+          <View className="flex-row justify-between mb-1">
+            <Text className="text-[#fff] text-sm">Teléfono:</Text>
+            <Text className="font-bold text-white">{telefono_estudiante}</Text>
           </View>
          
         </View>

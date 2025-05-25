@@ -10,6 +10,7 @@ type TeacherPaymentInfoProps = {
   curso: string;
   tema: string;
   modalidad: string;
+  telefono_estudiante?: string;
 };
 
 const TeacherPaymentInfo: React.FC<TeacherPaymentInfoProps> = ({
@@ -20,6 +21,7 @@ const TeacherPaymentInfo: React.FC<TeacherPaymentInfoProps> = ({
   curso,
   tema,
   modalidad,
+  telefono_estudiante,
 }) => {
   const capitalizeFirstLetter = (text: string) =>
     text.charAt(0).toUpperCase() + text.slice(1);
@@ -56,15 +58,16 @@ const TeacherPaymentInfo: React.FC<TeacherPaymentInfoProps> = ({
           </View>
         </View>
 
-      
-            
-      
+
+
+
 
         {/* Línea divisoria */}
         <View className="h-0.5 bg-[#fff] opacity-30 mb-6 rounded-full" />
-      
 
-        {/* Fecha y Hora */}
+
+      
+        {/* Telefono */}
         <Text className="text-xs text-[#8ECAE6] mb-1">Fecha y Hora</Text>
         <View className="flex-row items-center mb-4">
           <MaterialIcons name="calendar-today" size={22} color="#FEB602" />
@@ -72,13 +75,23 @@ const TeacherPaymentInfo: React.FC<TeacherPaymentInfoProps> = ({
           <MaterialIcons name="access-time" size={22} color="#FEB602" style={{ marginLeft: 16 }} />
           <Text className="text-base text-white ml-2 font-semibold">{hora}</Text>
         </View>
-        
+
+        <View className="h-0.5 bg-[#fff] opacity-20 mb-4 rounded-full" />
+
+  {/* Fecha y Hora */}
+  <Text className="text-xs text-[#8ECAE6] mb-1">Teléfono</Text>
+        <View className="flex-row items-center mb-4">
+          <MaterialIcons name="phone" size={22} color="#FEB602" />
+          <Text className="text-base text-white ml-2 font-semibold">{telefono_estudiante}</Text>
+          
+        </View>
+
         <View className="h-0.5 bg-[#fff] opacity-20 mb-4 rounded-full" />
 
         {/* Monto */}
         <Text className="text-xs text-[#8ECAE6] mb-1">Monto por hora</Text>
         <View className="flex-row items-center mb-4">
-        <MaterialIcons name="account-balance-wallet" size={22} color="#FEB602" />
+          <MaterialIcons name="account-balance-wallet" size={22} color="#FEB602" />
           <Text className="text-base text-white ml-2 font-semibold">₡{monto}</Text>
         </View>
         <View className="h-0.5 bg-[#fff] opacity-20 mb-4 rounded-full" />
@@ -100,6 +113,6 @@ const TeacherPaymentInfo: React.FC<TeacherPaymentInfoProps> = ({
       </View>
     </View>
   );
-}; 
+};
 
 export default TeacherPaymentInfo;
