@@ -1,125 +1,191 @@
-import { View, Text, SafeAreaView, FlatList, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
-
-const reviews = [
-  {
-    id: '1',
-    name: 'Juan Pérez',
-    rating: 5,
-    description: 'Excelente profesor, muy paciente y claro al explicar.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '2',
-    name: 'María López',
-    rating: 4,
-    description: 'Muy buen profesor, aunque podría mejorar en puntualidad.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '3',
-    name: 'Carlos García',
-    rating: 5,
-    description: 'Sus clases son muy dinámicas y entretenidas.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '4',
-    name: 'Ana Torres',
-    rating: 3,
-    description: 'Explica bien, pero a veces se extiende demasiado.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '5',
-    name: 'Luis Fernández',
-    rating: 4,
-    description: 'Muy profesional y siempre dispuesto a ayudar.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '6',
-    name: 'Sofía Martínez',
-    rating: 5,
-    description: 'El mejor profesor que he tenido, lo recomiendo mucho.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '7',
-    name: 'Diego Ramírez',
-    rating: 2,
-    description: 'No cumplió con mis expectativas, esperaba más.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '8',
-    name: 'Valeria Gómez',
-    rating: 4,
-    description: 'Muy buen profesor, aunque podría mejorar en organización.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '9',
-    name: 'Jorge Herrera',
-    rating: 5,
-    description: 'Sus explicaciones son claras y fáciles de entender.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-  {
-    id: '10',
-    name: 'Camila Rojas',
-    rating: 3,
-    description: 'Es un buen profesor, pero a veces se distrae mucho.',
-    photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-  },
-];
-
-const StarRating = ({ rating }: any) => {
-  return (
-    <View className="flex-row mt-1">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <FontAwesome
-          key={index}
-          name={index < rating ? 'star' : 'star-o'}
-          size={16}
-          color={index < rating ? '#FFD700' : '#C0C0C0'}
-          style={{ marginRight: 4 }}
-        />
-      ))}
-    </View>
-  );
-};
-
+import LoadingScreen from '@/components/LoadingScreen';
+import useGetProfesorProfile from '@/hooks/profesorProfile/useGetProfesorProfile';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import React, { useMemo, useState } from 'react';
+import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { useProfesorReviews } from '../../../hooks/profesorProfile/useProfesorReviews';
+import HeaderScreens from '@/components/HeaderScreens';
 const ReviewScreen = () => {
-  const renderReview = ({ item }: any) => (
-    <View className="bg-white p-4 mb-4 mx-4 rounded-lg shadow-lg flex-row items-center">
-      <Image
-        source={{ uri: item.photo }}
-        className="w-14 h-14 rounded-full mr-4 border border-gray-300"
-      />
-      <View className="flex-1">
-        <Text className="text-lg font-bold text-gray-900">{item.name}</Text>
-        <StarRating rating={item.rating} />
-        <Text className="text-gray-600 mt-1 text-sm">{item.description}</Text>
-      </View>
-    </View>
+  const { profile } = useGetProfesorProfile();
+  const profesorId = Number(profile?.profesor_id);
+  const shouldFetch = !!profesorId && !isNaN(profesorId);
+  const { reviews, loading, error } = useProfesorReviews(shouldFetch ? profesorId : 0);
+
+  const [starFilter, setStarFilter] = useState<number | null>(null);
+  const [visibleReviews, setVisibleReviews] = useState(7);
+  const [showFilter, setShowFilter] = useState(false);
+
+  const filteredReviews = useMemo(
+    () => (starFilter ? reviews.filter(r => r.estrellas === starFilter) : reviews),
+    [reviews, starFilter]
   );
+  const displayedReviews = filteredReviews.slice(0, visibleReviews);
 
   return (
     <SafeAreaView className="flex-1 bg-[#023047]">
-      <View className="bg-[#086491] rounded-b-3xl items-center shadow-md p-5">
-        <Text className="text-3xl font-bold text-white">Mis Reseñas</Text>
-      </View>
+      <HeaderScreens title={"Gestionar Cursos"} />
 
+      {loading ? (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <LoadingScreen
+            message=""
+            fullScreen={false}
+            backgroundColor="transparent"
+            indicatorColor="#FB8500"
+            textColor="white"
+            indicatorSize="large"
+          />
+        </View>
+      ) : (
+        <>
+          <ScrollView className="flex-1" contentContainerStyle={{ padding: 16 }}>
+            {error ? (
+              <Text className="text-red-500 text-center mt-10">{error}</Text>
+            ) : displayedReviews.length > 0 ? (
+              <>
+                {displayedReviews.map((review, idx) => (
+                  <View key={idx} className="mb-4 rounded-xl bg-white p-4 shadow-md">
+                    <View className="flex-row items-center mb-2">
+                      <Text className="font-bold text-gray-800 mr-2">
+                        {review.nombre_estudiante || 'Anónimo'}
+                      </Text>
+                      <View className="flex-row">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <FontAwesome
+                            key={star}
+                            name={star <= review.estrellas ? 'star' : 'star-o'}
+                            size={14}
+                            color="#FFD700"
+                            style={{ marginRight: 2 }}
+                          />
+                        ))}
+                      </View>
+                    </View>
+                    <Text className="text-gray-600">{review.comentario}</Text>
+                  </View>
+                ))}
+                {filteredReviews.length > visibleReviews && (
+                  <TouchableOpacity
+                    onPress={() => setVisibleReviews(visibleReviews + 3)}
+                    className="bg-[#0B4D6C] py-3 rounded-xl items-center mb-4"
+                  >
+                    <Text className="font-[Space-Grotesk] text-white font-bold">
+                      Ver más reseñas ({filteredReviews.length - visibleReviews} restantes)
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </>
+            ) : (
+              <Text className="text-white text-center mt-10">No hay reseñas disponibles.</Text>
+            )}
+          </ScrollView>
 
-      <FlatList className="flex-1 mt-4"
-        contentContainerStyle={{ paddingBottom: 10 }}
-        data={reviews}
-        keyExtractor={(item) => item.id}
-        renderItem={renderReview}
-        showsVerticalScrollIndicator={false}
-      />
+          {/* Botón flotante minimalista */}
+          {showFilter && (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => setShowFilter(false)}
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: 10,
+                backgroundColor: 'rgba(0,0,0,0.01)',
+              }}
+            >
+              <View style={{ flex: 1 }}>
+                <View style={{
+                  position: 'absolute',
+                  bottom: 84,
+                  right: 24,
+                  backgroundColor: '#0B4C6C',
+                  borderRadius: 16,
+                  paddingVertical: 8,
+                  minWidth: 140,
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.15,
+                  shadowRadius: 6,
+                  elevation: 6,
+                }}>
+                  <TouchableOpacity
+                    onPress={() => { setStarFilter(null); setShowFilter(false); }}
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      paddingVertical: 8,
+                      paddingHorizontal: 18,
+                      backgroundColor: starFilter === null ? '#FB8500' : 'transparent',
+                      borderRadius: 5,
+                    }}
+                  >
+                    <MaterialIcons name="star" size={18} color="#FFD700" />
+                    <Text style={{
+                      marginLeft: 8,
+                      fontWeight: 'bold',
+                      color: starFilter === null ? '#fff' : '#fff'
+                    }}>Todas</Text>
+                  </TouchableOpacity>
+                  {[5, 4, 3, 2, 1].map((star) => (
+                    <TouchableOpacity
+                      key={star}
+                      onPress={() => { setStarFilter(star); setShowFilter(false); }}
+                      style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingVertical: 8,
+                        paddingHorizontal: 18,
+                        backgroundColor: starFilter === star ? '#FB8500' : 'transparent',
+                        borderRadius: 12,
+                      }}
+                    >
+                      <View style={{ flexDirection: 'row', marginRight: 6 }}>
+                        {[1, 2, 3, 4, 5].map((s) => (
+                          <FontAwesome
+                            key={s}
+                            name={s <= star ? 'star' : 'star-o'}
+                            size={14}
+                            color="#FFD700"
+                          />
+                        ))}
+                      </View>
+                      <Text style={{
+                        fontWeight: 'bold',
+                        color: starFilter === star ? '#fff' : '#fff'
+                      }}>{star}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+          <View style={{ position: 'absolute', bottom: 28, right: 24, alignItems: 'flex-end', zIndex: 11 }}>
+            <TouchableOpacity
+              onPress={() => setShowFilter(!showFilter)}
+              style={{
+                backgroundColor: "#096491",
+                borderWidth: 1,
+                borderColor: "#ccc",
+                borderRadius: 32,
+                width: 56,
+                height: 56,
+                justifyContent: "center",
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 4,
+                elevation: 5,
+              }}
+              activeOpacity={0.85}
+            >
+              <MaterialIcons name="filter-list" size={26} color="#fff" />
+            </TouchableOpacity>
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 };

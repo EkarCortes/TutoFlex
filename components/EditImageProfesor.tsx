@@ -40,7 +40,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         <View className="flex-1 justify-center items-center bg-[#023047]">
             <TouchableOpacity
                 onPress={pickImage}
-                className={`w-48 h-48 rounded-full justify-center items-center overflow-hidden border-2 ${comprobante ? "bg-transparent" : "bg-gray-200"
+                className={`w-48 h-48 rounded-full justify-center items-center overflow-hidden border-2  border-[#FB8500] ${comprobante ? "bg-transparent" : "bg-gray-200"
                     }`}
             >
                 <Image
