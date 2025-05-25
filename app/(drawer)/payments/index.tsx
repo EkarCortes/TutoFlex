@@ -83,7 +83,7 @@ export default function PagosPendientesScreen() {
               renderItem={({ item }) => (
                 <PagoItem
                   nombre={item.Nombre_Profesor}
-                  telefono={item.whatsapp}
+                  telefono={item.telefono_profesor}
                   materia={item.nombre}
                   monto={`₡ ${item.monto}`}
                   fecha={`${item.fecha_tutoria.split("T")[0].split("-").reverse().join("/")}`}
@@ -100,7 +100,7 @@ export default function PagosPendientesScreen() {
                       hora_inicio: item.hora_inicio_tutoria,
                       hora_fin: item.hora_fin_tutoria,
                       monto_total: item.monto,
-                      telefono: item.whatsapp,
+                      telefono: item.telefono_profesor,
                     })
                   }
                   onCancel={() => {

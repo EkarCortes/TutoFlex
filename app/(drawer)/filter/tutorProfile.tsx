@@ -263,7 +263,7 @@ const TutorProfileScreen = () => {
         </ScrollView>
 
         {/* Fixed WhatsApp button at the bottom */}
-        {tutor.whatsapp && (
+        {tutor.telefono_profesor && (
           <View className="absolute bottom-0 left-0 right-0 px-5 pb-3 pt-2 bg-[#023046] border-t border-[#0B4D6C]">
             <TouchableOpacity
               className="bg-[#25D366] py-3 rounded-xl flex-row items-center justify-center"

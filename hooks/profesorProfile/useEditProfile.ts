@@ -30,7 +30,7 @@ export default function useEditProfile() {
   } = useUpdateProfesorProfile();
 
   const [formData, setFormData] = useState<{
-    whatsapp: string;
+    telefono_profesor: string;
     foto: Asset | null;
     descripcion: string;
     nombre: string;
@@ -40,7 +40,7 @@ export default function useEditProfile() {
     recinto_id: string;
     carrera_id: string;
   }>({
-    whatsapp: "",
+    telefono_profesor: "",
     foto: null,
     descripcion: "",
     nombre: "",
@@ -59,7 +59,7 @@ export default function useEditProfile() {
   useEffect(() => {
     if (profile) {
       setFormData({
-        whatsapp: profile.whatsapp,
+        telefono_profesor: profile.telefono_profesor,
         foto: null,
         descripcion: profile.descripcion,
         nombre: profile.nombre,
@@ -117,9 +117,8 @@ export default function useEditProfile() {
         "Seleccione sede, recinto y carrera al cambiar universidad."
       );
     }
-
     const fd = new FormData();
-    fd.append("whatsapp", formData.whatsapp);
+    fd.append("telefono", formData.telefono_profesor);
     fd.append("descripcion", formData.descripcion);
     fd.append("nombre", formData.nombre);
     fd.append("apellido", formData.apellido);

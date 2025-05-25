@@ -5,7 +5,7 @@ export interface Profile {
   profesor_id: number;
   nombre: string;
   apellido: string;
-  whatsapp: string;
+  telefono_profesor: string;
   foto: string;
   descripcion: string;
   email: string;

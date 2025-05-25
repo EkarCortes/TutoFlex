@@ -75,12 +75,12 @@ const EditProfile = () => {
         </View>
 
         <View className="mb-4">
-          <Text className="text-white mb-2">WhatsApp</Text>
+          <Text className="text-white mb-2">Teléfono</Text>
           <TextInput
             className="bg-white rounded-lg p-3 shadow-md"
-            placeholder="WhatsApp"
-            value={formData.whatsapp}
-            onChangeText={(t) => handleInputChange("whatsapp", t)}
+            placeholder="Teléfono"
+            value={formData.telefono_profesor}
+            onChangeText={(t) => handleInputChange("telefono_profesor", t)}
           />
         </View>
 

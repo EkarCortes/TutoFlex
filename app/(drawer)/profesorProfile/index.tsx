@@ -96,7 +96,7 @@ const _profesorProfile = () => {
                             <View>
                                 <Text className="text-white text-lg font-semibold">Número Telefónico:</Text>
                                 <Text className="bg-white/10 text-lg py-2 px-4 rounded-md text-white opacity-90 mt-2">
-                                    {getProfileValue(profile?.whatsapp)}
+                                    {getProfileValue(profile?.telefono_profesor)}
                                 </Text>
                             </View>
                         </View>

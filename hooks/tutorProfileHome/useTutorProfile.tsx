@@ -25,7 +25,7 @@ const useTutorProfile = (tutorId: number | null) => {
       const data = await getTutorById(tutorId);
       
       if (data) {
-        console.log(`Successfully loaded tutor: ${data.nombre} ${data.apellido}`);
+        console.log(`Successfully loaded tutor: ${data.nombre} ${data.apellido} (${data.telefono_profesor})`);
         setTutor(data);
       } else {
         console.error(`No tutor found with ID: ${tutorId}`);

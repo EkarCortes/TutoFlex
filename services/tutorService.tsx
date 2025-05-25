@@ -21,7 +21,7 @@ export interface TutorProfile {
   nombre: string;
   apellido: string;
   email: string;
-  whatsapp: string;
+  telefono_profesor: string;
   foto: string;
   descripcion: string;
   universidad_id: number;
@@ -92,6 +92,7 @@ export const getTutorById = async (profesorId: number): Promise<TutorProfile | n
       console.log(`Tutor with profesor_id ${profesorId} not found. Available profesor_ids:`, 
         tutorsCache.map(t => t.profesor_id).join(', '));
     }
+    console.log("Estos son los datos del tutor:", tutor);
     
     return tutor || null;
   } catch (error) {

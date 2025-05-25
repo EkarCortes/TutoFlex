@@ -1,7 +1,7 @@
 import axiosInstance from "../api/axiosConfig";
 
 export interface Profile {
-  whatsapp:       string;
+  telefono:       string;
   foto:           string;  
   descripcion:    string;
   nombre:         string;

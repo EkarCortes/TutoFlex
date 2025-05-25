@@ -30,7 +30,7 @@ export interface ProfesorProfile {
   nombre: string;
   apellido: string;
   email: string;
-  whatsapp: string;
+  telefono_profesor: string;
   foto: string;
   descripcion: string;
   universidad: string;
@@ -66,7 +66,7 @@ export const getProfileProfesor = async (): Promise<ProfesorProfile | null> => {
       nombre: data.nombre,
       apellido: data.apellido,
       email: data.email,
-      whatsapp: data.whatsapp,
+      telefono_profesor: data.telefono_profesor,
       foto: data.foto,
       descripcion: data.descripcion,
       universidad: data.universidad,

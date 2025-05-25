@@ -17,7 +17,7 @@ export interface PendingPayment {
   hora_fin_tutoria: string;
   monto: string;
   estado: string;
-  whatsapp: string;
+  telefono_profesor: string;
 }
 
 // Este hook se encarga de manejar la lógica de los pagos pendientes del Estudiante.
