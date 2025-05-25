@@ -123,7 +123,7 @@ const TutorProfileScreen = () => {
                           {course.title}
                         </Text>
 
-                        {/* New grouped schedule display */}
+                 
                         <View className="mt-2 border-l-4 border-[#FA8501] bg-blue-50 pl-2 py-1 rounded-r">
                           <Text className="font-[Space-Grotesk] font-medium text-[#023047] mb-1">Horarios:</Text>
 
@@ -156,7 +156,7 @@ const TutorProfileScreen = () => {
                       </View>
                     ))}
 
-                    {/* Botón "Ver más" si hay más cursos para mostrar */}
+             
                     {courses.length > visibleCourses && (
                       <TouchableOpacity
                         onPress={loadMoreCourses}
@@ -242,7 +242,7 @@ const TutorProfileScreen = () => {
                         <Text className="text-gray-600">{review.comentario}</Text>
                       </View>
                     ))}
-                    {/* Botón "Ver más reseñas" si hay más para mostrar */}
+             
                     {filteredReviews.length > visibleReviews && (
                       <TouchableOpacity
                         onPress={() => setVisibleReviews(visibleReviews + 3)}
@@ -262,7 +262,7 @@ const TutorProfileScreen = () => {
           </View>
         </ScrollView>
 
-        {/* Fixed WhatsApp button at the bottom */}
+     
         {tutor.telefono_profesor && (
           <View className="absolute bottom-0 left-0 right-0 px-5 pb-3 pt-2 bg-[#023046] border-t border-[#0B4D6C]">
             <TouchableOpacity
