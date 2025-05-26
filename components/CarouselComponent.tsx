@@ -14,7 +14,7 @@ const ImageCarousel = () => {
   ];
 
   return (
-    <View className="flex-1 items-center mt-5">
+    <View className="flex-1 items-center mt-5 mb-8">
       <Carousel
         width={300}
         height={250}

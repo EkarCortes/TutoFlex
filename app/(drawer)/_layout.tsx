@@ -224,18 +224,7 @@ export default function Layout() {
         ),
       },
     },
-    {
-      name: "tutorProfile",
-      roles: [1, 2, 3],
-      showInDrawer: false,
-      options: {
-        title: "",
-        drawerItemStyle: { height: 0 },
-        drawerIcon: ({ color, size }) => (
-          <MaterialIcons name="monetization-on" color={color} size={size} />
-        ),
-      },
-    },
+ 
    
   ];
 

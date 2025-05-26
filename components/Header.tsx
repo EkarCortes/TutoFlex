@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userPoints, searchQuery, setS
         paddingTop: 5,
         borderBottomLeftRadius: 24,
         borderBottomRightRadius: 24,
-        backgroundColor: "#086491", // Color de fondo fijo
+        backgroundColor: "#086491", 
       }}
     >
       <StatusBarComponent />

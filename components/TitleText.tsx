@@ -13,7 +13,7 @@ const Title = ({ textTitle }: titleProps) => {
   useFontsLoader();
   return (
     <View>
-    <Text className="text-white ml-5 mt-8 text-2xl" style={{ fontFamily: 'SpaceGrotesk-Bold' }}>{ textTitle }</Text>
+    <Text className="text-white ml-5 text-2xl" style={{ fontFamily: 'SpaceGrotesk-Bold' }}>{ textTitle }</Text>
     </View>
   );
 };

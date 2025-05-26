@@ -6,18 +6,37 @@ interface QuickAccessButtonProps {
   iconName: string;
   label1: string;
   label2: string;
-  onPress?: () => void; // Prop para manejar la navegación
+  onPress?: () => void;
 }
 
-const QuickAccessButton: React.FC<QuickAccessButtonProps> = ({ iconName, label1, label2, onPress }) => {
+const QuickAccessButton: React.FC<QuickAccessButtonProps> = ({
+  iconName,
+  label1,
+  label2,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity 
-      className={`bg-[#086491] rounded-xl p-5 ml-5 items-center w-32 h-32 justify-center`}
-      onPress={onPress} 
+    <TouchableOpacity
+      className="bg-[#0B4D6D] rounded-2xl shadow-lg p-4 mx-2 my-2 items-center w-32 h-34 justify-between  active:scale-95"
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${label1} ${label2}`}
     >
-      <MaterialIcons name={iconName as any} size={30} color="#FEB702" className={`mb-2`} />
-      <Text className={` text-white text-center text-lg `} style={{ fontFamily: "SpaceGrotesk-Bold" }}>{label1}</Text>
-      <Text className={` text-white text-center text-base `} style={{ fontFamily: 'SpaceGrotesk-Bold' }}>{label2}</Text>
+      <View className="rounded-full p-3 ">
+        <MaterialIcons name={iconName as any} size={32} color="#FEB702" />
+      </View>
+      <Text
+        className="text-white text-center text-base font-bold"
+        style={{ fontFamily: 'SpaceGrotesk-Bold' }}
+      >
+        {label1}
+      </Text>
+      <Text
+        className="text-white text-center text-xs font-semibold"
+        style={{ fontFamily: 'SpaceGrotesk-bold' }}
+      >
+        {label2}
+      </Text>
     </TouchableOpacity>
   );
 };

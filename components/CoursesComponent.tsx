@@ -16,7 +16,7 @@ const RecommendedCourses = () => {
       {courses.map((course) => (
         <TouchableOpacity
         key={course.id}
-        className="bg-[#086491] w-[136px] h-[120px] rounded-lg ml-5 items-center justify-center overflow-hidden"
+        className="bg-[#0B4D6D] w-[136px] h-[120px] rounded-lg ml-5 items-center justify-center overflow-hidden"
         >
         <View className="w-full h-20">
           <Image source={course.image} className='w-full h-full' resizeMode="cover" />

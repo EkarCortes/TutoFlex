@@ -1,0 +1,1 @@
+import { useMemo } from 'react';import { Animated } from 'react-native';export default function useAnimatedOpacity(  scrollY: Animated.Value,  inputRange: [number, number]) {  return useMemo(    () =>      scrollY.interpolate({        inputRange,        outputRange: [1, 0],        extrapolate: 'clamp',      }),    [scrollY, inputRange]  );}
