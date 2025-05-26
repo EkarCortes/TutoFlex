@@ -41,7 +41,7 @@ export default function RootLayout() {
       <View style={{ flex: 1, backgroundColor: "#023047" }}>
         <StatusBar 
           barStyle="light-content" 
-          backgroundColor="#023047"
+          backgroundColor="#086491"
           translucent={false} 
         />
         <AuthWrapper>
