@@ -27,7 +27,7 @@ const DeductionsCard = () => {
 
   if (!deductions || deductions.length === 0) {
     return (
-      <View className="bg-[#2379A1] p-6 rounded-xl mb-3">
+      <View className="bg-[#086491] p-6 rounded-xl mb-3">
         <Text className="text-white text-base text-center">
           No tienes deducciones pendientes.
         </Text>

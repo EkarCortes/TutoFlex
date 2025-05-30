@@ -54,7 +54,7 @@ const TutorialItem = ({
           </View>
         </View>
 
-        <View className="bg-[#2379A1] p-3 rounded-xl mb-3">
+        <View className="bg-[#086491] p-3 rounded-xl mb-3">
           <View className="flex-row justify-between mb-1">
             <Text className="text-[#fff] text-sm">Materia:</Text>
             <Text className="font-bold text-white">{curso}</Text>

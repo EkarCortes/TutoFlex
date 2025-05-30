@@ -52,10 +52,12 @@ const AddCourseScreen = () => {
       <HeaderScreens title="Cursos Disponibles" />
 
       <View className="flex-1 w-full px-5 py-3 md:px-8 md:py-5">
-        <View className="w-full bg-[#0d6a97] rounded-2xl p-5 shadow-lg mb-4">
-          <View className="flex-row items-center justify-between mb-4">
-            <Text className="text-white text-xl font-bold">Buscar Cursos</Text>
+        <View className="w-full bg-[#0B4D6C] rounded-2xl p-5 shadow-lg mb-4">
+          <View className="flex-row items-center mb-4">
+            <Ionicons name="search" size={24} color="#FB8500" />
+            <Text className="text-white text-xl font-bold ml-2">Buscar Cursos</Text>
           </View>
+
 
           <View className="mb-1">
             <InputField
@@ -92,7 +94,7 @@ const AddCourseScreen = () => {
           </View>
         </View>
 
-        <View className="flex-1 bg-[#0d6a97] rounded-2xl px-5 pt-4 pb-3 shadow-lg">
+        <View className="flex-1 bg-[#0B4D6C] rounded-2xl px-5 pt-4 pb-3 shadow-lg">
           <View className="flex-row justify-between items-center mb-4">
             <View className="flex-row items-center">
               <Ionicons name="book" size={20} color="#FB8500" />
@@ -100,8 +102,8 @@ const AddCourseScreen = () => {
                 {selectedCategory === null
                   ? "Todos los cursos"
                   : selectedCategory === -1
-                  ? "Mis cursos"
-                  : classifications.find(
+                    ? "Mis cursos"
+                    : classifications.find(
                       (classification) =>
                         classification.clasificacion_id === selectedCategory
                     )?.nombre || "Categoría desconocida"}
@@ -175,6 +177,8 @@ const AddCourseScreen = () => {
       <Modal
         animationType="fade"
         transparent={true}
+        hardwareAccelerated={true}
+        statusBarTranslucent={true}
         visible={modalVisible}
         onRequestClose={() => handleCloseModal()}
       >

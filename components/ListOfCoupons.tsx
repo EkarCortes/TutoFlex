@@ -48,7 +48,7 @@ const ListCoupons = () => {
                     </Text>
                 </View>
                 
-                <View className="bg-[#2379A1] p-3 rounded-lg mb-3">
+                <View className="bg-[#086491] p-3 rounded-lg mb-3">
                     <View className="flex-row justify-between mb-1">
                         <Text className="text-[#fff] text-sm">Código:</Text>
                         <Text className="font-bold text-[#fff]">{item.codigo}</Text>
@@ -86,15 +86,15 @@ const ListCoupons = () => {
                             onPress={() => handleDelete(item.id, item.cupon)}
                             disabled={isDeleting === item.id}
                             className={`flex-1 py-2.5 rounded-lg flex-row justify-center items-center ${
-                                isDeleting === item.id ? 'bg-[#A0AEC0]' : 'bg-[#FEE2E2]'
+                                isDeleting === item.id ? 'bg-[#A0AEC0]' : 'bg-[#E53E3E]'
                             }`}
                         >
                             {isDeleting === item.id ? (
                                 <Text className="text-[#4A5568] font-semibold">Eliminando...</Text>
                             ) : (
                                 <>
-                                    <Ionicons name="trash-outline" size={18} color="#E53E3E" />
-                                    <Text className="text-[#E53E3E] font-semibold ml-1.5">Eliminar</Text>
+                                    <Ionicons name="trash-outline" size={18} color="#fff" />
+                                    <Text className="text-[#fff] font-semibold ml-1.5">Eliminar</Text>
                                 </>
                             )}
                         </TouchableOpacity>

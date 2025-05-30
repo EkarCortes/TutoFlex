@@ -43,7 +43,7 @@ const SetClassDetails = () => {
       <ScrollView className="flex-1">
         <View className="p-5">
           {/* Selected Course Card */}
-          <View className="bg-[#0d6a97] rounded-2xl shadow-lg mb-6 overflow-hidden">
+          <View className="bg-[#0B4D6C] rounded-2xl shadow-lg mb-6 overflow-hidden">
             <View className="p-5 flex-row items-center">
               <Ionicons name="book" size={48} color="#FB8500" />
               <View className="ml-4 flex-1">
@@ -56,7 +56,7 @@ const SetClassDetails = () => {
           </View>
 
           {/* Price Card */}
-          <View className="bg-[#0d6a97] rounded-2xl shadow-lg mb-4 overflow-hidden">
+          <View className="bg-[#0B4D6C] rounded-2xl shadow-lg mb-4 overflow-hidden">
             <View className="px-5 py-4 border-b border-[#FFF]/30">
               <Text className="text-white text-lg font-bold">
                 Precio por sesión
@@ -81,7 +81,7 @@ const SetClassDetails = () => {
           </View>
 
           {/* Modalidad Card */}
-          <View className="bg-[#0d6a97] rounded-2xl shadow-lg mb-4 overflow-hidden">
+          <View className="bg-[#0B4D6C] rounded-2xl shadow-lg mb-4 overflow-hidden">
             <View className="px-5 py-4 border-b border-[#FFF]/30">
               <Text className="text-white text-lg font-bold">Modalidad</Text>
               <Text className="text-white/70 text-sm">
@@ -96,7 +96,7 @@ const SetClassDetails = () => {
           </View>
 
           {/* Schedule Card */}
-          <View className="bg-[#0d6a97] rounded-2xl shadow-lg mb-6 overflow-hidden">
+          <View className="bg-[#0B4D6C] rounded-2xl shadow-lg mb-6 overflow-hidden">
             <View className="px-5 py-4 border-b border-[#FFF]/30 flex-row justify-between items-center">
               <View>
                 <Text className="text-white text-lg font-bold">

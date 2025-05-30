@@ -69,7 +69,7 @@ export default function DeductionsPaidList({ data, showAll, loading, error, refr
                   Deducción #{item.deduccion_id}
                 </Text>
               </View>
-              <View className="bg-[#2379A1] p-3 rounded-xl mb-3">
+              <View className="bg-[#096490] p-3 rounded-xl mb-3">
                 <View className="flex-row justify-between mb-1">
                   <Text className="text-[#fff] text-sm">Transferencia:</Text>
                   <Text className="font-bold text-white">{item.numero_tranferencia}</Text>

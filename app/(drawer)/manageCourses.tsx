@@ -29,7 +29,7 @@ const ManageCourseScreen = () => {
     <View
       className="mb-4 p-4 rounded-2xl shadow-lg"
       style={{
-        backgroundColor: "#0A4C6D",
+        backgroundColor: "#096490",
         elevation: 4,
       }}
     >
@@ -75,7 +75,7 @@ const ManageCourseScreen = () => {
     <SafeAreaView className="flex-1 bg-[#023046]" edges={['left', 'right', 'bottom']}>
       <HeaderScreens title={"Gestionar Cursos"} />
       <View className="flex-1 w-full px-5 py-3 md:px-8 md:py-5">
-        <View className="w-full bg-[#0d6a97] rounded-2xl p-5 shadow-lg mb-4">
+        <View className="w-full bg-[#0B4D6C] rounded-2xl p-5 shadow-lg mb-4">
           <View className="flex-row items-center mb-4">
             <Ionicons name="search" size={24} color="#FB8500" />
             <Text className="text-white text-xl font-bold ml-2">Buscar Cursos</Text>
@@ -113,7 +113,7 @@ const ManageCourseScreen = () => {
           </View>
         </View>
 
-        <View className="flex-1 bg-[#0d6a97] rounded-2xl px-5 pt-4 pb-3 shadow-lg">
+        <View className="flex-1 bg-[#0B4D6C] rounded-2xl px-5 pt-4 pb-3 shadow-lg">
           <View className="flex-row justify-between items-center mb-4">
             <View className="flex-row items-center">
               <Ionicons name="book" size={20} color="#FB8500" />
@@ -279,7 +279,7 @@ const ManageCourseScreen = () => {
               </Text>
             </View>
 
-            <View className="bg-[#096491] rounded-xl p-4 mb-5">
+            <View className="bg-[#096490] rounded-xl p-4 mb-5">
             <Text className="text-[#fff] text-base text-center mb-2">
                 ¿Estás seguro que deseas eliminar el curso
                 <Text className="font-bold text-[#FB8500]">{courseToDelete ? ` : ${courseToDelete.name}` : ""}</Text>?

@@ -65,7 +65,7 @@ const PaymentCard = () => {
                   </View>
                 </View>
 
-                <View className="bg-[#2379A1] p-3 rounded-xl mb-3">
+                <View className="bg-[#096490] p-3 rounded-xl mb-3">
                   <View className="flex-row justify-between mb-1">
                     <Text className="text-[#fff] text-sm">Profesor:</Text>
                     <Text className="font-bold text-white">{item.nombre_profesor}</Text>

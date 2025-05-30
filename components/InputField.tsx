@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import { View, TextInput } from 'react-native';
+import { TextInput, View } from 'react-native';
 
 interface InputProps {
   icon: string;
@@ -23,6 +23,7 @@ const InputField: React.FC<InputProps> = ({ icon, value, onChangeText, placehold
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         className="flex-1 ml-2 text-lg"
+        style={{ color: '#023047' }} 
       />
     </View>
   );

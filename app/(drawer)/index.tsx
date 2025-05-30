@@ -70,7 +70,7 @@ export default function HomeScreen() {
   const { handleWhatsApp, handleEmail } = useHelpLinks();
 
   return (
-    <SafeAreaView className={`flex-1 bg-[#023046]`}>
+    <SafeAreaView className="flex-1 bg-[#023046]">
       <Header
         userName={userName}
         userPoints={userPoints}
@@ -80,17 +80,16 @@ export default function HomeScreen() {
       />
       <Animated.ScrollView
         ref={scrollViewRef}
-        className={`flex-1 bg-[#023046]`}
+        className="bg-[#023046]"
         showsVerticalScrollIndicator={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-
         <Animated.View style={{ opacity: fadeOpacity }}>
-          <View className={`h-auto`}>
+          <View className="h-auto">
             <Text className="text-white ml-5 mt-8 text-2xl" style={{ fontFamily: 'SpaceGrotesk-Bold' }}>Acceso Rápido</Text>
-            <View className={`flex-1 items-center`}>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false} className={`flex-row mt-5`}>
+            <View className="flex-1 items-center">
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row mt-5">
                 {renderQuickAccessButtons()}
               </ScrollView>
             </View>
@@ -100,7 +99,6 @@ export default function HomeScreen() {
         <Animated.View style={{ opacity: carouselOpacity }}>
           <ImageCarousel />
         </Animated.View>
-
 
         <Animated.View style={{ opacity: cursosOpacity }}>
           <TitleText textTitle={'Cursos Recomendados'} />
@@ -135,38 +133,36 @@ export default function HomeScreen() {
           </Text>
         </View>
       </Animated.ScrollView>
-      <View style={{flex: 1, position: 'absolute', width: '100%', height: '100%'}}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={showSessionExpired}
-          hardwareAccelerated={true} 
-          statusBarTranslucent={true}
-          onRequestClose={() => setShowSessionExpired(false)}
-        >
-          <View className="flex-1 justify-center items-center bg-black/80">
-            <View className="bg-[#023047] w-11/12 rounded-xl p-6 shadow-lg max-w-md">
-              <View className="items-center mb-4">
-                <MaterialIcons name="timer-off" size={48} color="#FB8500" />
-                <Text className="text-white text-2xl font-bold text-center mt-2 mb-1">
-                  Sesión Expirada
-                </Text>
-                <Text className="text-[#B0BFCB] text-base text-center mb-4">
-                  Tu sesión ha expirado. Por favor inicia sesión nuevamente para continuar.
-                </Text>
-              </View>
-
-              <TouchableOpacity
-                onPress={handleLogin}
-                className="bg-[#FB8500] h-14 rounded-xl items-center justify-center flex-row shadow-md"
-              >
-                <MaterialIcons name="login" size={24} color="white" />
-                <Text className="text-white font-bold text-lg ml-2">Iniciar Sesión</Text>
-              </TouchableOpacity>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={showSessionExpired}
+        hardwareAccelerated={true}
+        statusBarTranslucent={true}
+        onRequestClose={() => setShowSessionExpired(false)}
+      >
+        <View className="flex-1 justify-center items-center bg-black/80">
+          <View className="bg-[#023047] w-11/12 rounded-xl p-6 shadow-lg max-w-md">
+            <View className="items-center mb-4">
+              <MaterialIcons name="timer-off" size={48} color="#FB8500" />
+              <Text className="text-white text-2xl font-bold text-center mt-2 mb-1">
+                Sesión Expirada
+              </Text>
+              <Text className="text-[#B0BFCB] text-base text-center mb-4">
+                Tu sesión ha expirado. Por favor inicia sesión nuevamente para continuar.
+              </Text>
             </View>
+
+            <TouchableOpacity
+              onPress={handleLogin}
+              className="bg-[#FB8500] h-14 rounded-xl items-center justify-center flex-row shadow-md"
+            >
+              <MaterialIcons name="login" size={24} color="white" />
+              <Text className="text-white font-bold text-lg ml-2">Iniciar Sesión</Text>
+            </TouchableOpacity>
           </View>
-        </Modal>
         </View>
+      </Modal>
     </SafeAreaView>
   );
 }
