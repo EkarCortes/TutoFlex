@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
 
 const axiosInstance = axios.create({
-  baseURL: "https://api-movil-ii-production.up.railway.app",
+  baseURL: "http://tutoflex-backend-takjn9-7c9a69-52-191-252-195.traefik.me/",
 });
 
 // Interceptor para agregar el token de autenticación
