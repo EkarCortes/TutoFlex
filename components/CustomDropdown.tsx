@@ -37,14 +37,15 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           borderRadius: 8,
           overflow: 'hidden',
           marginTop: 8,
+          maxHeight: 48 * 3 + 8, 
         }}
         data={data}
-        maxHeight={300}
+        maxHeight={48 * 3 + 8}
         labelField="label"
         valueField="value"
         placeholder={placeholder}
         value={value}
-        onChange={(item) => onChange(item.value)}
+        onChange={item => onChange(item.value)}
       />
     </View>
   );

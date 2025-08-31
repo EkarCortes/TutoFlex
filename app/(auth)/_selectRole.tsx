@@ -19,6 +19,9 @@ const SelectRoleScreen = () => {
     }
   }, [roleParam]);
 
+  const [campus, setCampus] = useState<string>("");
+  const [facility, setFacility] = useState<string>("");
+
   const registerEstudiante = {
     ...useRegisterStudent(
       Array.isArray(email) ? email[0] : email || "",
@@ -28,6 +31,10 @@ const SelectRoleScreen = () => {
     setHeadquarter: () => { },
     enclosure: "",
     setEnclosure: () => { },
+    campus,
+    setCampus,
+    facility,
+    setFacility,
   };
 
   const registerProfesor = {
@@ -39,6 +46,10 @@ const SelectRoleScreen = () => {
     setHeadquarter: () => { },
     enclosure: "",
     setEnclosure: () => { },
+    campus,
+    setCampus,
+    facility,
+    setFacility,
   };
 
   const { renderForm } = useRenderForm(role,
@@ -51,39 +62,32 @@ const SelectRoleScreen = () => {
       className="flex-1 bg-[#023047]"
     >
       <StatusBar backgroundColor="#023047" />
-      <ScrollView
-        className="w-full flex-1"
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingVertical: 10
-        }}
-      >
-        <View className="w-full  px-6 pt-4 pb-2">
-          <TouchableOpacity
-            className="flex-row mt-8 items-center w-auto"
-            onPress={() => router.back()}
-          >
-            <MaterialIcons name="arrow-back-ios-new" size={24} color="#fff" />
-          </TouchableOpacity>
+      <View className="w-full  px-5 pt-4 ">
+        <TouchableOpacity
+          className="flex-row items-center w-auto"
+          onPress={() => router.back()}
+        >
+          <MaterialIcons name="arrow-back-ios-new" size={24} color="#fff" className="pt-16" />
+        </TouchableOpacity>
+      </View>
+
+      <View className="flex-1 items-center justify-center ">
+        <View className="items-center justify-center mb-6 w-11/12 max-w-md">
+          <Text className="text-white text-2xl font-bold text-center">
+            {role === "Estudiante" ? "Perfil de Estudiante" : "Perfil de Profesor"}
+          </Text>
+          <Text className="text-[#FFB703] text-sm text-center">
+            Completa tu información personal
+          </Text>
         </View>
 
-        <View className="flex-1 items-center justify-center px-4">
-          <View className="items-center justify-center mb-6 w-11/12 max-w-md">
-            <Text className="text-white text-2xl font-bold text-center">
-              {role === "Estudiante" ? "Perfil de Estudiante" : "Perfil de Profesor"}
-            </Text>
-            <Text className="text-[#FFB703] text-sm text-center">
-              Completa tu información personal
-            </Text>
-          </View>
-
-          <View className="bg-[#0B4D6C] rounded-3xl p-8 shadow-2xl w-11/12 max-w-lg items-center">
-            <View className="w-full">
-              {renderForm()}
-            </View>
+        <View className="bg-[#0B4D6C] rounded-3xl p-8 shadow-2xl w-11/12 max-w-lg items-center">
+          <View className="w-full">
+            {renderForm()}
           </View>
         </View>
-      </ScrollView>
+      </View>
+
       <ToastComponent />
     </KeyboardAvoidingView>
   );
