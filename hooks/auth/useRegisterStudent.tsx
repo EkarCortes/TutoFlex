@@ -12,7 +12,7 @@ const useRegisterStudent = (email: string, password: string) => {
   const [country, setCountry] = useState<number | null>(null);
   const [university, setUniversity] = useState<number | null>(null);
   const [career, setCareer] = useState<number | null>(null);
-  const [telefono, setTelefono] = useState(''); 
+  const [telefono, setTelefono] = useState('');
 
   const setTelefonoValidated = (value: string) => {
     const numeric = value.replace(/\D/g, '').slice(0, 10);
@@ -20,12 +20,12 @@ const useRegisterStudent = (email: string, password: string) => {
   };
 
   const handleRegister = async () => {
-    
     if (!name || !lastname || !country || !university || !career || !telefono) {
       showToast('error', 'Por favor completa todos los campos', 'Aviso', 'bottom');
       return;
     }
 
+  
     const userData = {
       nombre: name,
       apellido: lastname,
@@ -34,7 +34,7 @@ const useRegisterStudent = (email: string, password: string) => {
       universidad_id: university!,
       pais_id: country!,
       carrera_id: career!,
-      telefono, 
+      telefono,
     };
 
     try {
@@ -44,7 +44,15 @@ const useRegisterStudent = (email: string, password: string) => {
         router.push('/loginScreen');
       }, 2000);
     } catch (error: any) {
-      console.log('Error', error.message || 'Error en el registro');
+      // Manejo específico para teléfono duplicado
+      if (
+        error?.response?.data?.message &&
+        error.response.data.message.toLowerCase().includes('teléfono')
+      ) {
+        showToast('error', 'El número de teléfono ya está registrado. Por favor, ingresa otro.', 'Teléfono duplicado', 'bottom');
+      } else {
+        showToast('error', error.message || 'Error en el registro', 'Error', 'bottom');
+      }
     }
   };
 

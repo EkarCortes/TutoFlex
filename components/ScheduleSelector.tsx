@@ -44,7 +44,7 @@ const ScheduleSelector: React.FC<ScheduleSelectorProps> = ({
           {horarios.map((horario, index) => {
          
             const isOccupied = Array.isArray(occupiedHorarios) && occupiedHorarios.includes(index);
-            console.log(`Horario ${horario} (índice ${index}): ${isOccupied ? 'ocupado' : 'disponible'}`);
+           
             
             return (
               <TouchableOpacity

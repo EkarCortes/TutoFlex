@@ -38,8 +38,7 @@ export default function HomeScreen() {
   }, [user?.rol_id]);
 
   React.useEffect(() => {
-    console.log('expoPushToken', expoPushToken);
-    console.log('notifications', notifications);
+
   }, [expoPushToken, notifications]);
 
 

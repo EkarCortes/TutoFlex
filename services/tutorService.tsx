@@ -75,7 +75,7 @@ export const getTopTutors = async (limit: number = 5): Promise<TutorProfile[]> =
 
 export const getTutorById = async (profesorId: number): Promise<TutorProfile | null> => {
   try {
-    console.log(`Searching for tutor with profesor_id: ${profesorId}`);
+    
     
     // Use cached data if available
     if (!tutorsCache) {
@@ -83,16 +83,13 @@ export const getTutorById = async (profesorId: number): Promise<TutorProfile | n
       tutorsCache = response.data.data;
     }
     
-    // Find tutor ONLY by profesor_id
+
     const tutor = tutorsCache.find(
       t => t.profesor_id === profesorId
     );
     
-    if (!tutor) {
-      console.log(`Tutor with profesor_id ${profesorId} not found. Available profesor_ids:`, 
-        tutorsCache.map(t => t.profesor_id).join(', '));
-    }
-    console.log("Estos son los datos del tutor:", tutor);
+    
+    
     
     return tutor || null;
   } catch (error) {
@@ -108,7 +105,7 @@ export const getReviewsByProfesorId = async (profesorId: number): Promise<Review
     );
     // Acceso correcto a las reseñas
     const reseñas = response.data.data?.data?.[0]?.reseñas || [];
-    console.log(`Fetched ${reseñas.length} reviews for profesor ID ${profesorId}`);
+    
     return reseñas;
   } catch (error) {
     console.error("Error fetching reviews by profesor ID:", error);

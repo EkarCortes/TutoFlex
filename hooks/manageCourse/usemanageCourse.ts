@@ -44,7 +44,7 @@ const useCourses = () => {
       setLoading(true);
       await deleteCourse(curso_id);
       await fetchCourses();
-      console.log("Curso eliminado correctamente:", curso_id);
+   
     } catch (err) {
       console.error("Error al eliminar el curso:", err);
       setError("No se pudo eliminar el curso");
@@ -59,9 +59,9 @@ const useCourses = () => {
       setLoading(true);
       await updateCourse(data);
       await fetchCourses();
-      console.log("Curso actualizado correctamente:", data.curso_id);
+      
     } catch (err) {
-      console.error("Error al actualizar el curso:", err);
+      
       setError("No se pudo actualizar el curso");
     } finally {
       setLoading(false);
@@ -74,7 +74,7 @@ const useCourses = () => {
       const data = await getClassifications();
       setClassifications(data);
     } catch (err) {
-      console.error("Error al obtener clasificaciones:", err);
+      
     }
   };
 

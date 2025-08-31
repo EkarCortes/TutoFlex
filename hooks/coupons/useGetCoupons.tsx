@@ -9,9 +9,9 @@ const useGetCoupons = () => {
   const fetchCoupons = useCallback(async () => {
     try {
       setLoading(true);
-      console.log("Obteniendo cupones...");
+      
       const couponsList = await getCoupons();
-      console.log("Cupones obtenidos:", couponsList);
+      
       const reversedCoupons = couponsList.reverse();
       setCoupons(reversedCoupons);
       setError(null);

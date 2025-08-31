@@ -29,7 +29,7 @@ export default function useHomeScreen() {
         const token = await getToken();
         
         if (!token) {
-          console.log('No hay token disponible');
+          
           return;
         }
         
@@ -39,7 +39,7 @@ export default function useHomeScreen() {
           // Intenta el método de importación directa primero
           decodedToken = jwtDecode(token) as { exp: number };
         } catch (decodeError) {
-          console.log('Método de importación directa falló, intentando con require');
+          
           // Si falla, intenta con require y accede a default o la función directa
           const jwtModule = require('jwt-decode');
           decodedToken = (jwtModule.default || jwtModule)(token) as { exp: number };
@@ -54,7 +54,7 @@ export default function useHomeScreen() {
         const currentTime = Math.floor(Date.now() / 1000);
         const timeUntilExpiry = decodedToken.exp - currentTime;
         
-        console.log(`Token expira en: ${timeUntilExpiry} segundos (${Math.floor(timeUntilExpiry/60)} minutos)`);
+  
         
         // Limpia cualquier temporizador existente
         if (tokenExpirationTimer) {
@@ -63,12 +63,12 @@ export default function useHomeScreen() {
         
         // Si ya expiró, muestra el modal inmediatamente
         if (timeUntilExpiry <= 0) {
-          console.log('Token ya expirado');
+         
           setShowSessionExpired(true);
         } else {
           // Si aún es válido, configura el temporizador con el tiempo restante
           tokenExpirationTimer = setTimeout(() => {
-            console.log('Token acaba de expirar');
+            
             setShowSessionExpired(true);
           }, timeUntilExpiry * 1000);
         }
@@ -80,7 +80,6 @@ export default function useHomeScreen() {
     // Verifica cuando el componente se monta y cuando la app vuelve a estar activa
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (nextAppState === 'active') {
-        console.log('App volvió al primer plano, verificando token...');
         checkTokenExpiration();
       }
     };

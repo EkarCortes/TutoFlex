@@ -91,7 +91,7 @@ const useNotificaciones = () => {
       setNotifications((prev) => [n, ...prev]);
     });
     responseListener.current = Notifications.addNotificationResponseReceivedListener((r) => {
-      console.log('User tapped notification:', r);
+      
     });
 
     return () => {

@@ -33,17 +33,15 @@ export const login = async (email: string, password: string): Promise<LoginRespo
 // Add new function to verify if an email exists
 export const verifyEmailExists = async (email: string): Promise<boolean> => {
   try {
-    console.log(`Checking if email exists: ${email}`);
+    
     const response = await axiosInstance.post('/users/verifyExistingEmail', {
       email
     });
-    console.log('API response:', response.data);
     
-    // If disponible is true, email is available (not registered)
-    // If disponible is false, email is already registered
+    
+    
     if (response.data.disponible !== undefined) {
-      // When disponible is false, we should return true (email exists)
-      // When disponible is true, we should return false (email doesn't exist)
+      
       return !response.data.disponible;
     }
     

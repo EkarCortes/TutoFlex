@@ -46,7 +46,7 @@ export const useDeductions = () => {
     setLoading(true);
     try {
       await payMultipleDeductions(transferNumber, comprobante, deductionIds);
-      console.log("Pago realizado correctamente");
+      
     } catch (error) {
       console.error(error);
     } finally {

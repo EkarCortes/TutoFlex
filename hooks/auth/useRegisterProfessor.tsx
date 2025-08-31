@@ -21,7 +21,7 @@ const useRegisterProfessor = (email: string, password: string) => {
 
   const handleRegister = async () => {
     if (!name || !lastname || !country || !university || !career || !telefono) {
-      console.log('estoso son los datos' + name + lastname + country + university + career + telefono);
+      
       showToast('error', 'Por favor completa todos los campos', 'Aviso', 'bottom');
 
       return;
@@ -46,7 +46,7 @@ const useRegisterProfessor = (email: string, password: string) => {
       }
       , 2000);
     } catch (error: any) {
-      console.log('Error', error.message || 'Error en el registro');
+      
     }
   };
 

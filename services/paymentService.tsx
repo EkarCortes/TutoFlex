@@ -27,10 +27,7 @@ export const sendPayment = async (
         paymentData
       );
     }
-    console.log("⏩ sendPayment response:", {
-      status: res.status,
-      data: res.data,
-    });
+ 
     return res.data;
   } catch (error: any) {
     console.error(
@@ -44,7 +41,7 @@ export const sendPayment = async (
 export const cancelTutorial = async (tutoria_id: number): Promise<void> => {
   try {
     await axiosInstance.post("/tutorials/cancelTutorial", { tutoria_id });
-    console.log("Tutoría cancelada exitosamente.");
+    
   } catch (error: any) {
     console.error("Error al cancelar la tutoría:", error.response?.data || error.message);
     throw error;

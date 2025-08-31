@@ -47,10 +47,7 @@ export const getTutorial = async (): Promise<{
 } | null> => {
   try {
     const response = await axiosInstance.get("/tutorials/getTutorials");
-    console.log(
-      "Respuesta completa de la API desde GetTutorialService:",
-      response.data
-    );
+  
     return response.data;
   } catch (error) {
     console.error("Error al obtener el tutorial del usuario:", error);
@@ -66,7 +63,7 @@ export const scheduleTutorial = async (
       "/tutorials/scheduleTutoring",
       params
     );
-    console.log("Respuesta al agendar tutoría:", response.data);
+    
     return response.data;
   } catch (error) {
     console.error("Error al agendar la tutoría:", error);
@@ -100,7 +97,7 @@ export const getTutorialDetails = async (
         horarios: course.horarios || "Sin horarios disponibles",
       };
     } else {
-      console.log("Error: No se encontraron datos para el curso.");
+      
       return null;
     }
   } catch (error) {
@@ -114,17 +111,17 @@ export const getPendingTutorialsByProfessor = async (
   params: PendingTutorialParams
 ): Promise<{ success: boolean; message: string; data?: any }> => {
   try {
-    console.log("Consultando tutorías pendientes con params:", params);
+    
     
     const response = await axiosInstance.post(
       "/tutorials/getPendingTutorialProfessor",
       params
     );
     
-    console.log("Respuesta de tutorías pendientes:", response.data);
+    
     return response.data;
   } catch (error) {
-    console.error("Error al consultar tutorías pendientes:", error);
+    
     return {
       success: false,
       message: "No se pudieron obtener las tutorías pendientes.",

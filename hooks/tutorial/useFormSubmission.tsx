@@ -55,7 +55,7 @@ export const useFormSubmission = ({
         hora_fin: horaFin,
         temas: topics || "No se especificaron temas"
       };
-      console.log("Parámetros para agendar la tutoría:", params);
+      
 
       const response = await scheduleTutorial(params);
 

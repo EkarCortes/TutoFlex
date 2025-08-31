@@ -52,11 +52,11 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({
       .padStart(2, "0")}`;
     if (pickerType === "start") {
       setStartTime(formattedTime);
-      console.log("Start Time:", formattedTime);
+    
     } else {
       setEndTime(formattedTime);
 
-      console.log("End Time:", formattedTime);
+      
     }
     setPickerVisible(false);
   };

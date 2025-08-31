@@ -48,7 +48,7 @@ export interface ProfesorProfile {
 export const getProfile = async (): Promise<{ data: Profile } | null> => {
     try {
         const response = await axiosInstance.get("/users/getProfileStudent");
-        console.log("Respuesta completa de la API desde GetUserProfileService:", response.data);
+        
         return response.data;
     } catch (error) {
         console.error("Error al obtener el perfil del usuario:", error);

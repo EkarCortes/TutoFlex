@@ -36,12 +36,12 @@ const usePendingPaymentsStudent = () => {
 
       if (response.data && response.data.success) {
         setTutorials(response.data.data);
-        console.log("Pagos pendientes obtenidos Ekar:", response.data.data);
+        
       } else {
         setError(response.data?.message || "No se pudieron obtener los pagos pendientes");
       }
     } catch (err) {
-      console.error("Error al cargar los pagos pendientes:", err);
+      ;
       setError("No se pudieron cargar los pagos pendientes.");
     } finally {
       setLoading(false);
@@ -54,7 +54,7 @@ const usePendingPaymentsStudent = () => {
       await cancelTutorial(tutoria_id);
       fetchPendingPayments();
     } catch (error) {
-      console.error("Error al cancelar la tutoría:", error);
+      
     } finally {
       setLoading(false);
     }

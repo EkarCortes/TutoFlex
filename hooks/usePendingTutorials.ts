@@ -42,7 +42,7 @@ export function usePendingTutorials() {
         horario: formatHorario(t.hora_inicio, t.hora_fin),
       }));
       setTutorials(parsed);
-      console.log("Tutorials fetched successfully:", parsed);
+      
     } catch (err: any) {
       setError(err.message || "Error desconocido");
     } finally {

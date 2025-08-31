@@ -28,7 +28,9 @@ export default function useAddCourseScreen() {
   } = useClassifications();
 
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [modalSelectedCategory, setModalSelectedCategory] = useState<number | null>(null);
+  const [modalSelectedCategory, setModalSelectedCategory] = useState<
+    number | null
+  >(null);
   const [searchText, setSearchText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [courseName, setCourseName] = useState("");
@@ -56,9 +58,7 @@ export default function useAddCourseScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText, selectedCategory]);
 
-  useEffect(() => {
-    console.log("Datos del usuario desde el contexto:", user);
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   const handleAddCourse = async () => {
     if (
@@ -84,7 +84,6 @@ export default function useAddCourseScreen() {
         descripcion: courseDescription,
       };
 
-      console.log("Nuevo curso:", newCourse);
       await addCourse(newCourse);
       handleCloseModal();
       setCourseName("");

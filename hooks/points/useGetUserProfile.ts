@@ -12,8 +12,7 @@ const useGetUserProfile = () => {
         try {
             setLoading(true);
             const response = await getProfile();
-            console.log("Datos recibidos de la API de useGetUserProfile:", response);
-
+            
             if (response) {
                 setProfile(response.data);
             } else {

@@ -15,7 +15,7 @@ export default function useSessionExpiration(user: any, getToken: () => Promise<
       try {
         const token = await getToken();
         if (!token) {
-          console.log('No hay token disponible');
+         
           return;
         }
         let decodedToken: any;

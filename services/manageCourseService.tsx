@@ -82,9 +82,9 @@ export interface UpdateCourseData {
 export const updateCourse = async (data: UpdateCourseData): Promise<void> => {
   try {
     const response = await axiosInstance.put("/courses/updateCourseAdmin", data);
-    console.log("Respuesta updateCourse:", response.status, response.data);
+    
   } catch (error) {
-    console.error("Error al actualizar el curso:", error?.response?.data || error);
+    
     throw error;
   }
 };

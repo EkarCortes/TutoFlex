@@ -37,15 +37,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       if (Platform.OS === 'web') {
         const userData = localStorage.getItem('userData');
-        console.log("Datos del usuario desde localStorage:", userData);
+
         return userData ? JSON.parse(userData) : null;
       } else {
         const userData = await SecureStore.getItemAsync('userData');
-        console.log("Datos del usuario desde SecureStore:", userData);
         return userData ? JSON.parse(userData) : null;
       }
     } catch (error) {
-      console.log('Error al obtener datos del usuario:', error);
+      
       return null;
     }
   };
@@ -81,7 +80,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setIsAuthenticated(false);
         }
       } catch (error) {
-        console.log('Error al verificar estado de autenticación:', error);
+        
         setUser(null);
         setIsAuthenticated(false);
       } finally {
@@ -98,7 +97,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string) => {
     try {
       setIsTransitioning(true); // Activamos el estado de transición
-      console.log('Iniciando sesión con:', { email });
+      
 
       const success = await hookLogin(email, password);
       
@@ -112,7 +111,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsAuthenticated(true);
             setIsTransitioning(false);
           }, 300); // Reducido de 2500ms a 300ms
-          console.log('Iniciando sesión con:', { userData });
         } else {
           setIsTransitioning(false);
           throw new Error('No se pudo obtener información del usuario');
@@ -123,7 +121,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     } catch (error) {
       setIsTransitioning(false);
-      console.log('Error al iniciar sesión:', error);
       throw error;
     }
   };
@@ -141,7 +138,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }, 500);
     } catch (error) {
       setIsTransitioning(false);
-      console.log('Error al cerrar sesión:', error);
       throw error;
     }
   };

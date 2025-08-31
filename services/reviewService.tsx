@@ -39,11 +39,11 @@ export const getFinishedTutorials = async (): Promise<{
 
 export const submitTutorialReview = async (payload: ReviewPayload): Promise<{ success: boolean; message: string }> => {
   try {
-    console.log("Sending review data:", payload);
+    
     
     const response = await axiosInstance.post("/reviews/insertReview", payload);
     
-    console.log("API response:", response.data);
+    
     return response.data;
   } catch (error) {
     console.error("Error en la respuesta:", error);

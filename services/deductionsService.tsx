@@ -83,7 +83,7 @@ export const payMultipleDeductions = async (
       res = await axiosInstance.post("/deductions/payMultipleDeductions", data);
     }
 
-    console.log("payMultipleDeductions:", res.status, res.data);
+    
     return res.data;
   } catch (error: any) {
     console.error("Error payMultipleDeductions:", error.response?.data || error.message);

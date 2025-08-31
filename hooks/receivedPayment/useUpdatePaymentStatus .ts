@@ -12,7 +12,7 @@ const useUpdatePaymentStatus = () => {
     setError(null);
     try {
       const response = await updatePaymentStatus({ payment_id, estado });
-      console.log('Respuesta del API (Actualizar Estado):', response);
+      
       return response;
     } catch (err: any) {
       setError(err.message);

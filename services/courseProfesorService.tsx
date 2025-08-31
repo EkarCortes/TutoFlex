@@ -36,7 +36,7 @@ export interface CourseProfesor {
 
 export const addCourseDetails = async (data: CourseDetails): Promise<CourseDetailsResponse> => {
   try {
-    console.log("API request data:", JSON.stringify(data));
+    
 
     // Validar formato de horario antes de enviar la petición
     if (!validarFormatoHorario(data.horario)) {

@@ -56,7 +56,7 @@ export const getHeadquarters = async (): Promise<Headquarter[]> => {
 export const getEnclosures = async (): Promise<Enclosure[]> => {
   try {
     const response = await axiosInstance.get("/catalogs/enclosures");
-    console.log("Respuesta completa del API de recintos:", response.data);
+    
     return response.data.data;
   } catch (error) {
     console.error("Error al obtener recintos desde el API:", error);

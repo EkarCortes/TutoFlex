@@ -40,10 +40,10 @@ export const getPaymentsReceived = async (): Promise<Payment[]> => {
           created_at: payment.created_at,
           updated_at: payment.updated_at,
         } as Payment),
-      console.log("response.data.data", response.data.data)
+      
     );
   } catch (error) {
-    console.error("Error al obtener los datos del pago pendiente:", error);
+    
     throw error;
   }
 };

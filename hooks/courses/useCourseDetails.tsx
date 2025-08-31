@@ -15,8 +15,7 @@ const useCourseDetails = (curso_id: number) => {
         setLoading(true);
         const details = await getTutorialDetails(curso_id);
         if (details) {
-          console.log("Detalles del curso obtenidos:", details);
-          console.log("curso_profesor_id:", details.curso_profesor_id); // Confirmar que curso_profesor_id está presente
+           // Confirmar que curso_profesor_id está presente
           setCourseDetails(details);
         } else {
           setError("No se encontraron detalles para el curso seleccionado.");

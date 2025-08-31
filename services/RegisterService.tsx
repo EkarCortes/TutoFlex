@@ -11,7 +11,7 @@ export const registerStudent = async (userData: {
   telefono: string; 
 }) => {
   try {
-    console.log('Datos enviados al API (Estudiante):', userData);
+    
     const response = await axiosInstance.post('/users/registerStudent', userData);
     return response.data;
   } catch (error: any) {
@@ -33,7 +33,7 @@ export const registerProfessor = async (userData: {
   telefono: string;
 }) => {
   try {
-    console.log('Datos enviados al API (Profesor):', userData);
+    
     const response = await axiosInstance.post('/users/registerProfesor', userData);
     return response.data;
   } catch (error: any) {

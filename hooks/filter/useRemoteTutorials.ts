@@ -35,8 +35,7 @@ export default function useRemoteTutorials(initialParams: FilterParams = {}) {
     setError(null);
     try {
       const mergedParams = { ...params, ...customParams };
-      console.log("Solicitando página:", mergedParams.page, "con limit:", mergedParams.limit);
-      console.log("Parámetros enviados a la API:", mergedParams);
+      
 
       const response = await axiosInstance.get("/tutorials/getTutorials", {
         params: {
@@ -51,7 +50,7 @@ export default function useRemoteTutorials(initialParams: FilterParams = {}) {
         },
       });
 
-      console.log("Response data:", response.data);
+      
       setTutorials(response.data.data || []);
       setTotal(response.data.total || 0);
     } catch (err: any) {

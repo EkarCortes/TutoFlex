@@ -27,7 +27,7 @@ const DeductionForm = ({ totalAmount }) => {
       </Text>
 
       {/* Botón para aplicar la deducción */}
-      <ButtonBotton title="Aplicar Deducción" onPress={() => console.log("Deducción aplicada")} />
+      <ButtonBotton title="Aplicar Deducción" onPress={() => {}} />
     </View>
   );
 };

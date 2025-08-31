@@ -108,7 +108,7 @@ const usePaymentHandler = ({
       setShowConfirmModal(false);
       showToast("success", "Pago confirmado con éxito.");
       for (let pair of formData.entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
+        
       }
       setTimeout(() => {
       router.dismissTo("/(drawer)/payments");
