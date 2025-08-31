@@ -199,7 +199,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
       <CustomDropdown
         data={countryOptions}
         value={country}
-        onChange={setCountry}
+        onChange={value => setCountry(Number(value))}
         placeholder="Seleccione su país"
         iconName="public"
       />
@@ -207,7 +207,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
       <CustomDropdown
         data={universityOptions}
         value={university}
-        onChange={setUniversity}
+        onChange={value => setUniversity(Number(value))}
         placeholder={
           country ? "Seleccione su universidad" : "Primero seleccione un país"
         }
@@ -217,9 +217,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
       <CustomDropdown
         data={headquarterOptions}
         value={headquarter}
-        onChange={(value) => {
-          setHeadquarter(value);
-        }}
+        onChange={value => setHeadquarter(Number(value))}
         placeholder={
           university
             ? "Seleccione su sede"
@@ -231,9 +229,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
       <CustomDropdown
         data={enclosureOptions}
         value={enclosure}
-        onChange={(value) => {
-          setEnclosure(value);
-        }}
+        onChange={value => setEnclosure(Number(value))}
         placeholder={
           headquarter ? "Seleccione su recinto" : "Primero seleccione una sede"
         }
@@ -243,7 +239,7 @@ const ProfessorForm: React.FC<ProfessorFormProps> = ({
       <CustomDropdown
         data={careerOptions}
         value={career}
-        onChange={setCareer}
+        onChange={value => setCareer(Number(value))}
         placeholder={
           university
             ? "Seleccione su carrera"

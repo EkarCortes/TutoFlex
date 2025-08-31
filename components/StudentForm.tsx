@@ -76,7 +76,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
       <CustomDropdown
         data={countryOptions}
         value={country}
-        onChange={setCountry}
+        onChange={value => setCountry(Number(value))}
         placeholder="Seleccione su país"
         iconName="public"
       />
@@ -84,7 +84,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
       <CustomDropdown
         data={universityOptions}
         value={university}
-        onChange={setUniversity}
+        onChange={value => setUniversity(Number(value))}
         placeholder={
           country ? "Seleccione su universidad" : "Primero seleccione un país"
         }
@@ -94,7 +94,7 @@ const StudentForm: React.FC<StudentFormProps> = ({
       <CustomDropdown
         data={careerOptions}
         value={career}
-        onChange={setCareer}
+        onChange={value => setCareer(Number(value))}
         placeholder={
           university
             ? "Seleccione su carrera"
