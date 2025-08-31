@@ -58,9 +58,9 @@ const SelectRoleScreen = () => {
           paddingVertical: 10
         }}
       >
-        <View className="w-full px-6 pt-4 pb-2">
+        <View className="w-full  px-6 pt-4 pb-2">
           <TouchableOpacity
-            className="flex-row items-center w-auto"
+            className="flex-row mt-8 items-center w-auto"
             onPress={() => router.back()}
           >
             <MaterialIcons name="arrow-back-ios-new" size={24} color="#fff" />

@@ -58,8 +58,8 @@ const CreateAccountScreen = () => {
               </Text>
             </ScrollView>
             <View className="mb-4">
-              <TouchableOpacity 
-                className="flex-row items-center" 
+              <TouchableOpacity
+                className="flex-row items-center"
                 onPress={toggleTermsAccepted}
               >
                 <View className={`w-6 h-6 border border-[#FB8500] rounded mr-2 items-center justify-center ${termsAccepted ? 'bg-[#FB8500]' : 'bg-white'}`}>
@@ -68,7 +68,7 @@ const CreateAccountScreen = () => {
                 <Text className="text-[#023047]">Acepto los términos y condiciones</Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity 
+            <TouchableOpacity
               className="bg-[#FB8500] py-3 px-6 rounded-lg self-center"
               onPress={closeTermsModal}
             >
@@ -79,8 +79,8 @@ const CreateAccountScreen = () => {
       </Modal>
 
       <StatusBar backgroundColor="#023047" />
-      <ScrollView 
-        className="w-full flex-1" 
+      <ScrollView
+        className="w-full flex-1"
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}
       >
         <View className="items-center mb-10">
@@ -100,9 +100,9 @@ const CreateAccountScreen = () => {
                 <Text className="text-white font-medium">Estudiante</Text>
               </View>
             </TouchableOpacity>
-            
+
             <View style={{ width: 12 }} />
-            
+
             <TouchableOpacity
               className={getButtonClass(role === "Profesor")}
               onPress={() => setRole("Profesor")}
@@ -113,7 +113,7 @@ const CreateAccountScreen = () => {
               </View>
             </TouchableOpacity>
           </View>
-          
+
 
           <Text className="text-white text-lg font-bold mb-4 text-center">Información de cuenta</Text>
           <View className="w-full">
@@ -123,9 +123,8 @@ const CreateAccountScreen = () => {
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
-              autoCapitalize="none"
             />
-            
+
             <InputField
               icon="lock"
               placeholder="Contraseña"
@@ -133,7 +132,7 @@ const CreateAccountScreen = () => {
               value={password}
               onChangeText={setPassword}
             />
-            
+
             <InputField
               icon="lock"
               placeholder="Confirmar Contraseña"
@@ -142,41 +141,41 @@ const CreateAccountScreen = () => {
               onChangeText={setConfirmPassword}
             />
           </View>
-          
 
-          <TouchableOpacity 
-            className="mt-4 mb-4 self-center flex-row items-center" 
+
+          <TouchableOpacity
+            className="mt-4 mb-4 self-center flex-row items-center"
             onPress={toggleTermsModal}
           >
-            <MaterialIcons 
-              name={termsAccepted ? "check-circle" : "error"} 
-              size={20} 
-              color={termsAccepted ? "#FFB703" : "#FFB703"} 
+            <MaterialIcons
+              name={termsAccepted ? "check-circle" : "error"}
+              size={20}
+              color={termsAccepted ? "#FFB703" : "#FFB703"}
               style={{ marginRight: 8 }}
             />
             <Text className="text-[#FFB703] underline">
               {termsAccepted ? "Términos y Condiciones Aceptados" : "Términos y Condiciones"}
             </Text>
           </TouchableOpacity>
-          
+
 
           <View className="items-center mt-3 w-full">
-            <ButtonBottom 
-              title="CONTINUAR" 
+            <ButtonBottom
+              title="CONTINUAR"
               style={{ padding: 16, width: "100%", fontWeight: "bold" }}
-              onPress={handleNext} 
+              onPress={handleNext}
             />
           </View>
-          
+
         </View>
         <View className="items-center w-full mt-4">
-            <View className="flex-row items-center justify-center">
-              <Text className="text-white">¿Ya tienes cuenta? </Text>
-              <TouchableOpacity onPress={navigateToLogin}>
-                <Text className="text-[#FFB703] font-bold">Inicia sesión</Text>
-              </TouchableOpacity>
-            </View>
+          <View className="flex-row items-center justify-center">
+            <Text className="text-white">¿Ya tienes cuenta? </Text>
+            <TouchableOpacity onPress={navigateToLogin}>
+              <Text className="text-[#FFB703] font-bold">Inicia sesión</Text>
+            </TouchableOpacity>
           </View>
+        </View>
       </ScrollView>
       <ToastComponent />
     </KeyboardAvoidingView>

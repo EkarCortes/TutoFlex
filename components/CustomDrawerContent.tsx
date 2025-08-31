@@ -3,6 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import LoadingScreen from '../components/LoadingScreen';
 import '../global.css';
 import useGetUserProfile from '../hooks/points/useGetUserProfile';
@@ -26,6 +27,7 @@ interface CustomDrawerContentProps {
 function CustomDrawerContent(props: CustomDrawerContentProps) {
     const { logout, user } = useAuth();
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const insets = useSafeAreaInsets();
 
     const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido.split(' ')[0]}` : "Usuario";
 
@@ -76,7 +78,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
       : Object.values(props.descriptors);
 
     return (
-        <View className="flex-1 bg-[#023046]">
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#023046' }} edges={['left', 'right', 'bottom']}>
             <View className="bg-[#086491] h-52 py-8">
                 <View className="items-center">
                     <MaterialIcons
@@ -115,14 +117,13 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
                             style={{
                                 marginVertical: 5,
                                 marginHorizontal: -15,
-                   
                             }}
                         />
                     ))}
                 </View>
             </DrawerContentScrollView>
 
-            <View className="bg-[#086491] border-none flex-row items-center">
+            <View className="bg-[#086491] border-none flex-row items-center" style={{ paddingBottom: insets.bottom }}>
                 <TouchableOpacity
                     className='py-7 pl-5 flex-row items-center'
                     onPress={handleLogout}
@@ -147,7 +148,7 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
                     )}
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 

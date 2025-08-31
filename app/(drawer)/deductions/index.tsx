@@ -1,14 +1,15 @@
+import { useRefreshOnFocus } from '@/hooks/useRefreshOnFocus';
 import { router } from 'expo-router';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import RoundedHeader from '../../../components/HeaderScreens';
 import InvoicesCard from '../../../components/InvoicesCard';
 import useTotalFee from '../../../hooks/deductions/useTotalFee';
-import { useRefreshOnFocus } from '@/hooks/useRefreshOnFocus';
 
 const Index = () => {
-  const { feeTotal, deductions,refresh } = useTotalFee();
+  const { feeTotal, deductions, refresh } = useTotalFee();
+  const insets = useSafeAreaInsets();
 
   const handleConfirm = () => {
     router.push('../../(drawer)/deductions/_confirmPaymentsTeacher');
@@ -17,19 +18,17 @@ const Index = () => {
   const goToHistory = () => {
     router.push('../../(drawer)/deductions/history');
   };
-  
-  useRefreshOnFocus(refresh);
 
+  useRefreshOnFocus(refresh);
 
   // Desactivar el botón si no hay deducciones pendientes o feeTotal es 0
   const isPayDisabled = !deductions || deductions.length === 0 || Number(feeTotal) === 0;
 
   return (
-    <View className="flex-1 bg-gradient-to-b from-[#023046] to-[#045a8d]">
+    <SafeAreaView className="flex-1 bg-gradient-to-b from-[#023046] to-[#045a8d]" edges={['left', 'right', 'bottom']}>
       <RoundedHeader title={'Deducciones'} />
-
       <ScrollView
-        contentContainerStyle={{ padding: 12, gap: 24 }}
+        contentContainerStyle={{ padding: 12, gap: 24, paddingBottom: insets.bottom + 24 }}
         showsVerticalScrollIndicator={false}
       >
         <View
@@ -49,7 +48,7 @@ const Index = () => {
           </View>
         </View>
       </ScrollView>
-      <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30">
+      <View className="bg-[#023046] px-5 py-4 border-t border-[#FFF]/30" style={{ paddingBottom: insets.bottom }}>
         <View className="flex-row justify-between">
           <TouchableOpacity
             onPress={goToHistory}
@@ -69,7 +68,7 @@ const Index = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

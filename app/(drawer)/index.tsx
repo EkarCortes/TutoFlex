@@ -1,21 +1,22 @@
+import useHelpLinks from '@/hooks/home/useHelpLinks';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import React, { useRef, useState } from 'react';
-import { Animated, Linking, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImageCarousel from '../../components/CarouselComponent';
 import RecommendedCourses from '../../components/CoursesComponent';
 import Header from '../../components/Header';
-import StatusBarComponent from '../../components/StatusBarComponent';
 import TitleText from '../../components/TitleText';
 import TopTutorsComponent from '../../components/TopTutorsComponent';
 import '../../global.css';
+import useAnimatedOpacity from '../../hooks/home/useAnimatedOpacity';
 import renderQuickAccessButtons from '../../hooks/home/useHomeQuickAccessButtons';
 import useHomeScreen from '../../hooks/home/useHomeScreen';
-import useAnimatedOpacity from '../../hooks/home/useAnimatedOpacity';
 import useNotificaciones from '../../hooks/useNotifications';
 import { getProfileProfesor } from '../../services/GetUserProfileService';
-import useHelpLinks from '@/hooks/home/useHelpLinks';
 
 export default function HomeScreen() {
+  const insets = useSafeAreaInsets();
   const {
     user,
     profile,
@@ -84,6 +85,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
+        contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}
       >
         <Animated.View style={{ opacity: fadeOpacity }}>
           <View className="h-auto">
