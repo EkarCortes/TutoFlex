@@ -2,7 +2,7 @@
 
 export function useTutorCourses(tutor: any) {
   const getDayText = (dayNum: number): string => {
-    const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const days = ['Sáb','Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie'];
     return days[dayNum % 7] || 'N/A';
   };
 
