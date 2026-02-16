@@ -104,6 +104,10 @@ export default function useHomeScreen() {
     router.replace("/(auth)/");
   };
 
+  const closeSessionExpiredModal = () => {
+    setShowSessionExpired(false);
+  };
+
   return {
     user,
     profile,
@@ -112,5 +116,6 @@ export default function useHomeScreen() {
     showSessionExpired,
     userName,
     handleLogin,
+    closeSessionExpiredModal,
   };
 }

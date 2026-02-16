@@ -1,27 +1,29 @@
 import axios from "axios";
-import * as SecureStore from "expo-secure-store";
-import { Platform } from "react-native";
+import { clearAuthData, getAuthToken } from "../services/authStorage";
 
 const axiosInstance = axios.create({
-  baseURL: "https://tutoflex.naturalaloe.app.naturalaloe.app",
+  baseURL: process.env.EXPO_PUBLIC_API_URL || "https://tutoflex.naturalaloe.app",
+  timeout: 15000,
 });
 
 // Interceptor para agregar el token de autenticación
 axiosInstance.interceptors.request.use(
   async (config) => {
     try {
-      let token;
-      if (Platform.OS === "web") {
-        token = localStorage.getItem("auth_token");
-      } else {
-        token = await SecureStore.getItemAsync("auth_token");
-      }
+      const token = await getAuthToken();
 
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        if (config.headers && typeof config.headers.set === "function") {
+          config.headers.set("Authorization", `Bearer ${token}`);
+        } else {
+          config.headers = {
+            ...config.headers,
+            Authorization: `Bearer ${token}`,
+          };
+        }
       }
-    } catch (error) {
-      console.error("Error al obtener el token:", error);
+    } catch {
+      console.error("Error al obtener el token de sesión");
     }
     return config;
   },
@@ -33,8 +35,10 @@ axiosInstance.interceptors.request.use(
 // Interceptor para manejo global de errores
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => {
-    console.error("Error en la respuesta:", error);
+  async (error) => {
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      await clearAuthData();
+    }
     return Promise.reject(error);
   }
 );

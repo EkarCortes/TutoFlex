@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { showToast } from "../../components/Toast";
 import { verifyEmailExists } from "../../services/AuthService";
+import { usePendingRegistration } from "../../app/contexts/PendingRegistrationContext";
 
 // Este hook maneja la lógica de la pantalla de creación de cuenta
 // y se encarga de validar los datos ingresados por el usuario
@@ -9,6 +10,7 @@ import { verifyEmailExists } from "../../services/AuthService";
 
 export const useCreateAccountScreen = () => {
   const router = useRouter();
+  const { setPendingRegistration } = usePendingRegistration();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -44,11 +46,14 @@ export const useCreateAccountScreen = () => {
         showToast('error', 'Este correo electrónico ya está registrado.', 'Aviso', 'bottom');
         return;
       }
-      
-      router.push({
-        pathname: "/_selectRole",
-        params: { email, password, role },
+
+      setPendingRegistration({
+        email: email.trim(),
+        password,
+        role,
       });
+
+      router.push("/(auth)/_selectRole");
     } catch (error) {
       showToast('error', 'Error al verificar el correo electrónico.', 'Aviso', 'bottom');
     }

@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 import { usePaymentDetails } from "./usePaymentsDetails";
-import { useSearchParams } from "expo-router/build/hooks";
-import useUpdatePaymentStatus from "./useUpdatePaymentStatus ";
+import useUpdatePaymentStatus from "./useUpdatePaymentStatus";
 import { showToast } from "../../components/Toast";
 
 //Funciones para formatear la hora
@@ -27,14 +26,23 @@ const useCardDetailsPayments = () => {
     useState(false);
   const [showComprobanteModal, setShowComprobanteModal] = useState(false);
 
-  const searchParams = useSearchParams();
-  const pagoId = searchParams.get("pagoId");
-  const { selectedPayment, loading } = usePaymentDetails(Number(pagoId));
+  const { pagoId } = useLocalSearchParams<{ pagoId?: string | string[] }>();
+  const parsedPagoId = Array.isArray(pagoId) ? pagoId[0] : pagoId;
+  const paymentId = parsedPagoId ? Number(parsedPagoId) : null;
+  const validPaymentId =
+    paymentId !== null && Number.isFinite(paymentId) && paymentId > 0 ? paymentId : null;
+
+  const { selectedPayment, loading } = usePaymentDetails(validPaymentId);
   const { updateStatus, loading: updating } = useUpdatePaymentStatus();
 
   const managePaymentConfirmation = async () => {
+    if (validPaymentId === null) {
+      showToast("error", "No se encontró un pago válido para confirmar");
+      return;
+    }
+
     try {
-      await updateStatus(Number(pagoId), "realizado");
+      await updateStatus(validPaymentId, "realizado");
       showToast("success", "Pago confirmado correctamente");
       setTimeout(() => {
         router.push("/(drawer)/receivedPayments");
@@ -45,8 +53,13 @@ const useCardDetailsPayments = () => {
   };
 
   const handlePaymentRejection = async () => {
+    if (validPaymentId === null) {
+      showToast("error", "No se encontró un pago válido para rechazar");
+      return;
+    }
+
     try {
-      await updateStatus(Number(pagoId), "pendiente");
+      await updateStatus(validPaymentId, "pendiente");
       showToast("success", "Pago rechazado correctamente");
       setTimeout(() => {
         router.push("/(drawer)/receivedPayments");

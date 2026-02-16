@@ -1,8 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import * as SecureStore from 'expo-secure-store';
-import { Platform } from 'react-native';
 import useLogin from '../../hooks/useLogin';
 import LoadingScreen from '../../components/LoadingScreen';
+import { getAuthToken, getStoredUserData } from '../../services/authStorage';
 
 type User = {
   id: number;
@@ -35,14 +34,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Función para obtener datos del usuario almacenados
   const getUserData = async () => {
     try {
-      if (Platform.OS === 'web') {
-        const userData = localStorage.getItem('userData');
-
-        return userData ? JSON.parse(userData) : null;
-      } else {
-        const userData = await SecureStore.getItemAsync('userData');
-        return userData ? JSON.parse(userData) : null;
-      }
+      return await getStoredUserData<User>();
     } catch (error) {
       
       return null;
@@ -52,7 +44,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Función para obtener el token almacenado
   const getToken = async () => {
     try {
-      return await SecureStore.getItemAsync('auth_token');
+      return await getAuthToken();
     } catch (error) {
       console.error('Error obteniendo token:', error);
       return null;
@@ -63,15 +55,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        let token, userData;
+        const token = await getToken();
+        const userData = await getUserData();
 
-        if (Platform.OS === 'web') {
-          token = localStorage.getItem('auth_token');
-          userData = await getUserData();
-        } else {
-          token = await SecureStore.getItemAsync('auth_token');
-          userData = await getUserData();
-        }
         if (token && userData) {
           setUser(userData);
           setIsAuthenticated(true);

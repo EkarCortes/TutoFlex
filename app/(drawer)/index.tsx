@@ -25,6 +25,7 @@ export default function HomeScreen() {
     showSessionExpired,
     userName,
     handleLogin,
+    closeSessionExpiredModal,
   } = useHomeScreen();
 
   const { expoPushToken, notifications } = useNotificaciones();
@@ -140,7 +141,7 @@ export default function HomeScreen() {
         visible={showSessionExpired}
         hardwareAccelerated={true}
         statusBarTranslucent={true}
-        onRequestClose={() => setShowSessionExpired(false)}
+        onRequestClose={closeSessionExpiredModal}
       >
         <View className="flex-1 justify-center items-center bg-black/80">
           <View className="bg-[#023047] w-11/12 rounded-xl p-6 shadow-lg max-w-md">

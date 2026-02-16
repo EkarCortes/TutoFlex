@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import * as SecureStore from 'expo-secure-store';
-import { Platform } from 'react-native';
 import { login as apiLogin } from '../services/AuthService';
+import { clearAuthData, saveAuthData } from '../services/authStorage';
 
 interface UseLoginReturn {
   login: (email: string, password: string) => Promise<boolean>;
@@ -13,28 +12,6 @@ interface UseLoginReturn {
 export const useLogin = (): UseLoginReturn => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Función para guardar datos de autenticación
-  const saveAuthData = async (token: string, userData: any) => {
-    if (Platform.OS === 'web') {
-      localStorage.setItem('auth_token', token);
-      localStorage.setItem('userData', JSON.stringify(userData));
-    } else {
-      await SecureStore.setItemAsync('auth_token', token);
-      await SecureStore.setItemAsync('userData', JSON.stringify(userData));
-    }
-  };
-
-  // Función para limpiar datos de autenticación
-  const clearAuthData = async () => {
-    if (Platform.OS === 'web') {
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('userData');
-    } else {
-      await SecureStore.deleteItemAsync('auth_token');
-      await SecureStore.deleteItemAsync('userData');
-    }
-  };
 
   const login = async (email: string, password: string): Promise<boolean> => {
     if (!email || !password) {
