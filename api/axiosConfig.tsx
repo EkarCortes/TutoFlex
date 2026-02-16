@@ -2,7 +2,7 @@ import axios from "axios";
 import { clearAuthData, getAuthToken } from "../services/authStorage";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_API_URL || "https://tutoflex.naturalaloe.app",
+  baseURL: process.env.EXPO_PUBLIC_API_URL || "https://tutoflex.naturalaloe.app/v2",
   timeout: 15000,
 });
 
