@@ -25,6 +25,7 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const AUTH_DEBUG = __DEV__;
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<User | null>(null);
@@ -58,6 +59,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const token = await getToken();
         const userData = await getUserData();
 
+        if (AUTH_DEBUG) {
+          console.log('[auth] checkLoginStatus', {
+            hasToken: Boolean(token),
+            hasUserData: Boolean(userData),
+            userId: (userData as any)?.id ?? null,
+            roleId: (userData as any)?.rol_id ?? null,
+          });
+        }
+
         if (token && userData) {
           setUser(userData);
           setIsAuthenticated(true);
@@ -85,25 +95,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsTransitioning(true); // Activamos el estado de transición
       
 
-      const success = await hookLogin(email, password);
+      const result = await hookLogin(email, password);
       
-      if (success) {
-        // Actualizar datos del usuario después de login exitoso
-        const userData = await getUserData();
+      if (result.success) {
+        // Preferimos el usuario retornado por login y usamos storage como fallback.
+        const userData = (result.userData as User | null) ?? await getUserData();
         if (userData) {
           setUser(userData);
-          // Reducimos el retraso significativamente
-          setTimeout(() => {
-            setIsAuthenticated(true);
-            setIsTransitioning(false);
-          }, 300); // Reducido de 2500ms a 300ms
+          setIsAuthenticated(true);
+          setIsTransitioning(false);
+
+          if (AUTH_DEBUG) {
+            const savedToken = await getToken();
+            console.log('[auth] login state committed', {
+              hasSavedToken: Boolean(savedToken),
+              userId: userData.id ?? null,
+              roleId: userData.rol_id ?? null,
+            });
+          }
         } else {
           setIsTransitioning(false);
           throw new Error('No se pudo obtener información del usuario');
         }
       } else {
         setIsTransitioning(false);
-        throw new Error(authError || 'Error al iniciar sesión');
+        throw new Error(result.error || authError || 'Error al iniciar sesión');
       }
     } catch (error) {
       setIsTransitioning(false);

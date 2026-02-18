@@ -21,10 +21,10 @@ function AuthWrapper({ children }: { children: React.ReactNode }) {
 
     if (!isAuthenticated && !inAuthGroup) {
       // Redirigir a login si no está autenticado y no está en el grupo auth
-      router.push("/(auth)/loginScreen");
+      router.replace("/(auth)/loginScreen");
     } else if (isAuthenticated && inAuthGroup) {
       // Redirigir a home si está autenticado pero está en el grupo auth
-      router.push("/(drawer)");
+      router.replace("/(drawer)");
     }
   }, [isAuthenticated, segments, loading]);
 

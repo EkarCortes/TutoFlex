@@ -2,6 +2,7 @@ import axios from "axios";
 import { clearAuthData, getAuthToken } from "../services/authStorage";
 
 const DEFAULT_API_BASE_URL = "https://tutoflex.naturalaloe.app";
+const AUTH_DEBUG = __DEV__;
 
 const ROUTE_REWRITES: Record<string, string> = {
   // Contrato canónico recomendado en v2
@@ -82,6 +83,14 @@ axiosInstance.interceptors.request.use(
         headers.set("Authorization", `Bearer ${token}`);
         config.headers = headers;
       }
+
+      if (AUTH_DEBUG) {
+        console.log("[api] request", {
+          method: (config.method || "get").toUpperCase(),
+          url: config.url,
+          hasToken: Boolean(token),
+        });
+      }
     } catch {
       console.error("Error al obtener el token de sesión");
     }
@@ -97,6 +106,14 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (axios.isAxiosError(error) && error.response?.status === 401) {
+      if (AUTH_DEBUG) {
+        console.log("[api] 401 response -> clearAuthData", {
+          url: error.config?.url,
+          method: error.config?.method,
+          status: error.response?.status,
+          data: error.response?.data,
+        });
+      }
       await clearAuthData();
     }
     return Promise.reject(error);
