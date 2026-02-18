@@ -55,7 +55,11 @@ export const useCreateAccountScreen = () => {
 
       router.push("/(auth)/_selectRole");
     } catch (error) {
-      showToast('error', 'Error al verificar el correo electrónico.', 'Aviso', 'bottom');
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Error al verificar el correo electrónico.';
+      showToast('error', message, 'Aviso', 'bottom');
     }
   };
 

@@ -17,7 +17,7 @@ export interface LoginResponse {
 
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
   try {
-    const response = await axiosInstance.post('/users/login', {
+    const response = await axiosInstance.post('/login', {
       email,
       password
     });
@@ -32,26 +32,6 @@ export const login = async (email: string, password: string): Promise<LoginRespo
 
 // Add new function to verify if an email exists
 export const verifyEmailExists = async (email: string): Promise<boolean> => {
-  try {
-    
-    const response = await axiosInstance.post('/users/verifyExistingEmail', {
-      email
-    });
-    
-    
-    
-    if (response.data.disponible !== undefined) {
-      
-      return !response.data.disponible;
-    }
-    
-    // Default fallback if disponible field is not present
-    return false;
-  } catch (error) {
-    console.error('Error verifying email:', error);
-    if (axios.isAxiosError(error) && error.response) {
-      throw new Error(error.response.data.message || 'Error al verificar el email');
-    }
-    throw new Error('Error de conexión al servidor');
-  }
+  void email;
+  throw new Error('El registro no está disponible en la API v2 actual');
 };

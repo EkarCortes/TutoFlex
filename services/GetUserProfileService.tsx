@@ -1,4 +1,4 @@
-import axiosInstance from "../api/axiosConfig";
+import { getStoredUserData } from "./authStorage";
 
 export interface Profile {
     pais_id: any;
@@ -46,39 +46,83 @@ export interface ProfesorProfile {
 }
 
 export const getProfile = async (): Promise<{ data: Profile } | null> => {
-    try {
-        const response = await axiosInstance.get("/users/getProfileStudent");
-        
-        return response.data;
-    } catch (error) {
-        console.error("Error al obtener el perfil del usuario:", error);
-        return null;
+  try {
+    const localUser = await getStoredUserData<{
+      id: number;
+      nombre: string;
+      apellido: string;
+      email: string;
+      universidad_id?: number;
+      carrera_id?: number;
+    }>();
+
+    if (!localUser) {
+      return null;
     }
+
+    return {
+      data: {
+        pais_id: 0,
+        usuario_id: localUser.id,
+        nombre: localUser.nombre,
+        apellido: localUser.apellido,
+        email: localUser.email,
+        telefono_estudiante: "",
+        estudiante_id: 0,
+        carnet: "",
+        total_puntos: "0",
+        universidad: "",
+        carrera: "",
+        sede: "",
+        recinto: "",
+        mis_cursos: [],
+        total_cursos_recibidos: 0,
+        universidad_id: localUser.universidad_id || 0,
+        sede_id: 0,
+        recinto_id: 0,
+        carrera_id: localUser.carrera_id || 0,
+        pais_nombre: "",
+      },
+    };
+  } catch (error) {
+    console.error("Error al obtener el perfil del usuario:", error);
+    return null;
+  }
 };
 
 export const getProfileProfesor = async (): Promise<ProfesorProfile | null> => {
   try {
-    const response = await axiosInstance.get("users/getProfileProfesor");
-    const data = response.data?.data;
-    if (!data) return null;
+    const localUser = await getStoredUserData<{
+      id: number;
+      nombre: string;
+      apellido: string;
+      email: string;
+      universidad_id?: number;
+      carrera_id?: number;
+    }>();
+
+    if (!localUser) {
+      return null;
+    }
+
     return {
-      usuario_id: data.usuario_id,
-      profesor_id: data.profesor_id,
-      nombre: data.nombre,
-      apellido: data.apellido,
-      email: data.email,
-      telefono_profesor: data.telefono_profesor,
-      foto: data.foto,
-      descripcion: data.descripcion,
-      universidad: data.universidad,
-      sede: data.sede,
-      recinto: data.recinto,
-      carrera: data.carrera,
-      universidad_id: data.universidad_id,
-      sede_id: data.sede_id,
-      recinto_id: data.recinto_id,
-      carrera_id: data.carrera_id,
-      calificacion_promedio: data.calificacion_promedio,
+      usuario_id: localUser.id,
+      profesor_id: 0,
+      nombre: localUser.nombre,
+      apellido: localUser.apellido,
+      email: localUser.email,
+      telefono_profesor: "",
+      foto: "",
+      descripcion: "",
+      universidad: "",
+      sede: null,
+      recinto: null,
+      carrera: "",
+      universidad_id: localUser.universidad_id || 0,
+      sede_id: null,
+      recinto_id: null,
+      carrera_id: localUser.carrera_id || 0,
+      calificacion_promedio: "0",
     };
   } catch (error) {
     console.error("Error al obtener el perfil del profesor:", error);

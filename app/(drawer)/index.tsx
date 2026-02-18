@@ -1,7 +1,7 @@
 import useHelpLinks from '@/hooks/home/useHelpLinks';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import React, { useRef, useState } from 'react';
-import { Animated, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Modal, Platform, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImageCarousel from '../../components/CarouselComponent';
 import RecommendedCourses from '../../components/CoursesComponent';
@@ -61,7 +61,7 @@ export default function HomeScreen() {
   const handleScroll = Animated.event(
     [{ nativeEvent: { contentOffset: { y: scrollY } } }],
     {
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== 'web',
       listener: (event) => {
         const offsetY = event.nativeEvent.contentOffset.y;
         setShowScrollTop(offsetY > 350);

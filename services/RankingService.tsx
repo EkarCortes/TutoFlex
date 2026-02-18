@@ -1,5 +1,4 @@
 import axiosInstance from "../api/axiosConfig";
-import Ranking from '../app/(drawer)/ranking';
 
 // Interfaz para los datos del curso
 export interface Ranking {

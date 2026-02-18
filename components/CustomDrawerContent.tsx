@@ -29,7 +29,9 @@ function CustomDrawerContent(props: CustomDrawerContentProps) {
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const insets = useSafeAreaInsets();
 
-    const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido.split(' ')[0]}` : "Usuario";
+    const firstName = user?.nombre?.trim()?.split(/\s+/)[0];
+    const firstLastName = user?.apellido?.trim()?.split(/\s+/)[0];
+    const userName = [firstName, firstLastName].filter(Boolean).join(' ') || "Usuario";
 
     // Solo usar el hook si es estudiante
     const { profile } = user?.rol_id === 2 ? useGetUserProfile() : { profile: null };

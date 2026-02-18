@@ -2,7 +2,7 @@ import axiosInstance from '../api/axiosConfig';
 
 export const requestPasswordReset = async (email: string) => {
   try {
-    const response = await axiosInstance.post('/users/requestPasswordReset', { email });
+    const response = await axiosInstance.post('/request-password-reset', { email });
     return { 
       success: true, 
       message: response.data.message || 'Solicitud enviada correctamente' 

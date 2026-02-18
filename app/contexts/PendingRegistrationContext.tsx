@@ -53,3 +53,9 @@ export const usePendingRegistration = () => {
   }
   return context;
 };
+
+// Expo Router trata este archivo como ruta al estar dentro de /app.
+// Exportamos un componente por defecto para evitar el warning de "missing default export".
+export default function PendingRegistrationContextRoute() {
+  return null;
+}

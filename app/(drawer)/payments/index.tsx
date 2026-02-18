@@ -164,8 +164,8 @@ export default function PagosPendientesScreen() {
           bottom: 32,
           right: 24,
           alignItems: "center",
+          pointerEvents: "box-none",
         }}
-        pointerEvents="box-none"
       >
         <TouchableOpacity
           onPress={toggleFiltro}

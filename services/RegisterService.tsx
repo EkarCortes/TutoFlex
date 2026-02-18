@@ -1,5 +1,3 @@
-import axiosInstance from '../api/axiosConfig';
-
 export const registerStudent = async (userData: {
   nombre: string;
   apellido: string;
@@ -10,16 +8,8 @@ export const registerStudent = async (userData: {
   carrera_id: number;
   telefono: string; 
 }) => {
-  try {
-    
-    const response = await axiosInstance.post('/users/registerStudent', userData);
-    return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en el registro');
-    }
-    throw new Error('Error de conexión al servidor');
-  }
+  void userData;
+  throw new Error('El registro de estudiantes no está disponible en la API v2 actual');
 };
 
 export const registerProfessor = async (userData: {
@@ -32,14 +22,6 @@ export const registerProfessor = async (userData: {
   pais_id: number;
   telefono: string;
 }) => {
-  try {
-    
-    const response = await axiosInstance.post('/users/registerProfesor', userData);
-    return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en el registro de profesor');
-    }
-    throw new Error('Error de conexión al servidor');
-  }
+  void userData;
+  throw new Error('El registro de profesores no está disponible en la API v2 actual');
 };
