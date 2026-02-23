@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, StatusBar } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface LoadingScreenProps {
@@ -7,8 +7,8 @@ interface LoadingScreenProps {
   fullScreen?: boolean;
   backgroundColor?: string;
   indicatorColor?: string;
-  textColor?: string; 
-indicatorSize?: "small" | "large" ;
+  textColor?: string;
+  indicatorSize?: "small" | "large";
 }
 
 const LoadingScreen: React.FC<LoadingScreenProps> = ({
@@ -20,15 +20,20 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
   indicatorSize = "large"
 }) => {
   const Container = fullScreen ? SafeAreaView : View;
-  
+
   return (
-    <Container className={`${fullScreen ? 'flex-1' : ''} justify-center items-center`} 
-      style={{ backgroundColor }}>
-      <View className="items-center">
+    <Container
+      style={[
+        styles.container,
+        fullScreen && styles.fullScreen,
+        { backgroundColor },
+      ]}
+    >
+      <View style={styles.content}>
         <ActivityIndicator size={indicatorSize} color={indicatorColor} />
         {message && (
-          <Text className="mt-4 text-center text-lg font-medium" 
-            style={{ color: textColor, fontFamily: "SpaceGrotesk-Medium" }}>
+          <Text
+            style={[styles.message, { color: textColor, fontFamily: "SpaceGrotesk-Medium" }]}>
             {message}
           </Text>
         )}
@@ -36,5 +41,21 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fullScreen: {
+    flex: 1,
+  },
+  content: {
+    alignItems: 'center',
+  },
+  message: {
+    marginTop: 16,
+  },
+});
 
 export default LoadingScreen;

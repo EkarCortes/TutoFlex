@@ -9,7 +9,10 @@ export const usePaymentDetails = (pagoId: number | null) => {
 
     useEffect(() => {
         const fetchPaymentDetails = async () => {
-            if (pagoId === null) return;
+            if (pagoId === null) {
+                setLoading(false);
+                return;
+            }
 
             try {
                 const allPayments = await getPaymentsDetailsService();

@@ -46,7 +46,7 @@ const useRegisterProfessor = (email: string, password: string) => {
       }
       , 2000);
     } catch (error: any) {
-      
+      showToast('error', error?.message || 'Error en el registro de profesor', 'Error', 'bottom');
     }
   };
 

@@ -2,31 +2,42 @@ import React, { useState, useEffect } from "react";
 import { View, Text, KeyboardAvoidingView, Platform, ScrollView, StatusBar, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import "../../global.css";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import useRegisterStudent from "../../hooks/auth/useRegisterStudent";
 import useRegisterProfessor from "../../hooks/auth/useRegisterProfessor";
 import useRenderForm from "../../hooks/auth/useRenderForm";
 import ToastComponent from "../../components/Toast";
+import { usePendingRegistration } from "../contexts/PendingRegistrationContext";
 
 const SelectRoleScreen = () => {
   const router = useRouter();
-  const { email, password, role: roleParam } = useLocalSearchParams();
-  const [role, setRole] = useState<"Estudiante" | "Profesor">("Estudiante");
+  const { pendingRegistration, clearPendingRegistration } = usePendingRegistration();
+  const [role, setRole] = useState<"Estudiante" | "Profesor">(
+    pendingRegistration?.role ?? "Estudiante"
+  );
 
   useEffect(() => {
-    if (roleParam === "Estudiante" || roleParam === "Profesor") {
-      setRole(roleParam);
+    if (!pendingRegistration) {
+      router.replace("/(auth)/_createAccountScreen");
+      return;
     }
-  }, [roleParam]);
+    setRole(pendingRegistration.role);
+  }, [pendingRegistration, router]);
+
+  useEffect(() => {
+    return () => {
+      clearPendingRegistration();
+    };
+  }, [clearPendingRegistration]);
+
+  const email = pendingRegistration?.email ?? "";
+  const password = pendingRegistration?.password ?? "";
 
   const [campus, setCampus] = useState<string>("");
   const [facility, setFacility] = useState<string>("");
 
   const registerEstudiante = {
-    ...useRegisterStudent(
-      Array.isArray(email) ? email[0] : email || "",
-      Array.isArray(password) ? password[0] : password || ""
-    ),
+    ...useRegisterStudent(email, password),
     headquarter: "",
     setHeadquarter: () => { },
     enclosure: "",
@@ -38,10 +49,7 @@ const SelectRoleScreen = () => {
   };
 
   const registerProfesor = {
-    ...useRegisterProfessor(
-      Array.isArray(email) ? email[0] : email || "",
-      Array.isArray(password) ? password[0] : password || ""
-    ),
+    ...useRegisterProfessor(email, password),
     headquarter: "",
     setHeadquarter: () => { },
     enclosure: "",

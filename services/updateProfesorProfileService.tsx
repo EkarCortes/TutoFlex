@@ -27,7 +27,7 @@ export const updateProfile = async (
 ): Promise<UpdateProfileResponse> => {
   try {
     const resp = await axiosInstance.put<UpdateProfileResponse>(
-      "/users/updateProfesor",
+      "/users/me/profile",
       formData,
       {
         headers: {

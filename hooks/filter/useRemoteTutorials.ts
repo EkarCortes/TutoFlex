@@ -2,14 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosConfig";
 
 export interface Tutorial {
-  tutorial_id: number;
-  curso: string;
-  profesor: string;
-  pais: string;
-  universidad: string;
-  carrera: string;
-  modalidad: string;
-  horarios: string;
+  tutorial_id?: number;
+  tutoria_id?: number;
+  curso_id?: number;
+  usuario_id?: number;
+  profesor_id?: number;
+  curso?: string;
+  profesor?: string;
+  pais?: string;
+  universidad?: string;
+  carrera?: string;
+  modalidad?: string;
+  horarios?: string;
 }
 
 export interface FilterParams {

@@ -17,7 +17,9 @@ export default function useHomeScreen() {
   const router = useRouter();
   useFontsLoader();
 
-  const userName = user ? `${user.nombre.split(' ')[0]} ${user.apellido.charAt(0)}` : "Usuario";
+  const firstName = user?.nombre?.trim()?.split(/\s+/)[0];
+  const lastInitial = user?.apellido?.trim()?.charAt(0);
+  const userName = [firstName, lastInitial].filter(Boolean).join(' ') || "Usuario";
 
   // Verifica si el token ha expirado y configura el temporizador adecuadamente
   useEffect(() => {
@@ -101,7 +103,11 @@ export default function useHomeScreen() {
   const handleLogin = () => {
     setShowSessionExpired(false);
     logout();
-    router.replace("/(auth)/");
+    router.replace("/(auth)/loginScreen");
+  };
+
+  const closeSessionExpiredModal = () => {
+    setShowSessionExpired(false);
   };
 
   return {
@@ -112,5 +118,6 @@ export default function useHomeScreen() {
     showSessionExpired,
     userName,
     handleLogin,
+    closeSessionExpiredModal,
   };
 }

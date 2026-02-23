@@ -1,6 +1,7 @@
+import axios from 'axios';
 import axiosInstance from '../api/axiosConfig';
 
-export const registerStudent = async (userData: {
+interface RegisterPayload {
   nombre: string;
   apellido: string;
   email: string;
@@ -8,38 +9,29 @@ export const registerStudent = async (userData: {
   universidad_id: number;
   pais_id: number;
   carrera_id: number;
-  telefono: string; 
-}) => {
+  telefono: string;
+}
+
+const extractApiError = (error: unknown, fallback: string): string => {
+  if (axios.isAxiosError(error) && error.response) {
+    const message = (error.response.data as { message?: string })?.message;
+    return message || fallback;
+  }
+  return fallback;
+};
+
+export const registerStudent = async (userData: RegisterPayload) => {
   try {
-    
-    const response = await axiosInstance.post('/users/registerStudent', userData);
-    return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en el registro');
-    }
-    throw new Error('Error de conexión al servidor');
+    return await axiosInstance.post('/users/registerStudent', userData);
+  } catch (error) {
+    throw new Error(extractApiError(error, 'Error al registrar estudiante'));
   }
 };
 
-export const registerProfessor = async (userData: {
-  nombre: string;
-  apellido: string;
-  email: string;
-  password: string;
-  universidad_id: number;
-  carrera_id: number;
-  pais_id: number;
-  telefono: string;
-}) => {
+export const registerProfessor = async (userData: RegisterPayload) => {
   try {
-    
-    const response = await axiosInstance.post('/users/registerProfesor', userData);
-    return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message || 'Error en el registro de profesor');
-    }
-    throw new Error('Error de conexión al servidor');
+    return await axiosInstance.post('/users/registerProfesor', userData);
+  } catch (error) {
+    throw new Error(extractApiError(error, 'Error al registrar profesor'));
   }
 };

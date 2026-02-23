@@ -18,6 +18,10 @@ Notifications.setNotificationHandler({
 });
 
 async function registerForPushNotificationsAsync(): Promise<string | undefined> {
+  if (Platform.OS === 'web') {
+    return undefined;
+  }
+
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('default', {
       name: 'default',
@@ -54,12 +58,16 @@ async function registerForPushNotificationsAsync(): Promise<string | undefined> 
 const useNotificaciones = () => {
   const [expoPushToken, setExpoPushToken] = useState<string>('');
   const [notifications, setNotifications] = useState<Notifications.Notification[]>([]);
-  const notificationListener = useRef<Notifications.EventSubscription>();
-  const responseListener = useRef<Notifications.EventSubscription>();
+  const notificationListener = useRef<Notifications.EventSubscription | null>(null);
+  const responseListener = useRef<Notifications.EventSubscription | null>(null);
 
 
   /* ----- Enviar el token si y solo si ha cambiado ----- */
   useEffect(() => {
+    if (Platform.OS === 'web') {
+      return;
+    }
+
     registerForPushNotificationsAsync()
       .then(async (token) => {
         if (!token) return;
@@ -69,7 +77,7 @@ const useNotificaciones = () => {
         if (lastToken !== token) {
           try {
             await axiosInstance.post(
-              '/notifications/register-token',
+              '/notifications/tokens',
               {
                 token,
                 plataforma: Platform.OS,
@@ -87,6 +95,10 @@ const useNotificaciones = () => {
   }, []);
 
   useEffect(() => {
+    if (Platform.OS === 'web') {
+      return;
+    }
+
     notificationListener.current = Notifications.addNotificationReceivedListener((n) => {
       setNotifications((prev) => [n, ...prev]);
     });

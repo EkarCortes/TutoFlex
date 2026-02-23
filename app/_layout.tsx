@@ -1,6 +1,7 @@
 import { Slot, useSegments, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { PendingRegistrationProvider } from "./contexts/PendingRegistrationContext";
 import React from "react";
 import LoadingScreen from "../components/LoadingScreen";
 import { StatusBar, View } from "react-native";
@@ -20,10 +21,10 @@ function AuthWrapper({ children }: { children: React.ReactNode }) {
 
     if (!isAuthenticated && !inAuthGroup) {
       // Redirigir a login si no está autenticado y no está en el grupo auth
-      router.push("/(auth)/loginScreen");
+      router.replace("/(auth)/loginScreen");
     } else if (isAuthenticated && inAuthGroup) {
       // Redirigir a home si está autenticado pero está en el grupo auth
-      router.push("/(drawer)");
+      router.replace("/(drawer)");
     }
   }, [isAuthenticated, segments, loading]);
 
@@ -38,16 +39,18 @@ function AuthWrapper({ children }: { children: React.ReactNode }) {
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <View style={{ flex: 1, backgroundColor: "#023047" }}>
-        <StatusBar 
-          barStyle="light-content" 
-          backgroundColor="#086491"
-          translucent={false} 
-        />
-        <AuthWrapper>
-          <Slot />
-        </AuthWrapper>
-      </View>
+      <PendingRegistrationProvider>
+        <View style={{ flex: 1, backgroundColor: "#023047" }}>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="#086491"
+            translucent={false}
+          />
+          <AuthWrapper>
+            <Slot />
+          </AuthWrapper>
+        </View>
+      </PendingRegistrationProvider>
     </AuthProvider>
   );
 }

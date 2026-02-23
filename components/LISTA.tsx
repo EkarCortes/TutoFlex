@@ -68,7 +68,11 @@ export default function ListadoTutores() {
 
       <FlatList
         data={datosFiltrados}
-        keyExtractor={(item) => item.usuario_id?.toString() || Math.random().toString()}
+        keyExtractor={(item, index) => {
+          const uniqueId =
+            item.usuario_id ?? item.profesor_id ?? item.tutorial_id ?? index;
+          return `profesor-${uniqueId}`;
+        }}
         renderItem={({ item }) => <CardProfesor datos={item} />}
         contentContainerStyle={{ padding: 16 }}
         ListEmptyComponent={
