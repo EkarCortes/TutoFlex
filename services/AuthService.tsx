@@ -76,8 +76,34 @@ export const login = async (email: string, password: string): Promise<LoginRespo
   }
 };
 
-// Add new function to verify if an email exists
 export const verifyEmailExists = async (email: string): Promise<boolean> => {
-  void email;
-  throw new Error('El registro no está disponible en la API v2 actual');
+  try {
+    const response = await axiosInstance.post('/users/verifyExistingEmail', {
+      email: email.trim(),
+    });
+
+    const body = response.data as {
+      disponible?: boolean;
+      data?: { disponible?: boolean };
+    };
+
+    const available =
+      typeof body.disponible === 'boolean'
+        ? body.disponible
+        : typeof body.data?.disponible === 'boolean'
+          ? body.data.disponible
+          : undefined;
+
+    // API returns `disponible=true` when email is not registered yet.
+    if (typeof available === 'boolean') {
+      return !available;
+    }
+
+    return false;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(error.response.data?.message || 'Error al verificar el email');
+    }
+    throw new Error('Error de conexión al servidor');
+  }
 };

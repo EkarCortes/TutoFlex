@@ -167,7 +167,17 @@ export default function Inicio() {
         ) : (
           <FlatList
             data={tutorials}
-            keyExtractor={(item) => item.tutorial_id?.toString()}
+            keyExtractor={(item, index) => {
+              const uniqueId =
+                item.tutorial_id ??
+                item.tutoria_id ??
+                (item.profesor_id != null && item.curso_id != null
+                  ? `${item.profesor_id}-${item.curso_id}`
+                  : undefined) ??
+                item.usuario_id ??
+                index;
+              return `tutorial-${uniqueId}`;
+            }}
             renderItem={({ item }) => <CardProfesor datos={item} />}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 70 }} 

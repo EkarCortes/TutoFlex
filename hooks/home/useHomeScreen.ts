@@ -103,7 +103,7 @@ export default function useHomeScreen() {
   const handleLogin = () => {
     setShowSessionExpired(false);
     logout();
-    router.replace("/(auth)/");
+    router.replace("/(auth)/loginScreen");
   };
 
   const closeSessionExpiredModal = () => {
